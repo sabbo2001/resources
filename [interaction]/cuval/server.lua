@@ -13,7 +13,7 @@ end)
 -- Notis skickas om spelaren inte har en ögonbindel
 RegisterServerEvent('jsfour-blindfold:notis')
 AddEventHandler('jsfour-blindfold:notis', function( src )
-  TriggerClientEvent('esx:showNotification', src, '~r~ Çuval ın olmadan nasıl takmayı düşünüyorsun?..')
+  TriggerClientEvent('esx:showNotification', src, '~r~ Как вы планируете носить его без мешка??..')
 end)
 
 -- Ger spelaren en ögonbindel

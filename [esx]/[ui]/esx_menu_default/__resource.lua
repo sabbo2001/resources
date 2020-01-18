@@ -2,9 +2,10 @@ resource_manifest_version '44febabe-d386-4d18-afbe-5e627f4af937'
 
 description 'ESX Menu Default'
 
-version '1.0.2'
+version '1.0.4'
 
 client_scripts {
+        '@es_extended/client/wrapper.lua',
 	'client/main.lua'
 }
 
@@ -44,7 +45,7 @@ files {
 	'html/img/header/lscus.png',
 	'html/img/header/masque.jpg',
 	'html/img/header/Me_concernant.jpg',
-	'html/img/header/mecano.png',
+	'html/img/header/mechanic.png',
 	'html/img/header/menu.jpg',
 	'html/img/header/moderation.jpg',
 	'html/img/header/poleemploi.png',

@@ -1,0 +1,73 @@
+<html>
+    <head>
+        <script src="nui://game/ui/jquery.js" type="text/javascript"></script>
+        <link href="style.css" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" href="css/master_style.css">
+
+
+    </head>
+    <body >
+        <img id="cursor" src="cursor.png">
+        <div class="dialog">
+
+        <div class="auth-2"></div>
+ <div class="auth-body">
+<center>
+<img src="https://i.imgur.com/io4Vspk.png" height="130px" width="350px">
+
+
+<br>
+<p class="auth-msg" style="margin-bottom:0px;">Создайте личность вашего персонажа</p>
+ <form id="register">
+<b>Имя:</b><br><input id="firstname"  class="form-control" type="text" placeholder="Имя (с заглавной буквы)"><br><br>
+<b>Фамилия:</b><br><input id="lastname" type="text" class="form-control" placeholder="Фамилия (с заглавной буквы)"><br><br>
+<b>Email:</b><br><input id="email" type="text" class="form-control unstyled" placeholder="Почта" maxlength="80" oninput="maxLengthCheck(this)"><br><br>
+<b>Дата рождения:</b><br><input id="dateofbirth" type="text" class="form-control unstyled" placeholder="Дата рождения формат:01.01.2010" maxlength="10" oninput="maxLengthCheck(this)"><br><br>
+<input id="height" type="hidden" value="182">
+
+ <!-- Gender -->
+  <div class="checkbox">
+    <input type="checkbox" id="sex1" class="sex"  value="M">
+    <label for="sex1">Парень</label> &nbsp;&nbsp;&nbsp;
+    <input type="checkbox" id="sex2" class="sex" value="F">
+    <label for="sex2">Девушка</label>
+  </div>
+	<br><br>
+  <!-- End Gender -->
+<button id="submit" type="submit">Создать аккаунт</button>
+ </form>
+</center>
+      </div>
+        </div>
+
+        <script src="new/js/jquery-3.3.1.js" type="text/javascript"></script>
+        <script src="script.js" type="text/javascript"></script>
+        <script>
+          $('input[type="checkbox"]').on('change', function() {
+          $('input[type="checkbox"]').not(this).prop('checked', false);
+          });
+          function maxLengthCheck(object) {
+                  if (object.value.length > object.maxLength)
+                    object.value = object.value.slice(0, object.maxLength)
+                }
+
+                function isNumeric (evt) {
+                  var theEvent = evt || window.event;
+                  var key = theEvent.keyCode || theEvent.which;
+                  key = String.fromCharCode (key);
+                  var regex = /[0-9]|\./;
+                  if ( !regex.test(key) ) {
+                    theEvent.returnValue = false;
+                    if(theEvent.preventDefault) theEvent.preventDefault();
+                  }
+                }
+
+                dateInput.addEventListener('keydown', function(event) {
+                    if (event.keyIdentifier === "Down") {
+                        event.preventDefault()
+                    }
+                }, false);
+        </script>
+
+    </body>
+</html>

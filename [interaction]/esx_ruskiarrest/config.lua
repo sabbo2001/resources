@@ -1,2 +1,2 @@
 Config                            	= {}
-Config.ArrestDistance				= 3.0
+Config.ArrestDistance				= 2.0

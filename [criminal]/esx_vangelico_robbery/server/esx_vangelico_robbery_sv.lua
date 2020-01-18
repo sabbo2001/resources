@@ -89,7 +89,7 @@ AddEventHandler('esx_vangelico_robbery:rob', function(robb)
 			rob = true
 			for i=1, #xPlayers, 1 do
 				local xPlayer = ESX.GetPlayerFromId(xPlayers[i])
-				if xPlayer.job.name == 'police' or 'fbi' then
+				if xPlayer.job.name == 'police' then
 					TriggerClientEvent('esx:showNotification', xPlayers[i], _U('rob_in_prog') .. store.nameofstore)
 					TriggerClientEvent('esx_vangelico_robbery:setblip', xPlayers[i], Stores[robb].position)
 				end

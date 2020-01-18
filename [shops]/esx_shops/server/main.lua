@@ -11,15 +11,15 @@ MySQL.ready(function()
 					ShopItems[shopResult[i].store] = {}
 				end
 
-				if shopResult[i].limit == -1 then
-					shopResult[i].limit = 30
+				if shopResult[i].weight == -1 then
+					shopResult[i].weight = 30
 				end
 
 				table.insert(ShopItems[shopResult[i].store], {
 					label = shopResult[i].label,
 					item  = shopResult[i].item,
 					price = shopResult[i].price,
-					limit = shopResult[i].limit
+					weight = shopResult[i].weight
 				})
 			else
 				print(('esx_shops: найден отсутствующий элемент "%s" в одной из таблиц!'):format(shopResult[i].item))
@@ -62,8 +62,8 @@ AddEventHandler('esx_shops:buyItem', function(itemName, amount, zone)
 
 	-- can the player afford this item?
 	if xPlayer.getMoney() >= price then
-		-- can the player carry the said amount of x item?
-		if sourceItem.limit ~= -1 and (sourceItem.count + amount) > sourceItem.limit then
+		-- может ли игрок нести указанное количество х предметов?
+		if sourceItem.weight ~= -1 and (sourceItem.count + amount) > sourceItem.weight then
 			TriggerClientEvent('esx:showNotification', _source, _U('player_cannot_hold'))
 		else
 			xPlayer.removeMoney(price)

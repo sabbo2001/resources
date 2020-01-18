@@ -273,7 +273,7 @@ function USBSuccess(success, timeremaining)
         ---TriggerServerEvent('qalle:jobS', 'police', 'En anonym person har försökt att göra intrång i ' .. v.BankName .. 's system!', {x = v.Doors[#v.Doors].Coords.x, y = v.Doors[#v.Doors].Coords.y, z = v.Doors[#v.Doors].Coords.z}, math.random(200, 1000))
         TriggerServerEvent('esx_phone:send', 'police', 'Хакер пытается взять под контроль систему банка ' .. v.BankName .. ', {x = v.Doors[#v.Doors].Coords.x, y = v.Doors[#v.Doors].Coords.y, z = v.Doors[#v.Doors].Coords.z})
         
-      ---  TriggerServerEvent('gcPhone:sendMessage2', 'police', 'En anonym person har försökt att göra intrång i ' .. v.BankName .. 's system!')
+        ---TriggerServerEvent('gcPhone:sendMessage2', 'police', 'En anonym person har försökt att göra intrång i ' .. v.BankName .. 's system!')
         blockKeys = false
         mHacking = false
     end

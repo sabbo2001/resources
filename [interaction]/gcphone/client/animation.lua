@@ -71,8 +71,8 @@ end
 --[[
 	out || text || Call ||
 --]]
-function PhonePlayAnim (status, freeze)
-	if currentStatus == status then
+function PhonePlayAnim (status, freeze, force)
+	if currentStatus == status and force ~= true then
 		return
 	end
 

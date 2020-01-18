@@ -19,6 +19,8 @@ Config.EnableHUD = false
 -- Configure blips here. Turn both to false to disable blips all together.
 Config.ShowNearestGasStationOnly = false
 Config.ShowAllGasStations = true
+-- Modify the fuel-cost here, using a multiplier value. Setting the value to 2.0 would cause a doubled increase.
+Config.CostMultiplier = 1.0
 
 -- Configure the strings as you wish here.
 Config.Strings = {
@@ -31,7 +33,7 @@ Config.Strings = {
 	CancelFuelingJerryCan = "Нажмите ~g~E ~w~для отмены заправки",
 	NotEnoughCash = "Не достаточно наличных",
 	RefillJerryCan = "Нажмите ~g~E ~w~для того чтобы наполнить канистру",
-	NotEnoughCashJerryCan = "Недостаточно наличных денег для пополнения канистры",
+	NotEnoughCashJerryCan = "Недостаточно наличных денег для покупки канистры",
 	JerryCanFull = "Канистра полна",
 	TotalCost = "Стоимость",
 }

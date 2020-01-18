@@ -15,6 +15,8 @@ window.addEventListener("message", function (event) {
             $(".info-div").hide();
         } else if (type === "player") {
             $(".info-div").show();
+        } else if (type === "shop") {
+            $(".info-div").show();
         }
 
         $(".ui").fadeIn();
@@ -63,6 +65,8 @@ window.addEventListener("message", function (event) {
         });
     } else if (event.data.action == "setSecondInventoryItems") {
         secondInventorySetup(event.data.itemList);
+    } else if (event.data.action == "setShopInventoryItems") {
+        shopInventorySetup(event.data.itemList)
     } else if (event.data.action == "setInfoText") {
         $(".info-div").html(event.data.text);
     } else if (event.data.action == "nearPlayers") {
@@ -114,6 +118,18 @@ function secondInventorySetup(items) {
     });
 }
 
+function shopInventorySetup(items) {
+    $("#otherInventory").html("");
+    $.each(items, function (index, item) {
+        //count = setCount(item)
+        cost = setCost(item);
+
+        $("#otherInventory").append('<div class="slot"><div id="itemOther-' + index + '" class="item" style = "background-image: url(\'img/items/' + item.name + '.png\')">' +
+            '<div class="item-count">' + cost + '</div> <div class="item-name">' + item.label + '</div> </div ><div class="item-name-bg"></div></div>');
+        $('#itemOther-' + index).data('item', item);
+        $('#itemOther-' + index).data('inventory', "second");
+    });
+}
 function Interval(time) {
     var timer = false;
     this.start = function () {
@@ -153,8 +169,8 @@ function disableInventory(ms) {
 function setCount(item) {
     count = item.count
 
-    if (item.limit > 0) {
-        count = item.count + " / " + item.limit
+    if (item.weight > 0) {
+        count = item.count + " из " + item.weight
     }
 
     if (item.type === "item_weapon") {
@@ -172,6 +188,17 @@ function setCount(item) {
     return count;
 }
 
+function setCost(item) {
+    cost = item.price
+
+    if (item.price == 0){
+        cost = "$" + item.price
+    }
+    if (item.price > 0) {
+        cost = "$" + item.price
+    }
+    return cost;
+}
 function formatMoney(n, c, d, t) {
     var c = isNaN(c = Math.abs(c)) ? 2 : c,
         d = d == undefined ? "." : d,
@@ -291,6 +318,12 @@ $(document).ready(function () {
             } else if (type === "player" && itemInventory === "second") {
                 disableInventory(500);
                 $.post("http://esx_inventoryhud/TakeFromPlayer", JSON.stringify({
+                    item: itemData,
+                    number: parseInt($("#count").val())
+                }));
+            } else if (type === "shop" && itemInventory === "second") {
+                disableInventory(500);
+                $.post("http://esx_inventoryhud/TakeFromShop", JSON.stringify({
                     item: itemData,
                     number: parseInt($("#count").val())
                 }));

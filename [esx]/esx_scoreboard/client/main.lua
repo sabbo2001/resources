@@ -99,7 +99,7 @@ function UpdatePlayerTable(connectedPlayers)
 			police = police + 1
 		elseif v.job == 'taxi' then
 			taxi = taxi + 1
-		elseif v.job == 'mecano' then
+		elseif v.job == 'mechanic' then
 			mechanic = mechanic + 1
 		--[[ elseif v.job == 'slaughterer' then
 			slaughterer = slaughterer + 1
@@ -119,7 +119,7 @@ function UpdatePlayerTable(connectedPlayers)
 			estate = estate + 1
 		elseif v.job == 'cardealer' then
 			cardeal = cardeal + 1
-		elseif v.job == 'armeria' then
+		elseif v.job == 'militar' then
 			arma = arma + 1
 		elseif v.job == 'state' then
 			stato = stato + 1

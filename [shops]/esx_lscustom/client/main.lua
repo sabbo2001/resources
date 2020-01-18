@@ -119,7 +119,7 @@ function UpdateMods(data)
 
 	if data.modType then
 		local props = {}
-		
+
 		if data.wheelType then
 			props['wheels'] = data.wheelType
 			ESX.Game.SetVehicleProperties(vehicle, props)
@@ -189,12 +189,12 @@ function GetAction(data)
 			parent    = v.parent
 
 			if v.modType then
-				
+
 				if v.modType == 22 then
 					table.insert(elements, {label = " " .. _U('by_default'), modType = k, modNum = false})
 				elseif v.modType == 'neonColor' or v.modType == 'tyreSmokeColor' then -- disable neon
 					table.insert(elements, {label = " " ..  _U('by_default'), modType = k, modNum = {0, 0, 0}})
-				elseif v.modType == 'color1' or v.modType == 'color2' or v.modType == 'pearlescentColor' or v.modType == 'dashboardColor' or v.modType == 'interiorColor' or v.modType == 'wheelColor' then
+				elseif v.modType == 'color1' or v.modType == 'color2' or v.modType == 'pearlescentColor' or v.modType == 'wheelColor' then
 					local num = myCar[v.modType]
 					table.insert(elements, {label = " " .. _U('by_default'), modType = k, modNum = num})
 				elseif v.modType == 17 then
@@ -244,7 +244,7 @@ function GetAction(data)
 							modNum = { neons[i].r, neons[i].g, neons[i].b }
 						})
 					end
-				elseif v.modType == 'color1' or v.modType == 'color2' or v.modType == 'pearlescentColor' or v.modType == 'dashboardColor' or v.modType == 'interiorColor' or v.modType == 'wheelColor' then -- RESPRAYS
+				elseif v.modType == 'color1' or v.modType == 'color2' or v.modType == 'pearlescentColor' or v.modType == 'wheelColor' then -- RESPRAYS
 					local colors = GetColors(data.color)
 					for j = 1, #colors, 1 do
 						local _label = ''
@@ -301,12 +301,12 @@ function GetAction(data)
 				elseif v.modType == 17 then -- TURBO
 					local _label = ''
 					if currentMods[k] then
-						_label = 'Turbo - <span style="color:cornflowerblue;">'.. _U('installed') ..'</span>'
+						_label = 'Турбо - <span style="color:cornflowerblue;">'.. _U('installed') ..'</span>'
 					else
-						_label = 'Turbo - <span style="color:green;">$' .. math.floor(vehiclePrice * v.price[1] / 100) .. ' </span>'
+						_label = 'Турбо - <span style="color:green;">$' .. math.floor(vehiclePrice * v.price[1] / 100) .. ' </span>'
 					end
 					table.insert(elements, {label = _label, modType = k, modNum = true})
-elseif v.modType == 48 then -- Livery
+				elseif v.modType == 48 then -- Livery
 					local _label = ''
 					local modCount = tonumber(GetNumVehicleMods(vehicle, 48) or 0) + tonumber(GetVehicleLiveryCount(vehicle) or 0)
 					for j = 1, modCount, 1 do
@@ -335,7 +335,7 @@ elseif v.modType == 48 then -- Livery
 					end
 				end
 			else
-				if data.value == 'primaryRespray' or data.value == 'secondaryRespray' or data.value == 'pearlescentRespray' or data.value == 'dashboardRespray' or data.value == 'interiorRespray' or data.value == 'modFrontWheelsColor' then
+				if data.value == 'primaryRespray' or data.value == 'secondaryRespray' or data.value == 'pearlescentRespray' or data.value == 'modFrontWheelsColor' then
 					for i=1, #Config.Colors, 1 do
 						if data.value == 'primaryRespray' then
 							table.insert(elements, {label = Config.Colors[i].label, value = 'color1', color = Config.Colors[i].value})
@@ -343,10 +343,6 @@ elseif v.modType == 48 then -- Livery
 							table.insert(elements, {label = Config.Colors[i].label, value = 'color2', color = Config.Colors[i].value})
 						elseif data.value == 'pearlescentRespray' then
 							table.insert(elements, {label = Config.Colors[i].label, value = 'pearlescentColor', color = Config.Colors[i].value})
-						elseif data.value == 'dashboardRespray' then
-							table.insert(elements, {label = Config.Colors[i].label, value = 'dashboardColor', color = Config.Colors[i].value})
-						elseif data.value == 'interiorRespray' then
-							table.insert(elements, {label = Config.Colors[i].label, value = 'interiorColor', color = Config.Colors[i].value})
 						elseif data.value == 'modFrontWheelsColor' then
 							table.insert(elements, {label = Config.Colors[i].label, value = 'wheelColor', color = Config.Colors[i].value})
 						end

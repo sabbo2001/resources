@@ -24,7 +24,7 @@ AddEventHandler('esx_nightclub:getStockItem', function(itemName, count)
 		if count > 0 and item.count >= count then
 		
 			-- can the player carry the said amount of x item?
-			if sourceItem.limit ~= -1 and (sourceItem.count + count) > sourceItem.limit then
+			if sourceItem.weight ~= -1 and (sourceItem.count + count) > sourceItem.weight then
 				TriggerClientEvent('esx:showNotification', _source, _U('player_cannot_hold'))
 			else
 				inventory.removeItem(itemName, count)
@@ -85,7 +85,7 @@ AddEventHandler('esx_nightclub:getFridgeStockItem', function(itemName, count)
 		if count > 0 and item.count >= count then
 		
 			-- can the player carry the said amount of x item?
-			if sourceItem.limit ~= -1 and (sourceItem.count + count) > sourceItem.limit then
+			if sourceItem.weight ~= -1 and (sourceItem.count + count) > sourceItem.weight then
 				TriggerClientEvent('esx:showNotification', _source, _U('player_cannot_hold'))
 			else
 				inventory.removeItem(itemName, count)
@@ -124,20 +124,17 @@ AddEventHandler('esx_nightclub:putFridgeStockItems', function(itemName, count)
     else
       TriggerClientEvent('esx:showNotification', xPlayer.source, _U('invalid_quantity'))
     end
-
     TriggerClientEvent('esx:showNotification', xPlayer.source, _U('you_added') .. count .. ' ' .. item.label)
-
   end)
 
 end)
-
 
 RegisterServerEvent('esx_nightclub:buyItem')
 AddEventHandler('esx_nightclub:buyItem', function(itemName, price, itemLabel)
 
     local _source = source
     local xPlayer = ESX.GetPlayerFromId(_source)
-    local limit = xPlayer.getInventoryItem(itemName).limit
+    local weight = xPlayer.getInventoryItem(itemName).weight
     local qtty = xPlayer.getInventoryItem(itemName).count
     local societyAccount = nil
 
@@ -146,7 +143,7 @@ AddEventHandler('esx_nightclub:buyItem', function(itemName, price, itemLabel)
       end)
     
     if societyAccount ~= nil and societyAccount.money >= price then
-        if qtty < limit then
+        if qtty < weight then
             societyAccount.removeMoney(price)
             xPlayer.addInventoryItem(itemName, 1)
             TriggerClientEvent('esx:showNotification', _source, _U('bought') .. itemLabel)

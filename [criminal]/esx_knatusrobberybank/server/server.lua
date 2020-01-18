@@ -15,7 +15,7 @@ AddEventHandler('esx_holdupbank:toofar', function(robb)
 	rob = false
 	for i=1, #xPlayers, 1 do
  		local xPlayer = ESX.GetPlayerFromId(xPlayers[i])
- 		if xPlayer.job.name == 'police' or xPlayer.job.name == 'fbi' then
+ 		if xPlayer.job.name == 'police' or 'fbi' then
 			TriggerClientEvent('esx:showNotification', xPlayers[i], _U('robbery_cancelled_at') .. Banks[robb].nameofbank)
 			TriggerClientEvent('esx_holdupbank:killblip', xPlayers[i])
 		end
@@ -34,7 +34,7 @@ AddEventHandler('esx_holdupbank:toofarhack', function(robb)
 	rob = false
 	for i=1, #xPlayers, 1 do
  		local xPlayer = ESX.GetPlayerFromId(xPlayers[i])
- 		if xPlayer.job.name == 'police' or xPlayer.job.name == 'fbi' then
+ 		if xPlayer.job.name == 'police' or 'fbi' then
 			TriggerClientEvent('esx:showNotification', xPlayers[i], _U('robbery_cancelled_at') .. Banks[robb].nameofbank)
 			TriggerClientEvent('esx_holdupbank:killblip', xPlayers[i])
 		end
@@ -67,7 +67,7 @@ AddEventHandler('esx_holdupbank:rob', function(robb)
 		local cops = 0
 		for i=1, #xPlayers, 1 do
  		local xPlayer = ESX.GetPlayerFromId(xPlayers[i])
- 		if xPlayer.job.name == 'police' or xPlayer.job.name == 'fbi' then
+ 		if xPlayer.job.name == 'police' or 'fbi' then
 				cops = cops + 1
 			end
 		end
@@ -75,7 +75,7 @@ AddEventHandler('esx_holdupbank:rob', function(robb)
 
 		if rob == false then
 		
-			 if xPlayer.getInventoryItem('blowtorch').count >= 1 then
+			if xPlayer.getInventoryItem('blowtorch').count >= 1 then
 				xPlayer.removeInventoryItem('blowtorch', 1)
 
 				if(cops >= Config.NumberOfCopsRequired)then
@@ -83,8 +83,8 @@ AddEventHandler('esx_holdupbank:rob', function(robb)
 					rob = true
 					for i=1, #xPlayers, 1 do
 						local xPlayer = ESX.GetPlayerFromId(xPlayers[i])
-						if xPlayer.job.name == 'police' or xPlayer.job.name == 'fbi'  then
-								TriggerClientEvent('chatMessage', -1, 'NEWS', {255, 0, 0}, "Идет ограбление ^2" .. bank.nameofbank)
+						if xPlayer.job.name == 'police' or 'fbi' then
+								TriggerClientEvent('chatMessage', -1, 'NEWS', {255, 0, 0}, "Robbery in progress at ^2" .. bank.nameofbank)
 								TriggerClientEvent('esx:showNotification', xPlayers[i], _U('rob_in_prog') .. bank.nameofbank)
 								TriggerClientEvent('esx_holdupbank:killblip', xPlayers[i])							
 								TriggerClientEvent('esx_holdupbank:setblip', xPlayers[i], Banks[robb].position)
@@ -107,11 +107,17 @@ AddEventHandler('esx_holdupbank:rob', function(robb)
 							TriggerClientEvent('esx_holdupbank:robberycomplete', savedSource, job)
 							if(xPlayer)then
 
-								xPlayer.addMoney(bank.reward)
+								--Updated to choose between cash or black money
+								if Config.moneyType == 'cash' then
+									xPlayer.addMoney(bank.reward)
+								elseif Config.moneyType == 'black' then
+									xPlayer.addAccountMoney('black_money',bank.reward)
+								end
+
 								local xPlayers = ESX.GetPlayers()
 								for i=1, #xPlayers, 1 do
 									local xPlayer = ESX.GetPlayerFromId(xPlayers[i])
-									if xPlayer.job.name == 'police' or xPlayer.job.name == 'fbi' then
+									if xPlayer.job.name == 'police' or 'fbi' then
 											TriggerClientEvent('esx:showNotification', xPlayers[i], _U('robbery_complete_at') .. bank.nameofbank)
 											TriggerClientEvent('esx_holdupbank:killblip', xPlayers[i])
 									end
@@ -120,11 +126,11 @@ AddEventHandler('esx_holdupbank:rob', function(robb)
 						end
 					end)
 				else
+					TriggerClientEvent('esx:showNotification', source, _U('min_two_police')..Config.NumberOfCopsRequired)
+				end
+			else
+				TriggerClientEvent('esx:showNotification', source, _U('blowtorch_needed'))
 			end
-				TriggerClientEvent('esx:showNotification', source, _U('min_two_police')..Config.NumberOfCopsRequired)
-			 else
-				 TriggerClientEvent('esx:showNotification', source, _U('blowtorch_needed'))
-			 end
 
 		else
 			TriggerClientEvent('esx:showNotification', source, _U('robbery_already'))
@@ -153,7 +159,7 @@ AddEventHandler('esx_holdupbank:hack', function(robb)
 		local cops = 0
 		for i=1, #xPlayers, 1 do
  		local xPlayer = ESX.GetPlayerFromId(xPlayers[i])
- 		if xPlayer.job.name == 'police' or xPlayer.job.name == 'fbi' then
+ 		if xPlayer.job.name == 'police' or 'fbi' then
 				cops = cops + 1
 			end
 		end
@@ -162,8 +168,8 @@ AddEventHandler('esx_holdupbank:hack', function(robb)
 
 			if(cops >= Config.NumberOfCopsRequired)then
 
-				if xPlayer.getInventoryItem('rasperry').count >= 1 then
-					xPlayer.removeInventoryItem('rasperry', 1)
+				if xPlayer.getInventoryItem('raspberry').count >= 1 then
+					xPlayer.removeInventoryItem('raspberry', 1)
 
 					TriggerClientEvent('esx:showNotification', source, _U('started_to_hack') .. bank.nameofbank .. _U('do_not_move'))
 					TriggerClientEvent('esx:showNotification', source, _U('hold_pos_hack'))
@@ -172,7 +178,7 @@ AddEventHandler('esx_holdupbank:hack', function(robb)
 
 
 				else
-					TriggerClientEvent('esx:showNotification', source, _U('rasperry_needed'))
+					TriggerClientEvent('esx:showNotification', source, _U('raspberry_needed'))
 				end
 			else
 				TriggerClientEvent('esx:showNotification', source, _U('min_two_police'))
@@ -203,7 +209,7 @@ AddEventHandler('esx_holdupbank:plantbomb', function(robb)
         local cops = 0
         for i=1, #xPlayers, 1 do
             local xPlayer = ESX.GetPlayerFromId(xPlayers[i])
-            if xPlayer.job.name == 'police' or xPlayer.job.name == 'fbi' then
+            if xPlayer.job.name == 'police' or 'fbi'  then
                 cops = cops + 1
             end
         end
@@ -215,7 +221,7 @@ AddEventHandler('esx_holdupbank:plantbomb', function(robb)
 				xPlayer.removeInventoryItem('c4_bank', 1)
 				for i=1, #xPlayers, 1 do
 				local xPlayer = ESX.GetPlayerFromId(xPlayers[i])
-					if xPlayer.job.name == 'police' or xPlayer.job.name == 'fbi' then
+					if xPlayer.job.name == 'police' or 'fbi' then
 						TriggerClientEvent('chatMessage', -1, 'NEWS', {255, 0, 0}, "Robbery in progress at ^2" .. bank.nameofbank)
 						TriggerClientEvent('esx:showNotification', xPlayers[i], _U('rob_in_prog') .. bank.nameofbank)
 						TriggerClientEvent('esx_holdupbank:setblip', xPlayers[i], Banks[robb].position)
@@ -242,7 +248,7 @@ AddEventHandler('esx_holdupbank:plantbomb', function(robb)
 							local xPlayers = ESX.GetPlayers()
 							for i=1, #xPlayers, 1 do
 								local xPlayer = ESX.GetPlayerFromId(xPlayers[i])
-								if xPlayer.job.name == 'police' or xPlayer.job.name == 'fbi' then
+								if xPlayer.job.name == 'police' or 'fbi' then
 									TriggerClientEvent('esx:showNotification', xPlayers[i], _U('bombplanted_at') .. bank.nameofbank)
 
 								end

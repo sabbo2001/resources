@@ -3,11 +3,7 @@ ESX = nil
 TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
 
 RegisterServerEvent('esx_billing:sendBill')
-AddEventHandler('esx_billing:sendBill', function(playerId, sharedAccountName, label, amount, split)
-	if split == nil then
-			split = false
-	end
-
+AddEventHandler('esx_billing:sendBill', function(playerId, sharedAccountName, label, amount)
 	local _source = source
 	local xPlayer = ESX.GetPlayerFromId(_source)
 	local xTarget = ESX.GetPlayerFromId(playerId)
@@ -20,16 +16,14 @@ AddEventHandler('esx_billing:sendBill', function(playerId, sharedAccountName, la
 		elseif account == nil then
 
 			if xTarget ~= nil then
-				MySQL.Async.execute('INSERT INTO billing (identifier, sender, target_type, target, label, amount, split, paid) VALUES (@identifier, @sender, @target_type, @target, @label, @amount, @split, @paid)',
+				MySQL.Async.execute('INSERT INTO billing (identifier, sender, target_type, target, label, amount) VALUES (@identifier, @sender, @target_type, @target, @label, @amount)',
 				{
 					['@identifier']  = xTarget.identifier,
 					['@sender']      = xPlayer.identifier,
 					['@target_type'] = 'player',
 					['@target']      = xPlayer.identifier,
 					['@label']       = label,
-					['@amount']      = amount,
-					['@split']		 = split,
-					['@paid']		 = false
+					['@amount']      = amount
 				}, function(rowsChanged)
 					TriggerClientEvent('esx:showNotification', xTarget.source, _U('received_invoice'))
 				end)
@@ -38,16 +32,14 @@ AddEventHandler('esx_billing:sendBill', function(playerId, sharedAccountName, la
 		else
 
 			if xTarget ~= nil then
-				MySQL.Async.execute('INSERT INTO billing (identifier, sender, target_type, target, label, amount, split, paid) VALUES (@identifier, @sender, @target_type, @target, @label, @amount, @split, @paid)',
+				MySQL.Async.execute('INSERT INTO billing (identifier, sender, target_type, target, label, amount) VALUES (@identifier, @sender, @target_type, @target, @label, @amount)',
 				{
 					['@identifier']  = xTarget.identifier,
 					['@sender']      = xPlayer.identifier,
 					['@target_type'] = 'society',
 					['@target']      = sharedAccountName,
 					['@label']       = label,
-					['@amount']      = amount,
-					['@split']		 = split,
-					['@paid']		 = false
+					['@amount']      = amount
 				}, function(rowsChanged)
 					TriggerClientEvent('esx:showNotification', xTarget.source, _U('received_invoice'))
 				end)
@@ -61,7 +53,7 @@ end)
 ESX.RegisterServerCallback('esx_billing:getBills', function(source, cb)
 	local xPlayer = ESX.GetPlayerFromId(source)
 
-	MySQL.Async.fetchAll('SELECT * FROM billing WHERE identifier = @identifier AND paid = false', {
+	MySQL.Async.fetchAll('SELECT * FROM billing WHERE identifier = @identifier', {
 		['@identifier'] = xPlayer.identifier
 	}, function(result)
 		local bills = {}
@@ -125,11 +117,12 @@ ESX.RegisterServerCallback('esx_billing:payBill', function(source, cb, id)
 
 				if xPlayer.getMoney() >= amount then
 
-					MySQL.Async.execute('UPDATE billing SET paid = true WHERE id = @id', {
+					MySQL.Async.execute('DELETE from billing WHERE id = @id', {
 						['@id'] = id
-					}, function()
+					}, function(rowsChanged)
 						xPlayer.removeMoney(amount)
-						xTarget.addAccountMoney('bank', amount)
+						xTarget.addMoney(amount)
+
 						TriggerClientEvent('esx:showNotification', xPlayer.source, _U('paid_invoice', ESX.Math.GroupDigits(amount)))
 						TriggerClientEvent('esx:showNotification', xTarget.source, _U('received_payment', ESX.Math.GroupDigits(amount)))
 
@@ -137,25 +130,12 @@ ESX.RegisterServerCallback('esx_billing:payBill', function(source, cb, id)
 					end)
 
 				elseif xPlayer.getBank() >= amount then
-					MySQL.Async.execute('UPDATE billing SET paid = true WHERE id = @id', {
+
+					MySQL.Async.execute('DELETE from billing WHERE id = @id', {
 						['@id'] = id
 					}, function(rowsChanged)
-						MySQL.Async.fetchAll('SELECT * FROM billing WHERE id = @id', {
-							['@id'] = id
-						}, function(result)
-							if result[1].split == true then
-								print('Society paid invoice with split')
-								local percent = 0.05
-								xPlayer.removeMoney('bank', amount)
-								xTarget.addAccountMoney('bank', amount*(1-percent))
-								local worker = ESX.GetPlayerFromIdentifier(result[1].sender)
-								worker.addAccountMoney('bank', amount*percent)
-							else
-								xPlayer.removeAccountMoney('bank', amount)
-								xTarget.addAccountMoney('bank', amount)
-							end
-						end)
-
+						xPlayer.removeAccountMoney('bank', amount)
+						xTarget.addAccountMoney('bank', amount)
 
 						TriggerClientEvent('esx:showNotification', xPlayer.source, _U('paid_invoice', ESX.Math.GroupDigits(amount)))
 						TriggerClientEvent('esx:showNotification', xTarget.source, _U('received_payment', ESX.Math.GroupDigits(amount)))
@@ -176,27 +156,17 @@ ESX.RegisterServerCallback('esx_billing:payBill', function(source, cb, id)
 			end
 
 		else
+
 			TriggerEvent('esx_addonaccount:getSharedAccount', target, function(account)
 
 				if xPlayer.getMoney() >= amount then
-					MySQL.Async.execute('UPDATE billing SET paid = true WHERE id = @id', {
+
+					MySQL.Async.execute('DELETE from billing WHERE id = @id', {
 						['@id'] = id
 					}, function(rowsChanged)
-						MySQL.Async.fetchAll('SELECT * FROM billing WHERE id = @id', {
-							['@id'] = id
-						}, function(result)
-							if result[1].split == true then
-								xPlayer.removeMoney(amount)
-								account.addMoney(amount*(1-Config.Percent))
-								local worker = ESX.GetPlayerFromIdentifier(result[1].sender)
-								worker.addAccountMoney('bank', amount*Config.Percent)
-							else
-								xPlayer.removeMoney(amount)
-								--account.addAccountMoney('bank', amount)
-								xPlayer.addAccountMoney('bank', amount)
-								
-							end
-						end)
+						xPlayer.removeMoney(amount)
+						account.addMoney(amount)
+
 						TriggerClientEvent('esx:showNotification', xPlayer.source, _U('paid_invoice', ESX.Math.GroupDigits(amount)))
 						if xTarget ~= nil then
 							TriggerClientEvent('esx:showNotification', xTarget.source, _U('received_payment', ESX.Math.GroupDigits(amount)))
@@ -206,22 +176,12 @@ ESX.RegisterServerCallback('esx_billing:payBill', function(source, cb, id)
 					end)
 
 				elseif xPlayer.getBank() >= amount then
-					MySQL.Async.execute('UPDATE billing SET paid = true WHERE id = @id', {
+
+					MySQL.Async.execute('DELETE from billing WHERE id = @id', {
 						['@id'] = id
 					}, function(rowsChanged)
-						MySQL.Async.fetchAll('SELECT * FROM billing WHERE id = @id', {
-							['@id'] = id
-						}, function(result)
-							if result[1].split == true then
-								xPlayer.removeMoney(amount)
-								account.addMoney(amount*(1-Config.Percent))
-								local worker = ESX.GetPlayerFromIdentifier(result[1].sender)
-								worker.addAccountMoney('bank', amount*Config.Percent)
-							else
-								xPlayer.removeMoney(amount)
-								account.addAccountMoney('bank', amount)
-							end
-						end)
+						xPlayer.removeAccountMoney('bank', amount)
+						account.addMoney(amount)
 
 						TriggerClientEvent('esx:showNotification', xPlayer.source, _U('paid_invoice', ESX.Math.GroupDigits(amount)))
 						if xTarget ~= nil then
@@ -246,20 +206,3 @@ ESX.RegisterServerCallback('esx_billing:payBill', function(source, cb, id)
 
 	end)
 end)
-
-
-
-function dump(o)
-	if type(o) == "table" then
-		local s = "{ "
-		for k, v in pairs(o) do
-			if type(k) ~= "number" then
-				k = '"' .. k .. '"'
-			end
-			s = s .. "[" .. k .. "] = " .. dump(v) .. ","
-		end
-		return s .. "} "
-	else
-		return tostring(o)
-	end
-end

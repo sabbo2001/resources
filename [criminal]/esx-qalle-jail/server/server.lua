@@ -53,6 +53,17 @@ RegisterCommand("unjail", function(src, args)
 	end
 end)
 
+
+--ESX.RegisterServerCallback('esx-qalle-jail:getDeathStatus', function(source, cb)
+--	local identifier = GetPlayerIdentifiers(source)[1]
+--
+--	MySQL.Async.fetchScalar('SELECT is_dead FROM users WHERE identifier = @identifier', {
+--		['@identifier'] = identifier
+--	}, function(isDead)
+--		cb(isDead)
+--	end)
+--end)
+
 RegisterServerEvent("esx-qalle-jail:jailPlayer")
 AddEventHandler("esx-qalle-jail:jailPlayer", function(targetSrc, jailTime, jailReason)
 	local src = source

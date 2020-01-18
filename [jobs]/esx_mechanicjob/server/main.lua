@@ -13,7 +13,7 @@ if Config.MaxInService ~= -1 then
 end
 
 TriggerEvent('esx_phone:registerNumber', 'mechanic', _U('mechanic_customer'), true, true)
-TriggerEvent('esx_society:registerSociety', 'mechanic', 'mechanic', 'society_mechanic', 'society_mechanic', 'society_mechanic', {type = 'private'})
+TriggerEvent('esx_society:registerSociety', 'mechanic', 'Механик', 'society_mechanic', 'society_mechanic', 'society_mechanic', {type = 'private'})
 
 local function Harvest(source)
 	SetTimeout(4000, function()
@@ -54,7 +54,7 @@ local function Harvest2(source)
 			local xPlayer = ESX.GetPlayerFromId(source)
 			local FixToolQuantity = xPlayer.getInventoryItem('fixtool').count
 
-			if FixToolQuantity >= 5 then
+			if FixToolQuantity >= 0 then
 				TriggerClientEvent('esx:showNotification', source, _U('you_do_not_room'))
 			else
 				xPlayer.addInventoryItem('fixtool', 1)
@@ -117,10 +117,10 @@ local function Craft(source)
 			local xPlayer = ESX.GetPlayerFromId(source)
 			local GazBottleQuantity = xPlayer.getInventoryItem('gazbottle').count
 
-			if GazBottleQuantity <= 0 then
-				TriggerClientEvent('esx:showNotification', source, _U('not_enough_gas_can'))
-			else
-				xPlayer.removeInventoryItem('gazbottle', 1)
+			if GazBottleQuantity >= 0 then
+				-- TriggerClientEvent('esx:showNotification', source, _U('not_enough_gas_can'))
+			-- else
+				-- xPlayer.removeInventoryItem('gazbottle', 1)
 				xPlayer.addInventoryItem('blowpipe', 1)
 				Craft(source)
 			end
@@ -150,10 +150,10 @@ local function Craft2(source)
 			local xPlayer = ESX.GetPlayerFromId(source)
 			local FixToolQuantity = xPlayer.getInventoryItem('fixtool').count
 
-			if FixToolQuantity <= 0 then
-				TriggerClientEvent('esx:showNotification', source, _U('not_enough_repair_tools'))
-			else
-				xPlayer.removeInventoryItem('fixtool', 1)
+			if FixToolQuantity >= 0 then
+				-- TriggerClientEvent('esx:showNotification', source, _U('not_enough_repair_tools'))
+			-- else
+				-- xPlayer.removeInventoryItem('fixtool', 0)
 				xPlayer.addInventoryItem('fixkit', 1)
 				Craft2(source)
 			end
@@ -184,9 +184,9 @@ local function Craft3(source)
 			local CaroToolQuantity = xPlayer.getInventoryItem('carotool').count
 
 			if CaroToolQuantity <= 0 then
-				TriggerClientEvent('esx:showNotification', source, _U('not_enough_body_tools'))
-			else
-				xPlayer.removeInventoryItem('carotool', 1)
+				-- TriggerClientEvent('esx:showNotification', source, _U('not_enough_body_tools'))
+			-- else
+				-- xPlayer.removeInventoryItem('carotool', 1)
 				xPlayer.addInventoryItem('carokit', 1)
 				Craft3(source)
 			end
@@ -268,7 +268,7 @@ AddEventHandler('esx_mechanicjob:getStockItem', function(itemName, count)
 		if count > 0 and item.count >= count then
 
 			-- can the player carry the said amount of x item?
-			if sourceItem.limit ~= -1 and (sourceItem.count + count) > sourceItem.limit then
+			if sourceItem.weight ~= -1 and (sourceItem.count + count) > sourceItem.weight then
 				TriggerClientEvent('esx:showNotification', xPlayer.source, _U('player_cannot_hold'))
 			else
 				inventory.removeItem(itemName, count)
@@ -289,21 +289,25 @@ end)
 
 RegisterServerEvent('esx_mechanicjob:putStockItems')
 AddEventHandler('esx_mechanicjob:putStockItems', function(itemName, count)
-	local xPlayer = ESX.GetPlayerFromId(source)
 
-	TriggerEvent('esx_addoninventory:getSharedInventory', 'society_mechanic', function(inventory)
-		local item = inventory.getItem(itemName)
-		local playerItemCount = xPlayer.getInventoryItem(itemName).count
+  local xPlayer = ESX.GetPlayerFromId(source)
+  local sourceItem = xPlayer.getInventoryItem(itemName)
 
-		if item.count >= 0 and count <= playerItemCount then
-			xPlayer.removeInventoryItem(itemName, count)
-			inventory.addItem(itemName, count)
-		else
-			TriggerClientEvent('esx:showNotification', xPlayer.source, _U('invalid_quantity'))
-		end
+  TriggerEvent('esx_addoninventory:getSharedInventory', 'society_mechanic', function(inventory)
 
-		TriggerClientEvent('esx:showNotification', xPlayer.source, _U('have_deposited', count, item.label))
-	end)
+    local inventoryItem = inventory.getItem(itemName)
+
+    if sourceItem.count >= count and count > 0 then
+      xPlayer.removeInventoryItem(itemName, count)
+      inventory.addItem(itemName, count)
+    else
+      TriggerClientEvent('esx:showNotification', xPlayer.source, _U('quantity_invalid'))
+    end
+
+    TriggerClientEvent('esx:showNotification', xPlayer.source, _U('added') .. count .. ' ' .. item.label)
+
+  end)
+
 end)
 
 ESX.RegisterServerCallback('esx_mechanicjob:getPlayerInventory', function(source, cb)

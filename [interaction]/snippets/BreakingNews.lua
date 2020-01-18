@@ -1,18 +1,3 @@
---[[
-----------------------------------------------------------------------------
-____________________________________________________________________________
-						
-						AUTHOR : Stivicx
-
-			Affiche le scaleform journaliste
-			Display Scaleform Breaking news
-		
-
-____________________________________________________________________________
-						
----------------------------------------------------------------------------
-]]--
-
 function breakingnews()
     scaleform = RequestScaleformMovie("breaking_news")
     while not HasScaleformMovieLoaded(scaleform) do

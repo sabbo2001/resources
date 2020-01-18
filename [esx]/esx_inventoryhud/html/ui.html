@@ -4,6 +4,7 @@
 <head>
     <title>ИНВЕНТАРЬ</title>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" type="text/css" href="css/ui.css">
     <link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
 </head>
@@ -14,6 +15,7 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="js/inventory.js"></script>
+    <script src="js/stepper.min.js"></script>
     <script>
         $(function () {
             $("#dialog").dialog({
@@ -30,7 +32,18 @@
             <div id="controls">
                 <div class="info-div"></div>
                 <div class="controls-div">
+                    <div class="count">Количество</div>
+
+                    <!--div class="stepper stepper--style-1 js-spinner">
+                        <input autofocus type="number" step="1" value="0" class="stepper__input">
+                        <div class="stepper__controls">
+                            <button type="button" spinner-button="up">+</button>
+                            <button type="button" spinner-button="down">−</button>
+                        </div>
+                    </div-->
+
                     <input type="number" class="control" id="count" value="1">
+                    <div class="count">Перетащите предмет</div>
                     <div class="control" id="use"></div>
                     <div class="control" id="give"></div>
                     <div class="control" id="drop"></div>

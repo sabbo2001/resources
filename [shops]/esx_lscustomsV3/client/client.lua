@@ -133,6 +133,7 @@ end
 
 --Set up inside camera
 local function SetupInsideCam()
+
 	local ped = LocalPed()
 	local coords = currentpos.camera
 	cam = CreateCam("DEFAULT_SCRIPTED_CAMERA",true,2)
@@ -152,29 +153,25 @@ AddEventHandler('LSC:cancelInstallMod', function()
 end)
 
 
---So we can actually enter it?
+---Так мы можем войти?
 local function DriveInGarage()
 
-	--Lock the garage
+	--Запереть гараж
 	TriggerServerEvent('lockGarage',true,currentgarage)
 	SetPlayerControl(PlayerId(),false,256)
-
-	StartFade()
+        StartFade()
+	
 	
 	local pos = currentpos
 	local ped = LocalPed()
-	--local ped = PlayerPedId()
-	
-	
 	local veh = GetVehiclePedIsUsing(ped)
-	SetPlayerInvincible(GetPlayerIndex(),false)
-    SetEntityInvincible(veh, true)
-    SetVehicleLights(veh, 1)
-	SetEntityVisible(ped, true, 1)
+	
+	
+	
 	
 	LSCMenu.buttons = {}
 	DisplayRadar(false)
-	TriggerEvent('chatMessage', 'Server', {255, 255, 255}, currentgarage)
+	TriggerEvent('chatMessage', 'Гараж номер', {255, 255, 255}, currentgarage)
 	if DoesEntityExist(veh) then
 		--Set menu title
 		if currentgarage == 4 or currentgarage == 5 then
@@ -193,19 +190,19 @@ local function DriveInGarage()
 		--Controls
 		LSCMenu.config.controls = LSC_Config.menu.controls
 		SetIbuttons({
-			{GetControlInstructionalButton(1,LSCMenu.config.controls.menu_back, 0),"Back"},
-			{GetControlInstructionalButton(1,LSCMenu.config.controls.menu_select, 0),"Select"},
-			{GetControlInstructionalButton(1,LSCMenu.config.controls.menu_up, 0),"Up"},
-			{GetControlInstructionalButton(1,LSCMenu.config.controls.menu_down, 0),"Down"},
-			{GetControlInstructionalButton(1,LSCMenu.config.controls.menu_left, 0),"Left"},
-			{GetControlInstructionalButton(1,LSCMenu.config.controls.menu_right, 0),"Right"},
+			{GetControlInstructionalButton(1,LSCMenu.config.controls.menu_back, 0),"Назад"},
+			{GetControlInstructionalButton(1,LSCMenu.config.controls.menu_select, 0),"Выбор"},
+			{GetControlInstructionalButton(1,LSCMenu.config.controls.menu_up, 0),"Вверх"},
+			{GetControlInstructionalButton(1,LSCMenu.config.controls.menu_down, 0),"Вниз"},
+			{GetControlInstructionalButton(1,LSCMenu.config.controls.menu_left, 0),"Влево"},
+			{GetControlInstructionalButton(1,LSCMenu.config.controls.menu_right, 0),"Вправо"},
 		 },0)
 		 
 		 --Max buttons
 		LSCMenu:setMaxButtons(LSC_Config.menu.maxbuttons)
 		
 		--Width, height of menu
-		LSCMenu.config.size.width = f(LSC_Config.menu.width) or 0.24;
+		LSCMenu.config.size.width = f(LSC_Config.menu.width) or 0.36;
 		LSCMenu.config.size.height = f(LSC_Config.menu.height) or 0.36;
 		
 		--Position
@@ -246,10 +243,13 @@ local function DriveInGarage()
 		--Setup table for vehicle with all mods, colors etc.
 		SetVehicleModKit(veh,0)	
 		myveh.vehicle = veh
+                --myveh.plate = GetVehicleNumberPlateText(veh)
 		myveh.model = GetDisplayNameFromVehicleModel(GetEntityModel(veh)):lower()
+                --myveh.modelhash = GetEntityModel(veh)
 		myveh.color =  table.pack(GetVehicleColours(veh))
 		myveh.extracolor = table.pack(GetVehicleExtraColours(veh))
 		myveh.neoncolor = table.pack(GetVehicleNeonLightsColour(veh))
+                --myveh.neon = {}
 		myveh.smokecolor = table.pack(GetVehicleTyreSmokeColor(veh))
 		myveh.plateindex = GetVehicleNumberPlateTextIndex(veh)
 		myveh.mods = {}
@@ -278,6 +278,10 @@ local function DriveInGarage()
 		myveh.wheeltype = GetVehicleWheelType(veh)
 		myveh.bulletProofTyres = GetVehicleTyresCanBurst(veh)
 		
+               --myveh.neon.left = IsVehicleNeonLightEnabled(veh,0)
+		--myveh.neon.right = IsVehicleNeonLightEnabled(veh,1)
+		--myveh.neon.front = IsVehicleNeonLightEnabled(veh,2)
+		--myveh.neon.back = IsVehicleNeonLightEnabled(veh,3)
 		--Menu stuff 
 		local chassis,interior,bumper,fbumper,rbumper = false,false,false,false
 		
@@ -522,7 +526,6 @@ local function DriveInGarage()
 			--NetworkSetEntityVisibleToNetwork(entity, toggle)
 			NetworkFadeOutEntity(veh, 1,1)
 			FadeOutLocalPlayer(1)
-			
 			--NetworkUnregisterNetworkedEntity(veh)
 			--NetworkSetEntityVisibleToNetwork(veh, true)
 			--SetEntityVisible(veh, true, 0)
@@ -546,6 +549,7 @@ local function DriveInGarage()
 			
 			TaskVehicleDriveToCoord(ped, veh, pos.inside.x, pos.inside.y, pos.inside.z, f(3), f(1), GetEntityModel(veh), 16777216, f(0.1), true)
 			EndFade()Citizen.Wait(3000)
+			
 			
 			local c = 0
 			while not IsVehicleStopped(veh) do
@@ -587,6 +591,7 @@ local function DriveOutOfGarage(pos)
 	
 		local ped = LocalPed()
 		local veh = GetVehiclePedIsUsing(ped)
+                local plate = GetVehicleNumberPlateText(veh)
 		
 		pos = currentpos
 		TaskVehicleDriveToCoord(ped, veh, pos.outside.x, pos.outside.y, pos.outside.z, f(5), f(0.1), GetEntityModel(veh), 16777216, f(0.1), true)
@@ -662,7 +667,7 @@ local function tableContains(t,val)
 	return false
 end
 
---Magical loop that allows you to  drive in garage if you successfully go through checks
+--Волшебная петля, которая позволяет вам ездить в гараже, если вы успешно проходите проверки
 Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(0)
@@ -884,6 +889,10 @@ AddEventHandler("LSC:buttonSelected", function(name, button, canpurchase)
 			myveh.neoncolor[1] = 255
 			myveh.neoncolor[2] = 255
 			myveh.neoncolor[3] = 255
+                        --myveh.neon.left = -1
+			--myveh.neon.right = -1
+			--myveh.neon.front = -1
+			--myveh.neon.back = -1
 			SetVehicleNeonLightsColour(veh,255,255,255)
 		elseif button.purchased or CanPurchase(price, canpurchase) then
 			if not myveh.neoncolor[1] then
@@ -896,6 +905,10 @@ AddEventHandler("LSC:buttonSelected", function(name, button, canpurchase)
 			SetVehicleNeonLightEnabled(veh,1,true)
 			SetVehicleNeonLightEnabled(veh,2,true)
 			SetVehicleNeonLightEnabled(veh,3,true)
+                        --myveh.neon.left = 1
+			--myveh.neon.right = 1
+			--myveh.neon.front = 1
+			--myveh.neon.back = 1
 		end
 	elseif mname == "neon color" then
 		if button.purchased or CanPurchase(price, canpurchase) then
@@ -1337,6 +1350,7 @@ local function AddBlips()
 		local blip = AddBlipForCoord(pos.inside.x,pos.inside.y,pos.inside.z)
 		SetBlipSprite(blip, 72)
 		SetBlipAsShortRange(blip,true)
+                --SetBlipScale(blip, 0.8)
 		if i == 5 then
 			BeginTextCommandSetBlipName("STRING")
 			AddTextComponentString("Beeker's Garage")

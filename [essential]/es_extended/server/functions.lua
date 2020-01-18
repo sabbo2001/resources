@@ -1,6 +1,6 @@
-ESX.Trace = function(str)
+ESX.Trace = function(msg)
 	if Config.EnableDebug then
-		print(('[es_extended] [^2TRACE^7] %s'):format(str))
+		print(('[es_extended] [^2TRACE^7] %s^7'):format(msg))
 	end
 end
 
@@ -38,7 +38,6 @@ end
 
 ESX.SavePlayer = function(xPlayer, cb)
 	local asyncTasks = {}
-	xPlayer.setLastPosition(xPlayer.getCoords())
 
 	-- User accounts
 	for k,v in ipairs(xPlayer.accounts) do
@@ -80,7 +79,7 @@ ESX.SavePlayer = function(xPlayer, cb)
 			['@job']        = xPlayer.job.name,
 			['@job_grade']  = xPlayer.job.grade,
 			['@loadout']    = json.encode(xPlayer.getLoadout()),
-			['@position']   = json.encode(xPlayer.getLastPosition()),
+			['@position']   = json.encode(xPlayer.getCoords()),
 			['@identifier'] = xPlayer.identifier
 		}, function(rowsChanged)
 			cb()
@@ -88,7 +87,7 @@ ESX.SavePlayer = function(xPlayer, cb)
 	end)
 
 	Async.parallel(asyncTasks, function(results)
-		print(('[es_extended] [^2INFO^7] Saved %s'):format(xPlayer.getName()))
+		print(('[es_extended] [^2INFO^7] Saved player "%s^7"'):format(xPlayer.getName()))
 
 		if cb ~= nil then
 			cb()
@@ -160,7 +159,7 @@ ESX.GetItemLabel = function(item)
 	end
 end
 
-ESX.CreatePickup = function(type, name, count, label, playerId)
+ESX.CreatePickup = function(type, name, count, label, playerId, components)
 	local pickupId = (ESX.PickupId == 65635 and 0 or ESX.PickupId + 1)
 	local xPlayer = ESX.GetPlayerFromId(playerId)
 
@@ -169,10 +168,14 @@ ESX.CreatePickup = function(type, name, count, label, playerId)
 		name  = name,
 		count = count,
 		label = label,
-		coords = xPlayer.getCoords()
+		coords = xPlayer.getCoords(),
 	}
 
-	TriggerClientEvent('esx:pickup', -1, pickupId, label, playerId)
+	if type == 'item_weapon' then
+		ESX.Pickups[pickupId].components = components
+	end
+
+	TriggerClientEvent('esx:createPickup', -1, pickupId, label, playerId, type, name, components)
 	ESX.PickupId = pickupId
 end
 

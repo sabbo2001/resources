@@ -109,7 +109,7 @@ function EnterProperty(name, owner)
 		end
 	end
 
-	TriggerServerEvent('esx_property:saveLastProperty', name)
+	TriggerServerEvent('esx_property:saveLastProperty', name)--сохраняет если пользователь посещяет дом
 
 	Citizen.CreateThread(function()
 		DoScreenFadeOut(800)
@@ -238,8 +238,8 @@ function OpenPropertyMenu(property)
 		end
 	else
 		if not Config.EnablePlayerManagement then
-			table.insert(elements, {label = _U('buy'), value = 'buy' .. " - $" .. property["price"], value = 'buy'})
-			table.insert(elements, {label = _U('rent'), value = 'rent' .. " - $" .. (property["price"]*0.005), value = 'rent'})
+			table.insert(elements, {label = _U('buy'), value = 'buy'})
+			table.insert(elements, {label = _U('rent'), value = 'rent'})
 		end
 
 		table.insert(elements, {label = _U('visit'), value = 'visit'})
@@ -408,9 +408,10 @@ function OpenRoomMenu(property, owner)
 		table.insert(elements, {label = _U('player_clothes'), value = 'player_dressing'})
 		table.insert(elements, {label = _U('remove_cloth'), value = 'remove_cloth'})
 	end
-
-	table.insert(elements, {label = _U('remove_object'),  value = 'room_inventory'})
-	table.insert(elements, {label = _U('deposit_object'), value = 'player_inventory'})
+	--Убираем пункты из меню, они больше не нужны, все будет работать DRAG&DROP
+	--table.insert(elements, {label = _U('remove_object'),  value = 'room_inventory'})
+	--table.insert(elements, {label = _U('deposit_object'), value = 'player_inventory'})
+	table.insert(elements, {label = _U('property_inventory'), value = "property_inventory"})
 
 	ESX.UI.Menu.CloseAll()
 
@@ -499,10 +500,14 @@ function OpenRoomMenu(property, owner)
 				end)
 			end)
 
-		elseif data.current.value == 'room_inventory' then
-			OpenRoomInventoryMenu(property, owner)
-		elseif data.current.value == 'player_inventory' then
-			OpenPlayerInventoryMenu(property, owner)
+			--elseif data.current.value == 'room_inventory' then
+			--	OpenRoomInventoryMenu(property, owner)
+			--elseif data.current.value == 'player_inventory' then
+			--	OpenPlayerInventoryMenu(property, owner)
+			--end
+			elseif data.current.value == "property_inventory" then
+				menu.close()
+			OpenPropertyInventoryMenu(property, owner)
 		end
 
 	end, function(data, menu)
@@ -684,7 +689,7 @@ AddEventHandler('playerSpawned', function()
 
 						for i=1, #property.ipls, 1 do
 							RequestIpl(property.ipls[i])
-				
+
 							while not IsIplActive(property.ipls[i]) do
 								Citizen.Wait(0)
 							end
@@ -858,6 +863,13 @@ Citizen.CreateThread(function()
 		end
 	end
 end)
+
+
+function OpenPropertyInventoryMenu(property, owner)
+	ESX.TriggerServerCallback("esx_property:getPropertyInventory", function(inventory)
+		TriggerEvent("esx_inventoryhud:openPropertyInventory", inventory)
+	end, owner)
+end
 
 -- Key controls
 Citizen.CreateThread(function()

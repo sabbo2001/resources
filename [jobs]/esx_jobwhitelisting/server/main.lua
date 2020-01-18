@@ -30,14 +30,14 @@ ESX.RegisterServerCallback('esx_joblisting:getJobsList', function(source, cb)
 			if ranks.leo_rank > -1 then
 				table.insert(data, {
 					job = "police",
-					label = "LEO"
+					label = "Полиция"
 				})
 			end
 			
 			if ranks.tow_rank > -1 then
 				table.insert(data, {
-					job = "mecano",
-					label = "Mechanic"
+					job = "mechanic",
+					label = "Механик"
 				})
 			end
 			
@@ -68,7 +68,7 @@ AddEventHandler('esx_joblisting:setJob', function(job)
 					injection()
 				end
 			end)
-		elseif job == "mecano" then
+		elseif job == "mechanic" then
 			getID(xPlayer.identifier, function(ranks)
 				if ranks.tow_rank then
 					xPlayer.setJob(job, ranks.tow_rank)

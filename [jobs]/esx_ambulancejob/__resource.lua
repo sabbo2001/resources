@@ -8,8 +8,8 @@ server_scripts {
 	'@mysql-async/lib/MySQL.lua',
 	'@es_extended/locale.lua',
 	'locales/br.lua',
-	'locales/ru.lua',
 	'locales/en.lua',
+     'locales/ru.lua',
 	'locales/fi.lua',
 	'locales/fr.lua',
 	'locales/es.lua',
@@ -24,7 +24,7 @@ client_scripts {
 	'@es_extended/locale.lua',
 	'locales/br.lua',
 	'locales/en.lua',
-	'locales/ru.lua',
+        'locales/ru.lua',
 	'locales/fi.lua',
 	'locales/fr.lua',
 	'locales/es.lua',
@@ -38,5 +38,6 @@ client_scripts {
 
 dependencies {
 	'es_extended',
+	'esx_skin',
 	'esx_vehicleshop'
 }

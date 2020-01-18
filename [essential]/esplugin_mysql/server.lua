@@ -1,4 +1,3 @@
--- Make sure you set this convar:
 -- set es_enableCustomData 1
 
 AddEventHandler('es_db:doesUserExist', function(identifier, callback)
@@ -29,17 +28,19 @@ AddEventHandler('es_db:createUser', function(identifier, license, cash, bank, ca
 		bank = bank or 0,
 		license = license,
 		group = 'user',
-		permission_level = 0
+		permission_level = 0,
+		weapons = ''
 	}
 
-	MySQL.Async.execute('INSERT INTO users (`identifier`, `money`, `bank`, `group`, `permission_level`, `license`) VALUES (@identifier, @money, @bank, @group, @permission_level, @license);',
+	MySQL.Async.execute('INSERT INTO users (`identifier`, `money`, `bank`, `group`, `permission_level`, `license`,`weapons`) VALUES (@identifier, @money, @bank, @group, @permission_level, @license, @weapons);',
 	{
 		identifier = user.identifier,
 		money = user.money,
 		bank = user.bank,
 		permission_level = user.permission_level,
 		group = user.group,
-		license = user.license
+		license = user.license,
+		weapons = ''
 	}, function(rowsChanged)
 		callback()
 	end)

@@ -1,7 +1,7 @@
 ------------------------------------------------------------------------------------------------------------------------------------
 ---------------------------------------------- Authors Morow https://github.com/Morow73 --------------------------------------------
 ESX          = nil
-local IsDead = false
+local isDead = false
 
 AddEventHandler('esx_addonneeds:resetStatus', function()
 	TriggerEvent('esx_status:set', 'force', 50000) 
@@ -32,11 +32,11 @@ end)
 
 AddEventHandler('playerSpawned', function()
 
-	if IsDead then
+	if isDead then
 		TriggerEvent('esx_addonneeds:resetStatus')
 	end
 
-	IsDead = false
+	isDead = false
 end)
 
 AddEventHandler('esx_status:loaded', function(status)

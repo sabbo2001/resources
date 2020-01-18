@@ -9,7 +9,7 @@ Citizen.CreateThread(function()
 	end
 end)
 
--- Öppnar/stänger ögonbindel
+-- Открывает / закрывает повязки
 RegisterNetEvent('jsfour-blindfold')
 AddEventHandler('jsfour-blindfold', function( hasItem, src )
 	if not open and hasItem then

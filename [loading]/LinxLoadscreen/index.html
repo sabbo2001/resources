@@ -1,0 +1,105 @@
+<html>
+<link rel="stylesheet" type="text/css" href="1.css">
+<link href="https://fonts.googleapis.com/css?family=Montserrat|Open+Sans" rel="stylesheet">
+<body>
+<div class="Shape">
+	<div style="height: 80%;width: 60%;margin-left: 10%;margin-top: 10%;">
+        <img src="logo.png" height="20%">
+        <div class="ShapeStyle" div id = "particles-js"></div>
+				<div style="margin-top:10%"><a style="font-size:24px;font-family: 'Montserrat', sans-serif;">Привет всем! <br></br> CRIMINAL Los Santos сервер загружается...</a></div>
+				<p>Сервер находится в режиме разработки, но играть можете с некоторыми ограничениями.</p>
+				<p>Наш сервер не является полноценным RP, у нас иные правила.</p>
+
+				<!-- <div class="letni"> -->
+					<br>
+					<div class="loadbar"><div class="thingy"></div></div>
+					<p class="loading">Загрузка<font size="6"><span>.</span><span>.</span><span>.</span></font></p>
+				<!-- </div> -->
+	</div>
+
+</div>
+
+<script type="text/javascript">
+											 var count = 0;
+											 var thisCount = 0;
+											 const emoji = {
+													 INIT_BEFORE_MAP_LOADED: [ '🍉' ],
+													 INIT_AFTER_MAP_LOADED: [ '🍋', '🍊' ],
+													 INIT_SESSION: [ '🍐', '🍅', '🍆' ],
+											 };
+											 const handlers = {
+													 startInitFunctionOrder(data)
+													 {
+															 count = data.count;
+															 document.querySelector('.letni h3').innerHTML += emoji[data.type][data.order - 1] || '';
+													 },
+													 initFunctionInvoking(data)
+													 {
+															 document.querySelector('.thingy').style.left = '0%';
+															 document.querySelector('.thingy').style.width = ((data.idx / count) * 100) + '%';
+													 },
+													 startDataFileEntries(data)
+													 {
+															 count = data.count;
+															 document.querySelector('.letni h3').innerHTML += "\u{1f358}";
+													 },
+													 performMapLoadFunction(data)
+													 {
+															 ++thisCount;
+															 document.querySelector('.thingy').style.left = '0%';
+															 document.querySelector('.thingy').style.width = ((thisCount / count) * 100) + '%';
+													 },
+													 // onLogLine(data)
+													 // {
+														// 	 document.querySelector('.letni p').innerHTML = data.message + "..!";
+													 // }
+											 };
+											 window.addEventListener('message', function(e)
+											 {
+													 (handlers[e.data.eventName] || function() {})(e.data);
+											 });
+									 </script>
+
+<div class="video-background">
+
+	<style>
+		body {
+			background-image: url('background.jpg');
+			background-repeat: no-repeat;
+			background-attachment: fixed;
+			background-size: cover;
+		}
+	</style>
+
+ </div>
+
+ </body>
+
+    <audio id="leson" src="music/music.ogg" autoplay="true" hidden="true" loop="true"/>
+		<script>
+
+
+    var play = false;
+    var myAudio = document.getElementById("leson");
+
+    myAudio.volume = 0.1;
+
+
+    function onKeyDown(event) {
+            switch (event.keyCode) {
+                case 32: //SpaceBar
+                    if (play) {
+                        myAudio.play();
+                        play = true;
+                    } else {
+                        myAudio.play();
+                        play = true;
+                    }
+                    break;
+            }
+      return false;
+    }
+    window.addEventListener("keydown", onKeyDown, false);
+    </script>
+		<script src="app.js"></script>
+</html>

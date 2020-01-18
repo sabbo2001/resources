@@ -1,30 +1,28 @@
-Locales ['en'] = {
-  -- weed
-  ['weed_pickupprompt'] = 'press ~INPUT_CONTEXT~ to harvest the ~g~Cannabis~s~ plant.',
-  ['weed_inventoryfull'] = 'you do not have any more inventory space for ~g~Cannabis~s~.',
-  ['weed_processprompt'] = 'press ~INPUT_CONTEXT~ to start ~g~Process Cannabis~s~.',
-  ['weed_processingstarted'] = 'processing ~g~Cannabis~s~ into ~g~Marijuana~s~...',
-  ['weed_processingfull'] = 'processing ~r~canceled~s~ due to full inventory!',
-  ['weed_processingenough'] = 'you must have ~b~3x~s~ ~g~Cannabis~s~ in order to process.',
-  ['weed_processed'] = 'you\'ve processed ~b~3x~s~ ~g~Cannabis~s~ to ~b~1x~s~ ~g~Marijuana~s~',
-  ['weed_processingtoofar'] = 'the processing has been ~r~canceled~s~ due to you abandoning the area.',
-
-  -- drug dealer
-  ['dealer_prompt'] = 'press ~INPUT_CONTEXT~ to talk with the ~r~Drug Dealer~s~.',
-  ['dealer_title'] = 'drug Dealer',
-  ['dealer_item'] = '$%s',
-  ['dealer_notenough'] = 'you don\'t have enough of that to sell!',
-  ['dealer_sold'] = 'you\'ve sold ~b~%sx~s~ ~y~%s~s~ for ~g~$%s~s~',
-
-  -- license
-  ['license_title'] = 'you are required to own a processing license to process this product, it can be bought here.',
-  ['license_no'] = 'no',
-  ['license_bought'] = 'you bought the ~b~%s~s~ for ~r~$%s~s~',
-  ['license_bought_fail'] = 'you cannot afford an ~b~%s~s~!',
-  ['license_weed'] = 'weed Processing License',
-
-  -- blips
-  ['blip_weedfield'] = 'weed Field',
-  ['blip_weedprocessing'] = 'weed Processing',
-  ['blip_drugdealer'] = 'drug Dealer',
+Locales['en'] = {
+	['weed'] = 'Marijuana',
+	['meth'] = 'Methamphetamine',
+	['opium'] = 'Opium',
+	['coke'] = 'Cocaine',
+	['press_collect'] = 'Press ~INPUT_CONTEXT~ to collect ~r~%s~s~ ',
+	['press_process'] = 'Press ~INPUT_CONTEXT~ to process ~r~%s~s~',
+	['press_sell'] = 'Press ~INPUT_CONTEXT~ to sell ~r~%s~s~',
+	['act_imp_police'] = 'Sorry, there are no enough cops to do this: ~o~%s~s~/~y~%s~s~ online',
+	['no_pouches_sale'] = 'You dont have anymore ~r~Bag of Drugs~s~ to sell',	
+	['pickup_in_prog'] = '~y~Harvest in progress~s~...',
+	['too_many_pouches'] = 'Your inventory is being full of ~r~Drugs',
+	['packing_in_prog'] = '~y~Packaging in progress~s~...',
+	['inv_full'] = 'You cant harvest anymore ~r~%s~s~, your inventory is full',
+	['not_enough'] = 'You dont have any ~r~%s~s~',
+	['sold_one'] = 'You\'re selling ~r~%s~s~',
+	['used_one'] = 'You have used ~r~x1 of ~r~%s~s~',
+	['sale_in_prog'] = '~g~Selling in progress~s~...',
+	['exit_marker'] = 'Press ~INPUT_CONTEXT~ to cancel the ~y~progress.',
+	['foot_work'] = 'You must be on your feet to work.',
+	['act_call_police'] = ':REPORT: Suspected tramp doing illegal things!',
+	['stop_action'] = 'Press ~g~[%s]~w~ to stop.',
+	
+	-- Blips
+	['field'] = '%s Field',
+	['processing'] = '%s Packaging',
+	['dealer'] = '%s Dealer',
 }

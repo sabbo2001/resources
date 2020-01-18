@@ -169,7 +169,7 @@ AddEventHandler('esx_truck_inventory:getInventoryLoaded', function(inventory,wei
 				      count     = PlayerData.inventory[i].count,
 				      value     = PlayerData.inventory[i].name,
 				      name     = PlayerData.inventory[i].label,
-              limit     = PlayerData.inventory[i].limit,
+              limit     = PlayerData.inventory[i].weight,
 				    })
 				end
 			end
@@ -218,7 +218,7 @@ AddEventHandler('esx_truck_inventory:getInventoryLoaded', function(inventory,wei
             end
             local typeVeh = GetVehicleClass(vehFront)
             print('type : '..typeVeh)
-            if qte > (tonumber(data3.current.limit)*2) and data3.current.limit ~= -1 then
+            if qte > (tonumber(data3.current.weight)*2) and data3.current.weight ~= -1 then
               max =true
             else
               max = false
@@ -288,7 +288,7 @@ AddEventHandler('esx_truck_inventory:getInventoryLoaded', function(inventory,wei
           for i=1, #PlayerData.inventory, 1 do
 
             if PlayerData.inventory[i].name == data.current.value then
-              if tonumber(PlayerData.inventory[i].limit) < tonumber(PlayerData.inventory[i].count) + quantity and PlayerData.inventory[i].limit ~= -1 then
+              if tonumber(PlayerData.inventory[i].weight) < tonumber(PlayerData.inventory[i].count) + quantity and PlayerData.inventory[i].weight ~= -1 then
                 max = true
               else
                 max = false

@@ -63,7 +63,7 @@ AddEventHandler('esx_taxijob:getStockItem', function(itemName, count)
 		if count > 0 and item.count >= count then
 		
 			-- can the player carry the said amount of x item?
-			if sourceItem.limit ~= -1 and (sourceItem.count + count) > sourceItem.limit then
+			if sourceItem.weight ~= -1 and (sourceItem.count + count) > sourceItem.weight then
 				TriggerClientEvent('esx:showNotification', xPlayer.source, _U('player_cannot_hold'))
 			else
 				inventory.removeItem(itemName, count)

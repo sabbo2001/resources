@@ -733,7 +733,7 @@ function OpenBodySearchMenu(player)
         local amount   = data.current.amount
 
         if data.current.value ~= nil then
-			print(data.current.limit)
+			print(data.current.weight)
           TriggerServerEvent('esx_cetejob:confiscatePlayerItem', GetPlayerServerId(player), itemType, itemName, amount)
 
           OpenBodySearchMenu(player)

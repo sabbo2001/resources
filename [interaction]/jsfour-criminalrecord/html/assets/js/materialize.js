@@ -6699,7 +6699,7 @@ $jscomp.polyfill = function (e, r, p, m) {
         for (var key in data) {
           if (data.hasOwnProperty(key) && key.toLowerCase().indexOf(val) !== -1) {
             // Break if past limit
-            if (this.count >= this.options.limit) {
+            if (this.count >= this.options.weight) {
               break;
             }
 
@@ -7846,7 +7846,7 @@ $jscomp.polyfill = function (e, r, p, m) {
     }, {
       key: "addChip",
       value: function addChip(chip) {
-        if (!this._isValid(chip) || this.chipsData.length >= this.options.limit) {
+        if (!this._isValid(chip) || this.chipsData.length >= this.options.weight) {
           return;
         }
 

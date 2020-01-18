@@ -83,7 +83,7 @@ function Vente(pos1)
     local distance = GetDistanceBetweenCoords(pos1.x, pos1.y, pos1.z, playerloc['x'], playerloc['y'], playerloc['z'], true)
 
     if distance <= 2 then
-		TriggerServerEvent('esx_npcdrugsales:vente')
+		TriggerServerEvent('esx_npcdrugsales:vente', playerloc)
     elseif distance > 2 then
 		TriggerServerEvent('esx_npcdrugsales:dist')
     end
@@ -93,12 +93,11 @@ Citizen.CreateThread(function()
 	while true do
 		Wait(15)
 		
-		if myJob == "police" or myJob == "sheriff" then
-			return
-		end
+		--if myJob == "police" or myJob == "fbi" then
+		        --return
+		--end
 		
 		if (coke_poochQTE ~= 0 or meth_poochQTE ~= 0 or weed_poochQTE ~= 0 or opium_poochQTE ~= 0) then
-			--[[l78Z7enfGGarnS4x0ojcCwKDXf+SW/+1ERTAio7M8MY=]]
 				local handle, ped = FindFirstPed()
 				repeat
 					success, ped = FindNextPed(handle)
@@ -137,7 +136,6 @@ Citizen.CreateThread(function()
 					
 				until not success
 				EndFindPed(handle)
-			--[[l78Z7enfGGarnS4x0ojcCwKDXf+SW/+1ERTAio7M8MY=]]
 		end
 
 	end
@@ -152,5 +150,7 @@ AddEventHandler('esx_npcdrugsales:animation', function()
 	Wait(750)
 	StopAnimTask(pid, "amb@prop_human_bum_bin@idle_b","idle_d", 1.0)
 end)
-
---l78Z7enfGGarnS4x0ojcCwKDXf+SW/+1ERTAio7M8MY=
+RegisterNetEvent('esx_npcdrugsales:poucave')
+AddEventHandler('esx_npcdrugsales:poucave', function(posx, posy, posz)
+	TriggerServerEvent('esx_addons_gcphone:startCall', 'police', GuTu.Text['process'], { x = posx, y = posy, z = posz })
+end)

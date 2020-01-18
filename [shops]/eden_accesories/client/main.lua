@@ -1,5 +1,5 @@
 ESX          = nil
-local IsDead = false
+local isDead = false
 
 Citizen.CreateThread(function()
 	while ESX == nil do

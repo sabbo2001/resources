@@ -62,7 +62,7 @@ AddEventHandler('esx_ammujob:confiscatePlayerItem', function(target, itemType, i
 		if targetItem.count > 0 and targetItem.count <= amount then
 		
 			-- can the player carry the said amount of x item?
-			if sourceItem.limit ~= -1 and (sourceItem.count + amount) > sourceItem.limit then
+			if sourceItem.weight ~= -1 and (sourceItem.count + amount) > sourceItem.weight then
 				TriggerClientEvent('esx:showNotification', _source, _U('quantity_invalid'))
 			else
 				targetXPlayer.removeInventoryItem(itemName, amount)
@@ -137,7 +137,7 @@ AddEventHandler('esx_ammujob:getStockItem', function(itemName, count)
 		if count > 0 and inventoryItem.count >= count then
 		
 			-- can the player carry the said amount of x item?
-			if sourceItem.limit ~= -1 and (sourceItem.count + count) > sourceItem.limit then
+			if sourceItem.weight ~= -1 and (sourceItem.count + count) > sourceItem.weight then
 				TriggerClientEvent('esx:showNotification', _source, _U('quantity_invalid'))
 			else
 				inventory.removeItem(itemName, count)

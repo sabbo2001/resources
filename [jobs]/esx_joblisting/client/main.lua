@@ -1,10 +1,4 @@
-local Keys = {
-	["ESC"] = 322, ["BACKSPACE"] = 177, ["E"] = 38, ["ENTER"] = 18,	["LEFT"] = 174, ["RIGHT"] = 175, ["TOP"] = 27, ["DOWN"] = 173
-}
-
-local menuIsShowed = false
-local hasAlreadyEnteredMarker = false
-local isInMarker = false
+local menuIsShowed, hasAlreadyEnteredMarker, isInMarker = false, false, false
 
 ESX = nil
 
@@ -82,9 +76,9 @@ Citizen.CreateThread(function()
 	for i=1, #Config.Zones, 1 do
 		local blip = AddBlipForCoord(Config.Zones[i])
 
-		SetBlipSprite (blip, 475)--475
-		SetBlipDisplay(blip, 4)
-		SetBlipScale  (blip, 1.0)
+		SetBlipSprite (blip, 475)
+		SetBlipDisplay(blip, 0)
+		SetBlipScale  (blip, 0.8)
 		SetBlipColour (blip, 3)
 		SetBlipAsShortRange(blip, true)
 
@@ -99,7 +93,7 @@ Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(0)
 
-		if IsControlJustReleased(0, Keys['E']) and isInMarker and not menuIsShowed then
+		if IsControlJustReleased(0, 38) and isInMarker and not menuIsShowed then
 			ESX.UI.Menu.CloseAll()
 			ShowJobListingMenu()
 		end

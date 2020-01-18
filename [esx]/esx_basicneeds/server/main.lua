@@ -4,9 +4,7 @@ TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
 
 
 ESX.RegisterUsableItem('bread', function(source)
-
-	local _source = source
-    local xPlayer = ESX.GetPlayerFromId(_source)
+        local xPlayer = ESX.GetPlayerFromId(source)
 
 	xPlayer.removeInventoryItem('bread', 1)
 
@@ -17,8 +15,7 @@ ESX.RegisterUsableItem('bread', function(source)
 end)
 
 ESX.RegisterUsableItem('water', function(source)
-	local _source = source
-    local xPlayer = ESX.GetPlayerFromId(_source)
+	local xPlayer = ESX.GetPlayerFromId(source)
 	xPlayer.removeInventoryItem('water', 1)
 	TriggerClientEvent('esx_status:add', source, 'thirst', 200000)
 	TriggerClientEvent('esx_basicneeds:onDrink', source)
@@ -26,8 +23,7 @@ ESX.RegisterUsableItem('water', function(source)
 end)
 
 ESX.RegisterUsableItem('coffe', function(source)
-	local _source = source
-    local xPlayer = ESX.GetPlayerFromId(_source)
+	local xPlayer = ESX.GetPlayerFromId(source)
 	xPlayer.removeInventoryItem('coffe', 1)
 	TriggerClientEvent('esx_status:add', source, 'thirst', 200000)
 	TriggerClientEvent('esx_optionalneeds:onDrink', source)

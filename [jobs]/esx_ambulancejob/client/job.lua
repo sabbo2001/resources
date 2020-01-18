@@ -62,48 +62,7 @@ function OpenMobileAmbulanceActionsMenu()
 				else
 
 					if data.current.value == 'revive' then
-
-						isBusy = true
-
-						ESX.TriggerServerCallback('esx_ambulancejob:getItemAmount', function(quantity)
-							if quantity > 0 then
-								local closestPlayerPed = GetPlayerPed(closestPlayer)
-
-								if IsPedDeadOrDying(closestPlayerPed, 1) then
-									local playerPed = PlayerPedId()
-
-									ESX.ShowNotification(_U('revive_inprogress'))
-
-									local lib, anim = 'mini@cpr@char_a@cpr_str', 'cpr_pumpchest'
-
-									for i=1, 15, 1 do
-										Citizen.Wait(900)
-
-										ESX.Streaming.RequestAnimDict(lib, function()
-											TaskPlayAnim(PlayerPedId(), lib, anim, 8.0, -8.0, -1, 0, 0, false, false, false)
-										end)
-									end
-
-									TriggerServerEvent('esx_ambulancejob:removeItem', 'medikit')
-									TriggerServerEvent('esx_ambulancejob:revive', GetPlayerServerId(closestPlayer))
-
-									-- Show revive award?
-									if Config.ReviveReward > 0 then
-										ESX.ShowNotification(_U('revive_complete_award', GetPlayerName(closestPlayer), Config.ReviveReward))
-									else
-										ESX.ShowNotification(_U('revive_complete', GetPlayerName(closestPlayer)))
-									end
-								else
-									ESX.ShowNotification(_U('player_not_unconscious'))
-								end
-							else
-								ESX.ShowNotification(_U('not_enough_medikit'))
-							end
-
-							isBusy = false
-
-						end, 'medikit')
-
+						revivePlayer(closestPlayer)
 					elseif data.current.value == 'small' then
 
 						ESX.TriggerServerCallback('esx_ambulancejob:getItemAmount', function(quantity)
@@ -172,6 +131,38 @@ function OpenMobileAmbulanceActionsMenu()
 	end, function(data, menu)
 		menu.close()
 	end)
+end
+
+function revivePlayer(closestPlayer)
+	isBusy = true
+
+	ESX.TriggerServerCallback('esx_ambulancejob:getItemAmount', function(quantity)
+		if quantity > 0 then
+			local closestPlayerPed = GetPlayerPed(closestPlayer)
+
+			if IsPedDeadOrDying(closestPlayerPed, 1) then
+				local playerPed = PlayerPedId()
+				local lib, anim = 'mini@cpr@char_a@cpr_str', 'cpr_pumpchest'
+				ESX.ShowNotification(_U('revive_inprogress'))
+
+				for i=1, 15 do
+					Citizen.Wait(900)
+
+					ESX.Streaming.RequestAnimDict(lib, function()
+						TaskPlayAnim(playerPed, lib, anim, 8.0, -8.0, -1, 0, 0, false, false, false)
+					end)
+				end
+
+				TriggerServerEvent('esx_ambulancejob:removeItem', 'medikit')
+				TriggerServerEvent('esx_ambulancejob:revive', GetPlayerServerId(closestPlayer))
+			else
+				ESX.ShowNotification(_U('player_not_unconscious'))
+			end
+		else
+			ESX.ShowNotification(_U('not_enough_medikit'))
+		end
+		isBusy = false
+	end, 'medikit')
 end
 
 function FastTravel(coords, heading)
@@ -361,7 +352,7 @@ Citizen.CreateThread(function()
 		if CurrentAction then
 			ESX.ShowHelpNotification(CurrentActionMsg)
 
-			if IsControlJustReleased(0, Keys['E']) then
+			if IsControlJustReleased(0, 38) then
 
 				if CurrentAction == 'AmbulanceActions' then
 					OpenAmbulanceActionsMenu()
@@ -380,7 +371,7 @@ Citizen.CreateThread(function()
 			end
 
 		elseif ESX.PlayerData.job ~= nil and ESX.PlayerData.job.name == 'ambulance' and not isDead then
-			if IsControlJustReleased(0, Keys['F6']) then
+			if IsControlJustReleased(0, 167) then
 				OpenMobileAmbulanceActionsMenu()
 			end
 		else
@@ -751,8 +742,7 @@ function OpenShopMenu(elements, restoreCoords, shopCoords)
 
 				ESX.TriggerServerCallback('esx_ambulancejob:buyJobVehicle', function (bought)
 					if bought then
-						ESX.ShowNotification(_U('vehicleshop_bought', data.current.name, ESX.Math.GroupDigits(data.current.price)))
-
+						ESX.ShowNotification(_U('vehicleshop_bought', data.current.name,ESX.Math.GroupDigits(data.current.price)))
 						isInShopMenu = false
 						ESX.UI.Menu.CloseAll()
 
@@ -832,12 +822,12 @@ function WaitForVehicleToLoad(modelHash)
 		while not HasModelLoaded(modelHash) do
 			Citizen.Wait(0)
 
-			DisableControlAction(0, Keys['TOP'], true)
-			DisableControlAction(0, Keys['DOWN'], true)
-			DisableControlAction(0, Keys['LEFT'], true)
-			DisableControlAction(0, Keys['RIGHT'], true)
+			DisableControlAction(0, 27, true)
+			DisableControlAction(0, 173, true)
+			DisableControlAction(0, 174, true)
+			DisableControlAction(0, 175, true)
 			DisableControlAction(0, 176, true) -- ENTER key
-			DisableControlAction(0, Keys['BACKSPACE'], true)
+			DisableControlAction(0, 177, true)
 
 			drawLoadingText(_U('vehicleshop_awaiting_model'), 255, 255, 255, 255)
 		end

@@ -64,8 +64,8 @@ AddEventHandler("esx_receptury:statusSuccess", function(message, min, max, item)
     math.randomseed(os.time())
     local amount = math.random(min, max)
     local itemProps = xPlayer.getInventoryItem(item)
-    if(itemProps.limit < itemProps.count + amount) then
-        xPlayer.setInventoryItem(item, itemProps.limit)
+    if(itemProps.weight < itemProps.count + amount) then
+        xPlayer.setInventoryItem(item, itemProps.weight)
         TriggerClientEvent("pNotify:SendNotification", source, {
             text = 'Porzucasz część towaru, gdyż nie masz już miejsca w kieszeniach.',
             type = "error",

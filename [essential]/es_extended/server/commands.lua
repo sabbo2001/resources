@@ -20,7 +20,7 @@ end, {help = 'Teleport to coordinates', params = {
 	{name = 'z', help = 'Z coords'}
 }})
 
-TriggerEvent('es:addGroupCommand', 'setjob', 'jobmaster', function(source, args, user)
+TriggerEvent('es:addGroupCommand', 'setjob', 'admin', function(source, args, user)
 	if tonumber(args[1]) and args[2] and tonumber(args[3]) then
 		local xPlayer = ESX.GetPlayerFromId(args[1])
 
@@ -153,6 +153,8 @@ TriggerEvent('es:addGroupCommand', 'giveweaponcomponent', 'admin', function(sour
 		local weapon = args[2] or 'unknown'
 
 		if ESX.GetWeapon(weapon) then
+			weapon = string.upper(weapon)
+
 			if xPlayer.hasWeapon(weapon) then
 				local component = ESX.GetWeaponComponent(weapon, args[3] or 'unknown')
 

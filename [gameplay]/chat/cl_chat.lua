@@ -1,5 +1,3 @@
-local isRDR = not TerraingridActivate and true or false
-
 local chatInputActive = false
 local chatInputActivating = false
 local chatHidden = true
@@ -107,6 +105,7 @@ RegisterNUICallback('chatResult', function(data, cb)
     --deprecated
     local r, g, b = 0, 0x99, 255
 
+	TriggerServerEvent("logs:logChat", data.message)
     if data.message:sub(1, 1) == '/' then
       ExecuteCommand(data.message:sub(2))
     else
@@ -196,7 +195,7 @@ Citizen.CreateThread(function()
     Wait(0)
 
     if not chatInputActive then
-      if IsControlPressed(0, isRDR and `INPUT_MP_TEXT_CHAT_ALL` or 245) --[[ INPUT_MP_TEXT_CHAT_ALL ]] then
+      if IsControlPressed(0, 245) --[[ INPUT_MP_TEXT_CHAT_ALL ]] then
         chatInputActive = true
         chatInputActivating = true
 
@@ -207,7 +206,7 @@ Citizen.CreateThread(function()
     end
 
     if chatInputActivating then
-      if not IsControlPressed(0, isRDR and `INPUT_MP_TEXT_CHAT_ALL` or 245) then
+      if not IsControlPressed(0, 245) then
         SetNuiFocus(true)
 
         chatInputActivating = false

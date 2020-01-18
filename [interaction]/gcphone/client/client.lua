@@ -11,7 +11,7 @@ local KeyToucheCloseEvent = {
   { code = 176, event = 'Enter' },
   { code = 177, event = 'Backspace' },
 }
-local KeyOpenClose = 288 -- F2
+local KeyOpenClose = 288 -- F1
 local KeyTakeCall = 38 -- E
 local menuIsOpen = false
 local contacts = {}
@@ -66,6 +66,7 @@ function ShowNoPhoneWarning ()
   if (ESX == nil) then return end
   ESX.ShowNotification("У вас ~r~нет ~s~телефона")
 end
+
 
 
 --====================================================================================
@@ -231,17 +232,6 @@ end
 function StopSoundJS (sound)
   SendNUIMessage({ event = 'stopSound', sound = sound})
 end
-
-
-
-
-
-
-
-
-
-
-
 
 RegisterNetEvent("gcPhone:forceOpenPhone")
 AddEventHandler("gcPhone:forceOpenPhone", function(_myPhoneNumber)
@@ -462,6 +452,7 @@ end)
 RegisterNUICallback('notififyUseRTC', function (use, cb)
   USE_RTC = use
   if USE_RTC == true and inCall == true then
+    print('USE RTC ON')
     inCall = false
     Citizen.InvokeNative(0xE036A705F989E049)
     NetworkSetTalkerProximity(2.5)
@@ -485,6 +476,7 @@ end)
 RegisterNetEvent('gcphone:autoCall')
 AddEventHandler('gcphone:autoCall', function(number, extraData)
   if number ~= nil then
+    print('number', number)
     SendNUIMessage({ event = "autoStartCall", number = number, extraData = extraData})
   end
 end)
@@ -513,7 +505,7 @@ RegisterNUICallback('blur', function(data, cb)
   cb()
 end)
 RegisterNUICallback('reponseText', function(data, cb)
-  local limit = data.limit or 255
+  local limit = data.weight or 255
   local text = data.text or ''
   
   DisplayOnscreenKeyboard(1, "FMMC_MPM_NA", "", text, "", "", "", limit)
@@ -654,7 +646,6 @@ RegisterNUICallback('setIgnoreFocus', function (data, cb)
   cb()
 end)
 
-
 RegisterNUICallback('takePhoto', function(data, cb)
 	CreateMobilePhone(1)
   CellCamActivate(true, true)
@@ -676,7 +667,7 @@ RegisterNUICallback('takePhoto', function(data, cb)
       cb(json.encode({ url = nil }))
       takePhoto = false
       break
-    elseif IsControlJustPressed(1, 176) then -- TAKE.. PIC
+    elseif IsControlJustPressed(1, 38) then -- TAKE.. PIC
 			exports['screenshot-basic']:requestScreenshotUpload(data.url, data.field, function(data)
         local resp = json.decode(data)
         DestroyMobilePhone()

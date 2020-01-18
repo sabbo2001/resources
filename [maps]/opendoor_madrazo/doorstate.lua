@@ -71,17 +71,12 @@ RegisterNetEvent('OD:state')
 AddEventHandler('OD:state', function(id, isLocked)
     PlayerData = ESX.GetPlayerData()
 	
-	if PlayerData.job.name == "fbi" or PlayerData.job.name == "cartel" then
+	if PlayerData.job.name == "cartel" then
 		if type(lockState[id]) ~= nil then -- Check if door exists
 			lockState[id]["locked"] = isLocked -- Change state of door
 		end
 	else
-	exports.pNotify:SendNotification({
-		text = "<center><span style='color:#F73006'>Вы не являетесь участником картеля, но находитесь на их территории, это не безопасно</span><center>",
-		type = "error",
-		timeout = 7000,
-		layout = "bottomRight",
-	})
+        ESX.ShowNotification('Вы не являетесь участником ~r~картеля~w~, но находитесь на их территории')
 	end
 
 	

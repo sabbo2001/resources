@@ -135,7 +135,7 @@ AddEventHandler(
 
     if type == "item_standard" then
       local targetItem = xPlayer.getInventoryItem(item)
-      if targetItem.limit == -1 or ((targetItem.count + count) <= targetItem.limit) then
+      if targetItem.weight == -1 or ((targetItem.count + count) <= targetItem.weight) then
         TriggerEvent(
           "esx_trunk:getSharedDataStore",
           plate,
@@ -160,7 +160,7 @@ AddEventHandler(
                       text = _U("invalid_quantity"),
                       type = "error",
                       queue = "trunk",
-                      timeout = 5000,
+                      timeout = 3000,
                       layout = "bottomCenter"
                     }
                   )
@@ -200,7 +200,7 @@ AddEventHandler(
             text = _U("player_inv_no_space"),
             type = "error",
             queue = "trunk",
-            timeout = 5000,
+            timeout = 3000,
             layout = "bottomCenter"
           }
         )
@@ -352,7 +352,7 @@ AddEventHandler(
                   text = _U("insufficient_space"),
                   type = "error",
                   queue = "trunk",
-                  timeout = 5000,
+                  timeout = 3000,
                   layout = "bottomCenter"
                 }
               )
@@ -379,7 +379,7 @@ AddEventHandler(
             text = _U("invalid_quantity"),
             type = "error",
             queue = "trunk",
-            timeout = 5000,
+            timeout = 3000,
             layout = "bottomCenter"
           }
         )
@@ -410,7 +410,7 @@ AddEventHandler(
                   text = _U("insufficient_space"),
                   type = "error",
                   queue = "trunk",
-                  timeout = 5000,
+                  timeout = 3000,
                   layout = "bottomCenter"
                 }
               )
@@ -437,7 +437,7 @@ AddEventHandler(
             text = _U("invalid_amount"),
             type = "error",
             queue = "trunk",
-            timeout = 5000,
+            timeout = 3000,
             layout = "bottomCenter"
           }
         )
@@ -471,7 +471,7 @@ AddEventHandler(
                 text = _U("invalid_amount"),
                 type = "error",
                 queue = "trunk",
-                timeout = 5000,
+                timeout = 3000,
                 layout = "bottomCenter"
               }
             )

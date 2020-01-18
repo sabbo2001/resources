@@ -33,12 +33,12 @@ AddEventHandler('esx_thief:stealPlayerItem', function(target, itemType, itemName
 	if itemType == 'item_standard' then
 
 		local label = sourceXPlayer.getInventoryItem(itemName).label
-		local itemLimit = sourceXPlayer.getInventoryItem(itemName).limit
+		local itemWeight = sourceXPlayer.getInventoryItem(itemName).weight
 		local sourceItemCount = sourceXPlayer.getInventoryItem(itemName).count
 		local targetItemCount = targetXPlayer.getInventoryItem(itemName).count
 
 		if amount > 0 and targetItemCount >= amount then
-			if itemLimit ~= -1 and (sourceItemCount + amount) > itemLimit then
+			if itemWeight ~= -1 and (sourceItemCount + amount) > itemWeight then
 				TriggerClientEvent('esx:showNotification', targetXPlayer.source, _U('ex_inv_lim_target'))
 				TriggerClientEvent('esx:showNotification', sourceXPlayer.source, _U('ex_inv_lim_source'))
 			else

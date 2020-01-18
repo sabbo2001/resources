@@ -34,18 +34,22 @@ end)
 RegisterNetEvent("esx:playerLoaded")
 AddEventHandler("esx:playerLoaded", function(newData)
 	PlayerData = newData
-
 	Citizen.Wait(25000)
-
 	ESX.TriggerServerCallback("esx-qalle-jail:retrieveJailTime", function(inJail, newJailTime)
 		if inJail then
-
 			jailTime = newJailTime
-
 			JailLogin()
 		end
 	end)
 end)
+
+--ESX.SetTimeout(4000, function()
+--	ESX.TriggerServerCallback('esx-qalle-jail:getDeathStatus', function(isDead)
+--		if isDead then
+--			TriggerEvent('esx_ambulancejob:revive', -1)
+--		end
+--	end)
+--end)
 
 RegisterNetEvent("esx:setJob")
 AddEventHandler("esx:setJob", function(response)
@@ -102,8 +106,6 @@ function JailLogin()
 	
 	ESX.ShowNotification("Вы ~r~покинули игру~w~, находясь в ~r~заключении")
 	ESX.ShowNotification("Вы будете ~r~перемещены в тюрьму~w~ до конца срока.")
-	
-	
 	InJail()
 end
 
@@ -276,7 +278,7 @@ function PackPackage(packageId)
 
 			Package["state"] = false
 		else
-			ESX.Game.Utils.DrawText3D(Package, "Упаковка в процессе... ~g~" .. math.ceil(tonumber(PackPercent)) .. "%", 1.0)
+			ESX.Game.Utils.DrawText3D(Package, "Вы выполняете работу... ~g~" .. math.ceil(tonumber(PackPercent)) .. "%", 1.0)
 		end
 		
 	end

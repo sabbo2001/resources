@@ -126,24 +126,24 @@ AddEventHandler('esx_mask:hasExitedMarker', function(zone)
 end)
 
 -- Create Blips
--- Citizen.CreateThread(function()
+Citizen.CreateThread(function()
 	
-	-- for i=1, #Config.Shops, 1 do
+	for i=1, #Config.Shops, 1 do
 		
-		-- local blip = AddBlipForCoord(Config.Shops[i].x, Config.Shops[i].y, Config.Shops[i].z)
+		local blip = AddBlipForCoord(Config.Shops[i].x, Config.Shops[i].y, Config.Shops[i].z)
 
-		-- SetBlipSprite (blip, 362)
-		-- SetBlipDisplay(blip, 4)
-		-- SetBlipScale  (blip, 0.8)
-		-- SetBlipColour (blip, 2)
-		-- SetBlipAsShortRange(blip, true)
+		SetBlipSprite (blip, 362)
+		SetBlipDisplay(blip, 4)
+		SetBlipScale  (blip, 0.8)
+		SetBlipColour (blip, 2)
+		SetBlipAsShortRange(blip, true)
 
-		-- BeginTextCommandSetBlipName("STRING")
-		-- AddTextComponentString(_U('masks_blip'))
-		-- EndTextCommandSetBlipName(blip)
-	-- end
+		BeginTextCommandSetBlipName("STRING")
+		AddTextComponentString(_U('masks_blip'))
+		EndTextCommandSetBlipName(blip)
+	end
 
--- end)
+end)
 
 -- Display markers
 Citizen.CreateThread(function()
@@ -196,11 +196,8 @@ end)
 -- Key controls
 Citizen.CreateThread(function()
 	while true do
-
 		Citizen.Wait(0)
-
 		if CurrentAction ~= nil then
-
 			SetTextComponentFormat('STRING')
 			AddTextComponentString(CurrentActionMsg)
 			DisplayHelpTextFromStringLabel(0, 0, 1, -1)
@@ -210,7 +207,6 @@ Citizen.CreateThread(function()
 				if CurrentAction == 'shop_menu' then
 					OpenShopMenu()
 				end
-
 				CurrentAction = nil
 				GUI.Time      = GetGameTimer()
 				
@@ -219,35 +215,25 @@ Citizen.CreateThread(function()
 		end
 
 		if IsControlPressed(0,  Keys['LEFTSHIFT']) and IsControlPressed(0,  Keys['M']) and (GetGameTimer() - GUI.Time) > 300 then
-			
 			if UseMask then
-
 				ESX.TriggerServerCallback('esx_skin:getPlayerSkin', function(skin)
-
 					TriggerEvent('skinchanger:loadClothes', skin, {
 						mask_1 = 0,
 						mask_2 = 0
 					})
-
 				end)
-
 			else
 
 				ESX.TriggerServerCallback('esx_skin:getPlayerSkin', function(playerSkin)
-
 					ESX.TriggerServerCallback('esx_mask:getMask', function(hasMask, skin)
-
 						if hasMask then
-
 							TriggerEvent('skinchanger:loadClothes', playerSkin, {
 								mask_1 = skin.mask_1,
 								mask_2 = skin.mask_2
 							})
-						
 						else
 							ESX.ShowNotification(_U('no_mask'))
 						end
-
 					end)
 
 				end)

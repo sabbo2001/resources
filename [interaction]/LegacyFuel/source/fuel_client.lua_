@@ -19,7 +19,7 @@ local inBlacklisted = false
 
 function ManageFuelUsage(vehicle)
 	if not DecorExistOn(vehicle, Config.FuelDecor) then
-		SetFuel(vehicle, math.random(200, 800) / 10)
+		SetFuel(vehicle, math.random(200, 950) / 10)
 	elseif not fuelSynced then
 		SetFuel(vehicle, GetFuel(vehicle))
 
@@ -172,8 +172,8 @@ AddEventHandler('fuel:startFuelUpTick', function(pumpObject, ped, vehicle)
 			currentFuel = oldFuel + fuelToAdd
 		end
 
-		if currentFuel > Citizen.InvokeNative(0x642FC12F, vehicle, "CHandlingData", "fPetrolTankVolume", Citizen.ReturnResultAnyway(), Citizen.ResultAsFloat()) then
-			currentFuel = Citizen.InvokeNative(0x642FC12F, vehicle, "CHandlingData", "fPetrolTankVolume", Citizen.ReturnResultAnyway(), Citizen.ResultAsFloat())
+		if currentFuel > 100.0 then
+			currentFuel = 100.0
 			isFueling = false
 		end
 
@@ -222,13 +222,13 @@ AddEventHandler('fuel:refuelFromPump', function(pumpObject, ped, vehicle)
 			local extraString = ""
 
 			if Config.UseESX then
-				extraString = "\nЦена: ~g~$" .. Round(currentCost, 1)
+				extraString = "\n" .. Config.Strings.TotalCost .. ": ~g~$" .. Round(currentCost, 1)
 			end
 
 			DrawText3Ds(stringCoords.x, stringCoords.y, stringCoords.z + 1.2, Config.Strings.CancelFuelingPump .. extraString)
-			DrawText3Ds(vehicleCoords.x, vehicleCoords.y, vehicleCoords.z + 0.5, Round(currentFuel, 1) .. "L")
+			DrawText3Ds(vehicleCoords.x, vehicleCoords.y, vehicleCoords.z + 0.5, Round(currentFuel, 1) .. "%")
 		else
-			DrawText3Ds(vehicleCoords.x, vehicleCoords.y, vehicleCoords.z + 0.5, Config.Strings.CancelFuelingJerryCan .. "\nБензин: ~g~" .. Round(GetAmmoInPedWeapon(ped, 883325847) / 4500 * 100, 1) .. "L | Транспорт: " .. Round(currentFuel, 1) .. "L")
+			DrawText3Ds(vehicleCoords.x, vehicleCoords.y, vehicleCoords.z + 0.5, Config.Strings.CancelFuelingJerryCan .. "\nТопливо: ~g~" .. Round(GetAmmoInPedWeapon(ped, 883325847) / 4500 * 100, 1) .. "% | Транспорт: " .. Round(currentFuel, 1) .. "%")
 		end
 
 		if not IsEntityPlayingAnim(ped, "timetable@gardener@filling_can", "gar_ig_5_filling_can", 3) then
@@ -272,7 +272,7 @@ Citizen.CreateThread(function()
 							end
 						end
 
-						if GetVehicleFuelLevel(vehicle) < Citizen.InvokeNative(0x642FC12F, vehicle, "CHandlingData", "fPetrolTankVolume", Citizen.ReturnResultAnyway(), Citizen.ResultAsFloat()) and canFuel then
+						if GetVehicleFuelLevel(vehicle) < 95 and canFuel then
 							if currentCash > 0 then
 								DrawText3Ds(stringCoords.x, stringCoords.y, stringCoords.z + 1.2, Config.Strings.EToRefuel)
 
@@ -349,13 +349,13 @@ function CreateBlip(coords)
 	local blip = AddBlipForCoord(coords)
 
 	SetBlipSprite(blip, 361)
-	SetBlipScale(blip, 0.9)
+	SetBlipScale(blip, 0.7)
 	SetBlipColour(blip, 4)
 	SetBlipDisplay(blip, 4)
 	SetBlipAsShortRange(blip, true)
 
 	BeginTextCommandSetBlipName("STRING")
-	AddTextComponentString("Бензоколонка")
+	AddTextComponentString("Бензоколонки")
 	EndTextCommandSetBlipName(blip)
 
 	return blip
@@ -401,7 +401,7 @@ function GetFuel(vehicle)
 end
 
 function SetFuel(vehicle, fuel)
-	if type(fuel) == 'number' and fuel >= 0 and fuel <= Citizen.InvokeNative(0x642FC12F, vehicle, "CHandlingData", "fPetrolTankVolume", Citizen.ReturnResultAnyway(), Citizen.ResultAsFloat()) then
+	if type(fuel) == 'number' and fuel >= 0 and fuel <= 100 then
 		SetVehicleFuelLevel(vehicle, fuel + 0.0)
 		DecorSetFloat(vehicle, Config.FuelDecor, GetVehicleFuelLevel(vehicle))
 	end
@@ -462,7 +462,7 @@ if Config.EnableHUD then
 				DrawAdvancedText(0.130 - x, 0.77 - y, 0.005, 0.0028, 0.6, mph, 255, 255, 255, 255, 6, 1)
 				DrawAdvancedText(0.174 - x, 0.77 - y, 0.005, 0.0028, 0.6, kmh, 255, 255, 255, 255, 6, 1)
 				DrawAdvancedText(0.2195 - x, 0.77 - y, 0.005, 0.0028, 0.6, fuel, 255, 255, 255, 255, 6, 1)
-				DrawAdvancedText(0.148 - x, 0.7765 - y, 0.005, 0.0028, 0.4, "mp/h              km/h              Fuel", 255, 255, 255, 255, 6, 1)
+				DrawAdvancedText(0.148 - x, 0.7765 - y, 0.005, 0.0028, 0.4, "mp/h  Км/ч  Топливо", 255, 255, 255, 255, 6, 1)
 			else
 				Citizen.Wait(750)
 			end

@@ -25,7 +25,7 @@ AddEventHandler('playerConnecting', function(name, setReason)
   if playerCount >= cv then
     print('Full. :(')
 
-    setReason('This server is full (past ' .. tostring(cv) .. ' players).')
+    setReason('Этот сервер полон (past ' .. tostring(cv) .. ' players).')
     CancelEvent()
   end
 end)

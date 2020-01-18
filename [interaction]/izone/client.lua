@@ -390,8 +390,8 @@ end
 Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(0)
-
-		if IsWaypointActive() and IsControlJustReleased(0, 182) then
+		--ТЕЛЕПОРТ
+		if IsWaypointActive() and IsControlJustReleased(0, 1800) then
 			Citizen.CreateThread(function()
 				local entity = PlayerPedId()
 				if IsPedInAnyVehicle(entity, false) then

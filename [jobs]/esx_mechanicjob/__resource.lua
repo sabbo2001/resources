@@ -7,7 +7,7 @@ version '1.1.0'
 client_scripts {
 	'@es_extended/locale.lua',
 	'locales/en.lua',
-	'locales/ru.lua',
+        'locales/ru.lua',
 	'locales/fi.lua',
 	'locales/fr.lua',
 	'locales/br.lua',
@@ -20,7 +20,7 @@ client_scripts {
 server_scripts {
 	'@es_extended/locale.lua',
 	'locales/en.lua',
-	'locales/ru.lua',
+        'locales/ru.lua',
 	'locales/fi.lua',
 	'locales/fr.lua',
 	'locales/br.lua',

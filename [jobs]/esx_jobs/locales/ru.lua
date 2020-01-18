@@ -6,6 +6,7 @@ Locales['ru'] = {
   ['job_wear']                  = 'Рабочая одежда',
   ['bank_deposit_returned']     = 'a security deposit of ~g~$%s~s~ was returned to you.',
   ['bank_deposit_taken']        = 'a security deposit of ~r~$%s~s~ was taken from you.',
+  ['caution_afford']            = 'you cannot afford the caution of ~g~$%s~s~',
   ['foot_work']                 = 'Вы должны идти пешком, чтобы иметь возможность работать.',
   ['next_point']                = 'Перейти к следующему шагу после завершения этого.',
   ['not_your_vehicle']          = 'Это не ваше транспортное средство, или вы должны быть водителем.',

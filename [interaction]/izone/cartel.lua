@@ -28,9 +28,10 @@ end)
 Citizen.CreateThread(function()
     while true do
        Wait(10000)
+		local ped = PlayerPedId()
 		--Тригер если игрок в зоне, выполняем функцию
 		TriggerEvent("izone:isPlayerInZone", "CartelWeedPlant", function(wanted)
-		
+
 				if (wanted) then
 				if (PlayerData.job ~= nil and (PlayerData.job.name == 'cartel' and PlayerData.job.grade == 3)) then
 					
@@ -38,7 +39,7 @@ Citizen.CreateThread(function()
 				else
 				SendSignalCartel()
 				--TriggerServerEvent('esx_phone:send', "cartel", 'На территории плантации замечены посторонние' , true, '')
-				ESX.ShowNotification('Вы находитесь на территории ~r~под контролем картеля~s~')
+				--ESX.ShowNotification('Вы находитесь на территории ~r~под контролем картеля~s~')
 				
 				end
 		end

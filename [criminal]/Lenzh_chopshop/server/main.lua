@@ -7,9 +7,8 @@ TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
 
 if GetCurrentResourceName() == 'Lenzh_chopshop' then
 
-  print("\n###############################")
   print("\n".. GetCurrentResourceName() .. " Loaded ")
-  print("\n###############################")
+  
 
     ESX.RegisterServerCallback('Lenzh_chopshop:anycops',function(source, cb)
         local anycops = 0
@@ -18,7 +17,7 @@ if GetCurrentResourceName() == 'Lenzh_chopshop' then
             local _source = playerList[i]
             local xPlayer = ESX.GetPlayerFromId(_source)
             local playerjob = xPlayer.job.name
-            if playerjob == 'police' then
+            if playerjob == 'police' or playerjob == 'fbi' then
                 anycops = anycops + 1
             end
         end
@@ -33,8 +32,8 @@ if GetCurrentResourceName() == 'Lenzh_chopshop' then
         if not xPlayer then return; end
         for k,v in pairs(Config.Items) do
             local randomCount = math.random(0, 3)
-            if xPlayer.getInventoryItem(v).count >= xPlayer.getInventoryItem(v).limit then
-                TriggerClientEvent('esx:showNotification', source, '~r~You cant carry anymore!')
+            if xPlayer.getInventoryItem(v).count >= xPlayer.getInventoryItem(v).weight then
+                TriggerClientEvent('esx:showNotification', source, '~r~Не хватает места в инвентаре!')
             else
                 xPlayer.addInventoryItem(v, randomCount)
             end
@@ -85,8 +84,4 @@ if GetCurrentResourceName() == 'Lenzh_chopshop' then
         TriggerClientEvent('esx:showNotification', source, _U('sold', amount, xItem.label, ESX.Math.GroupDigits(price)))
     end)
 else
-    print("\n###############################")
-    print("\n DO NOT RENAME MY CHOPSHOP FUCKERS... Change it ".. GetCurrentResourceName() .. " should be:\n".. 'Lenzh_chopshop')
-    print("\n###############################")
-
 end

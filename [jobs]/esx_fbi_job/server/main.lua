@@ -12,7 +12,7 @@ TriggerEvent('esx_society:registerSociety', 'fbi', 'fbi', 'society_fbi', 'societ
 RegisterServerEvent('esx_fbijob:giveWeapon')
 AddEventHandler('esx_fbi_job:giveWeapon', function(weapon, ammo)
 	local xPlayer = ESX.GetPlayerFromId(source)
-	
+
 	if xPlayer.job.name == 'fbi' then
 		xPlayer.addWeapon(weapon, ammo)
 	else
@@ -39,7 +39,7 @@ AddEventHandler('esx_fbijob:confiscatePlayerItem', function(target, itemType, it
 		if targetItem.count > 0 and targetItem.count >= amount then
 
 			-- can the player carry the said amount of x item?
-			if sourceItem.limit ~= -1 and (sourceItem.count + amount) > sourceItem.limit then
+			if sourceItem.weight ~= -1 and (sourceItem.count + amount) > sourceItem.weight then
 				TriggerClientEvent('esx:showNotification', _source, _U('quantity_invalid'))
 			else
 				targetXPlayer.removeInventoryItem(itemName, amount)
@@ -53,7 +53,7 @@ AddEventHandler('esx_fbijob:confiscatePlayerItem', function(target, itemType, it
 
 	elseif itemType == 'item_account' then
 		local targetItem = targetXPlayer.getAccount('black_money').money
-		
+
 		if targetItem ~= 0 then
 		targetXPlayer.removeAccountMoney(itemName, amount)
 			sourceXPlayer.addAccountMoney   (itemName, amount)
@@ -129,7 +129,7 @@ AddEventHandler('esx_fbijob:getStockItem', function(itemName, count)
 		if count > 0 and inventoryItem.count >= count then
 
 			-- can the player carry the said amount of x item?
-			if sourceItem.limit ~= -1 and (sourceItem.count + count) > sourceItem.limit then
+			if sourceItem.weight ~= -1 and (sourceItem.count + count) > sourceItem.weight then
 				TriggerClientEvent('esx:showNotification', _source, _U('quantity_invalid'))
 			else
 				inventory.removeItem(itemName, count)
@@ -441,7 +441,7 @@ ESX.RegisterServerCallback('esx_fbijob:buyJobVehicle', function(source, cb, vehi
 		-- cb(false)
 	-- else
 		if xPlayer.getMoney() >= price then
-			
+
 			xPlayer.removeMoney(price)
 			MySQL.Async.execute('INSERT INTO owned_vehicles (owner, vehicle, plate, type, job, `stored`) VALUES (@owner, @vehicle, @plate, @type, @job, @stored)', {
 				['@owner'] = xPlayer.identifier,

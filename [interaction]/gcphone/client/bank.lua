@@ -8,9 +8,8 @@
 --]]
 
 -- ES / ESX Implementation
-inMenu                      = true
+
 local bank = 0
-local firstname = ''
 function setBankBalance (value)
       bank = value
       SendNUIMessage({event = 'updateBankbalance', banking = bank})
@@ -48,29 +47,3 @@ RegisterNetEvent('es:displayBank')
 AddEventHandler('es:displayBank', function(bank)
       setBankBalance(bank)
 end)
-
-
-
---===============================================
---==         Transfer Event                    ==
---===============================================
-RegisterNUICallback('transfer', function(data)
-	TriggerServerEvent('gcPhone:transfer', data.to, data.amountt)
-end)
-
-RegisterNetEvent("gcPhone:myfirstname")
-AddEventHandler("gcPhone:myfirstname", function(firstname)
-  SendNUIMessage({event = 'updatebankgetName', firstname = firstname})
-end)
-
-RegisterNUICallback('myfirstname', function(data)
-  TriggerServerEvent('gcPhone:myfirstname', data.firstname)
-end)
-
-
-
-
-
-
-
-

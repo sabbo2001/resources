@@ -13,15 +13,15 @@ local Keys = {
 local crouched = false
 local proned = false
 crouchKey = Keys['C']
-proneKey = Keys['N4']
+proneKey = Keys['Z']
 
 Citizen.CreateThread( function()
 	while true do 
 		Citizen.Wait( 1 )
 		local ped = GetPlayerPed( -1 )
-		if ( DoesEntityExist( ped ) and not IsEntityDead( ped ) ) then 
+		if (DoesEntityExist(ped) and not IsEntityDead(ped) ) then
 			ProneMovement()
-			--DisableControlAction( 0, proneKey, true ) 
+			DisableControlAction( 0, proneKey, true ) 
 			DisableControlAction( 0, crouchKey, true ) 
 			if ( not IsPauseMenuActive() ) then 
 				if ( IsDisabledControlJustPressed( 0, crouchKey ) and not proned ) then 
@@ -45,22 +45,22 @@ Citizen.CreateThread( function()
 						crouched = true 
 					end 
 				elseif ( IsDisabledControlJustPressed(0, proneKey) and not crouched and not IsPedInAnyVehicle(ped, true) and not IsPedFalling(ped) and not IsPedDiving(ped) and not IsPedInCover(ped, false) and not IsPedInParachuteFreeFall(ped) and (GetPedParachuteState(ped) == 0 or GetPedParachuteState(ped) == -1) ) then
-					-- if proned then
-						-- ClearPedTasksImmediately(ped)
-						-- proned = false
-					-- elseif not proned then
-						-- RequestAnimSet( "move_crawl" )
-						-- while ( not HasAnimSetLoaded( "move_crawl" ) ) do 
-							-- Citizen.Wait( 100 )
-						-- end 
-						-- ClearPedTasksImmediately(ped)
-						-- proned = true
-						-- if IsPedSprinting(ped) or IsPedRunning(ped) or GetEntitySpeed(ped) > 5 then
-							-- TaskPlayAnim(ped, "move_jump", "dive_start_run", 8.0, 1.0, -1, 0, 0.0, 0, 0, 0)
-							-- Citizen.Wait(1000)
-						-- end
-						-- SetProned()
-					-- end
+					if proned then
+						ClearPedTasksImmediately(ped)
+						proned = false
+					elseif not proned then
+						RequestAnimSet( "move_crawl" )
+						while ( not HasAnimSetLoaded( "move_crawl" ) ) do 
+							Citizen.Wait( 100 )
+						end 
+						ClearPedTasksImmediately(ped)
+						proned = true
+						if IsPedSprinting(ped) or IsPedRunning(ped) or GetEntitySpeed(ped) > 5 then
+							TaskPlayAnim(ped, "move_jump", "dive_start_run", 8.0, 1.0, -1, 0, 0.0, 0, 0, 0)
+							Citizen.Wait(1000)
+						end
+						SetProned()
+					end
 				end
 			end
 		else
@@ -79,8 +79,8 @@ end
 
 function ProneMovement()
 	if proned then
-	   --ShowNotification("~g~Вы ползете")
 		ped = PlayerPedId()
+		DisableControlAction(0, 23)
 		if IsControlPressed(0, 32) or IsControlPressed(0, 33) then
 			DisablePlayerFiring(ped, true)
 		 elseif IsControlJustReleased(0, 32) or IsControlJustReleased(0, 33) then
@@ -107,10 +107,3 @@ function ProneMovement()
 		end
 	end
 end
-
-function ShowNotification(text)
-	SetNotificationTextEntry("STRING")
-	AddTextComponentString(text)
-	DrawNotification(false, false)
-end
-

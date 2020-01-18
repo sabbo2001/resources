@@ -51,7 +51,7 @@ function setTrunkInventoryData(data, blackMoney, inventory, weapons)
                 inventory[key].type = "item_standard"
                 inventory[key].usable = false
                 inventory[key].rare = false
-                inventory[key].limit = -1
+                inventory[key].weight = -1
                 inventory[key].canRemove = false
                 table.insert(items, inventory[key])
             end

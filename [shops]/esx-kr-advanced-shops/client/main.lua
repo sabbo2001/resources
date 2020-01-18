@@ -849,6 +849,8 @@ function Robbery(id)
                         z = coords1[id].z - 1,
 					}
 						TriggerServerEvent('esx_phone:send', "police", "Ограбление " .. result.name .. '\'s магазина', true, coords)
+
+
 						TriggerServerEvent('esx_kr_shops-robbery:NotifyOwner', "~r~Ваш магазин ~b~(" .. result.name .. ')~r~ грабят', id)
 						
 						ESX.Game.SpawnObject(1089807209, coords, function(safe)

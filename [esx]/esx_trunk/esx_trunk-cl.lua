@@ -275,7 +275,7 @@ AddEventHandler('esx_trunk_inventory:getInventoryLoaded', function(inventory,wei
 				      count     = PlayerData.accounts[i].money,
 				      value     = PlayerData.accounts[i].name,
 				      name      = PlayerData.accounts[i].label,
-					  limit     = PlayerData.accounts[i].limit,
+					  limit     = PlayerData.accounts[i].weight,
 					  type		= 'item_account',
 				    })
 				  -- end
@@ -289,7 +289,7 @@ AddEventHandler('esx_trunk_inventory:getInventoryLoaded', function(inventory,wei
 				      count     = PlayerData.inventory[i].count,
 				      value     = PlayerData.inventory[i].name,
 				      name      = PlayerData.inventory[i].label,
-					  limit     = PlayerData.inventory[i].limit,
+					  limit     = PlayerData.inventory[i].weight,
 					  type		= 'item_standard',
 				    })
 				end
@@ -412,7 +412,7 @@ AddEventHandler('esx_trunk_inventory:getInventoryLoaded', function(inventory,wei
           for i=1, #PlayerData.inventory, 1 do
 			
             if PlayerData.inventory[i].name == data.current.value then
-              if tonumber(PlayerData.inventory[i].limit) < tonumber(PlayerData.inventory[i].count) + quantity and PlayerData.inventory[i].limit ~= -1 then
+              if tonumber(PlayerData.inventory[i].weight) < tonumber(PlayerData.inventory[i].count) + quantity and PlayerData.inventory[i].weight ~= -1 then
                 max = true
               else
                 max = false

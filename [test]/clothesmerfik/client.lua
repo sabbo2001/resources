@@ -121,7 +121,7 @@ function OpenActionMenuInteraction(target)
 	ESX.UI.Menu.Open(
 		'default', GetCurrentResourceName(), 'action_menu',
 		{
-			title    = ('Kıyafet Menü'),
+			title    = ('Меню одежды'),
 			align    = 'top-left',
 			elements = elements
 		},
@@ -168,7 +168,7 @@ end
 Citizen.CreateThread(function()
   while true do
     Citizen.Wait(0)
-    if IsControlJustReleased(0, 57) and not ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'action_menu') then
+    if IsControlJustReleased(0, 56) and not ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'action_menu') then
 		OpenActionMenuInteraction()
     end
   end

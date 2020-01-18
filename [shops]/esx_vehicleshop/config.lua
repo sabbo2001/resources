@@ -4,7 +4,7 @@ Config.MarkerColor                = { r = 120, g = 120, b = 240 }
 Config.EnablePlayerManagement     = false -- enables the actual car dealer job. You'll need esx_addonaccount, esx_billing and esx_society
 Config.EnableOwnedVehicles        = true
 Config.EnableSocietyOwnedVehicles = false -- use with EnablePlayerManagement disabled, or else it wont have any effects
-Config.ResellPercentage           = 25
+Config.ResellPercentage           = 40
 
 Config.Locale                     = 'ru'
 
@@ -19,41 +19,41 @@ Config.PlateUseSpace = true
 Config.Zones = {
 
 	ShopEntering = {
-		Pos   = { x = 1230.21, y = 2725.34, z = 37.31 },
-		Size  = { x = 1.5, y = 1.5, z = 1.0 },
-		Type  = 30
+		Pos   = vector3(-33.7, -1102.0, 25.4),
+		Size  = {x = 1.5, y = 1.5, z = 1.0},
+		Type  = 1
 	},
 
 	ShopInside = {
-		Pos     = { x = 1226.12, y = 2718.25, z = 38.01 },
-		Size    = { x = 1.5, y = 1.5, z = 1.0 },
+		Pos     = vector3(-47.5, -1097.2, 25.4),
+		Size    = {x = 1.5, y = 1.5, z = 1.0},
 		Heading = -20.0,
 		Type    = -1
 	},
 
 	ShopOutside = {
-		Pos     = { x = 1228.22, y = 2718.71, z = 37.3 },
-		Size    = { x = 1.5, y = 1.5, z = 1.0 },
+		Pos     = vector3(-28.6, -1085.6, 25.5),
+		Size    = {x = 1.5, y = 1.5, z = 1.0},
 		Heading = 330.0,
 		Type    = -1
 	},
 
 	BossActions = {
-		Pos   = { x = -32.065, y = -1114.277, z = 25.422 },
-		Size  = { x = 1.5, y = 1.5, z = 1.0 },
+		Pos   = vector3(-32.0, -1114.2, 25.4),
+		Size  = {x = 1.5, y = 1.5, z = 1.0},
 		Type  = -1
 	},
 
 	GiveBackVehicle = {
-		Pos   = { x = -18.227, y = -1078.558, z = 25.675 },
-		Size  = { x = 3.0, y = 3.0, z = 1.0 },
+		Pos   = vector3(-18.2, -1078.5, 25.6),
+		Size  = {x = 3.0, y = 3.0, z = 1.0},
 		Type  = (Config.EnablePlayerManagement and 1 or -1)
 	},
 
 	ResellVehicle = {
-		Pos   = { x = 1224.39, y = 2727.36, z = 37.44 },
-		Size  = { x = 3.0, y = 3.0, z = 1.0 },
-		Type  = 24
+		Pos   = vector3(-44.6, -1080.7, 25.6),
+		Size  = {x = 3.0, y = 3.0, z = 1.0},
+		Type  = 1
 	}
 
 }

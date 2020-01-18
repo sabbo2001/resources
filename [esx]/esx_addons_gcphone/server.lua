@@ -17,22 +17,15 @@ end)
 
 function notifyAlertSMS (number, alert, listSrc)
   if PhoneNumbers[number] ~= nil then
-  local mess = 'От#' .. alert.numero  .. ' : ' .. alert.message
-
+	local mess = 'От #' .. alert.numero  .. ' : ' .. alert.message
 	if alert.coords ~= nil then
-    --mess = mess .. ' GPS: ' .. alert.coords.x .. ', ' .. alert.coords.y 
-    mess = mess .. ''
-
+		mess = mess .. ' ' .. alert.coords.x .. ', ' .. alert.coords.y 
 	end
     for k, _ in pairs(listSrc) do
       getPhoneNumber(tonumber(k), function (n)
         if n ~= nil then
-          
-          TriggerEvent('gcPhone:_internalAddMessage', number, n, 'From #' .. alert.numero  .. ' : ' .. alert.message, 0, function (smsMess)
+          TriggerEvent('gcPhone:_internalAddMessage', number, n, mess, 0, function (smsMess)
             TriggerClientEvent("gcPhone:receiveMessage", tonumber(k), smsMess)
-            TriggerEvent('gcPhone:_internalAddMessage', number, n, 'GPS: ' .. alert.coords.x .. ', ' .. alert.coords.y, 0, function (smsMess)
-            TriggerClientEvent("gcPhone:receiveMessage", tonumber(k), smsMess)
-          end)
           end)
         end
       end)
@@ -41,7 +34,7 @@ function notifyAlertSMS (number, alert, listSrc)
 end
 
 AddEventHandler('esx_phone:registerNumber', function(number, type, sharePos, hasDispatch, hideNumber, hidePosIfAnon)
-  print('INFO = Зарегистрированный номер ' .. number .. ' => ' .. type)
+  print('= INFO = Зарегистрированный номер ' .. number .. ' => ' .. type)
 	local hideNumber    = hideNumber    or false
 	local hidePosIfAnon = hidePosIfAnon or false
 
@@ -84,19 +77,44 @@ AddEventHandler('gcPhone:sendMessage', function(number, message)
     end
 end)
 
+--RegisterServerEvent('esx_addons_gcphone:startCall')
+--AddEventHandler('esx_addons_gcphone:startCall', function (number, message, coords)
+--  local source = source
+--  if PhoneNumbers[number] ~= nil then
+--    getPhoneNumber(source, function (phone)
+--      notifyAlertSMS(number, {
+--        message = message,
+--        coords = coords,
+--        numero = phone,
+--      }, PhoneNumbers[number].sources)
+--    end)
+--  else
+--    print('= WARNING = Звонки или сообщения на незарегистрированный => номер : ' .. number)
+--  end
+--end)
+
+
 RegisterServerEvent('esx_addons_gcphone:startCall')
 AddEventHandler('esx_addons_gcphone:startCall', function (number, message, coords)
   local source = source
   if PhoneNumbers[number] ~= nil then
-    getPhoneNumber(source, function (phone) 
-      notifyAlertSMS(number, {
-        message = message,
-        coords = coords,
-        numero = phone,
-      }, PhoneNumbers[number].sources)
-    end)
+    if number == 'taxi' then
+      if message == 'cancel' then
+        TriggerClientEvent('esx_aiTaxi:cancelTaxi', source, true)
+      else
+        TriggerClientEvent('esx_aiTaxi:callTaxi', source, coords)
+      end
+    else
+      getPhoneNumber(source, function (phone)
+        notifyAlertSMS(number, {
+          message = message,
+          coords = coords,
+          numero = phone,
+        }, PhoneNumbers[number].sources)
+      end)
+    end
   else
-    print('= ВНИМАНИЕ = Звонки или сообщения на незарегистрированный номер => ' .. number)
+    print('WARNING = Звонки или сообщения на незарегистрированный => номер : ' .. number)
   end
 end)
 

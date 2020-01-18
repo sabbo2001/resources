@@ -24,23 +24,23 @@
 
   "useFormatNumberFrance": false,
 
-  "useWebRTCVocal": true,
+   "useWebRTCVocal": false,
   "RTCConfig": {
     "iceServers": [{
-      "urls": ["turn:89.189.172.170"],
-      "username": "testuser",
-      "credential": "superpwd"
+      "urls": ["turn:softportal.pro"],
+      "username": "gta5",
+      "credential": "rhbvbyfkbcn"
     }]
   },
 
   "//": "REQUIRE https://github.com/citizenfx/screenshot-basic or set false",
-  "enableTakePhoto": false,
+  "enableTakePhoto": true,
   "fileUploadService_Url": "https://wew.wtf/upload.php",
   "fileUploadService_Field": "files[]",
 
- "background" : {
+  "background": {
 
-      "Гитара": "01.jpg",
+     "Гитара": "01.jpg",
       "Los Santos": "02.jpg",
       "Погоня": "03.jpg",
       "Сан-Андреас": "07.jpg",
@@ -51,226 +51,217 @@
 	  "Лев": "12.jpg",
 	  "Космос": "13.jpg",
 	  "Текстура": "14.jpg",
-	  "Синий фон": "15.jpg",
-	  "Черный фон": "16.jpg",
-	  "Коричневый фон": "17.jpg",
-	  
-	  
-	  
-      "Свои обои": "URL"
-    },
-    "background_default": {
-      "label": "Guitare",
+     "Синий фон": "15.jpg",
+    "Черный фон": "16.jpg",
+    "Коричневый фон": "17.jpg",
+    "Destiny": "back002.jpg",
+    "Stormtrooper": "back003.jpg",
+    "Свои обои по URL": "URL"
+
+  },
+  "background_default": {
+    "label": "Guitare",
       "value": "01.jpg"
-    },
+  },
 
 
   "coque": {
     "Sansumg S8": "s8.png",
     "Iphone X": "iphonex.png"
-  },
-  
+},
+
   "coque_default": {
     "label": "Sansumg S8",
     "value": "s8.png"
   },
 
 
- "serviceCall": [
+  "serviceCall": [
     {
       "display": "Police",
-      "icon": "/html/static/img/icons_app/policier.png",
-      "subMenu": [
-        {
+      "icon": "/html/static/img/icons_app/police.png",
+      "subMenu": [{
           "title": "Отправить сообщение",
           "eventName": "esx_addons_gcphone:call",
           "type": {
             "number": "police"
           }
         },
-       
-    {
-      "title": "Полиция",
-      "eventName": "esx_addons_gcphone:call",
-      "type": {
-      "number": "police",
-      "message": "Мне нужна срочная помощь, пожалуйста, помогите!"
-      }
-        }
-      ]
-    },
-    {
-      "display": "FBI",
-      "icon": "/html/static/img/icons_app/fib.png",
-      "subMenu": [
         {
-          "title": "Отправить сообщение",
-          "eventName": "esx_addons_gcphone:call",
+          "title": "Вызов скорой",
+          "eventName": "gcphone:autoCallNumber",
           "type": {
-            "number": "fbi"
+            "number": "ambulance"
           }
         }
       ]
     },
-    
+
+    {
+      "display": "Такси",
+      "backgroundColor": "yellow",
+      "subMenu": [
         {
+          "title": "Заказать такси",
+          "eventName": "esx_addons_gcphone:call",
+          "type": {
+            "number": "taxi",
+            "message": "Мне нужна поездка"
+          }
+        },
+        {
+          "title": "Отменить такси",
+          "eventName": "esx_addons_gcphone:call",
+          "type": {
+            "number": "taxi",
+            "message": "cancel"
+          }
+        }
+      ]
+    },
+
+    {
       "display": "Скорая помощь",
-      "icon": "/html/static/img/icons_app/ambulancier.png",
-      "subMenu": [
-        {
-          "title": "Отправить сообщение",
-          "eventName": "esx_addons_gcphone:call",
-          "type": {
-            "number": "ambulance"
-          }
-        },
-        {
-          "title": "Позвонить",
-          "eventName": "gcphone:autoCallNumber",
-          "type": {
-            "number": "ambulance"
-          }
+      "backgroundColor": "red",
+      "subMenu": [{
+        "title": "Отправить сообщение",
+        "eventName": "esx_addons_gcphone:call",
+        "type": {
+          "number": "ambulance"
         }
-      ]
-    },
-    {
-      "display": "Картель",
-      "icon": "/html/static/img/icons_app/itfaiye.png",
-      "subMenu": [
-        {
-          "title": "Отправить сообщение",
-          "eventName": "esx_addons_gcphone:call",
-          "type": {
-            "number": "cartel"
-          }
-        },
-        {
-          "title": "Позвонить",
-          "eventName": "gcphone:autoCallNumber",
-          "type": {
-            "number": "cartel"
-          }
-        }
-      ]
-    },
-    
-    {
-      "display": "Механик",
-      "icon": "/html/static/img/icons_app/mecano.png",
-      "subMenu": [
-        {
-          "title": "Механик",
-          "eventName": "esx_addons_gcphone:call",
-          "type": {
-          "number": "mechanic"
-          }
-        }
-      ]
-    },
-    {
-      "display": "Армия",
-      "backgroundColor": "grey",
-	  "icon": "/html/static/img/icons_app/militar.png",
-      "subMenu": [
-        {
-          "title": "Отправить сообщение",
-          "eventName": "esx_addons_gcphone:call",
-          "type": {
-            "number": "militar"
-          }
-        }
-      ]
-    },
-    
-    {
-	  "display": "Такси",
-      "icon": "/html/static/img/icons_app/taxi.png",
-      "subMenu": [
-        {
-          "title": "Такси",
-          "eventName": "esx_addons_gcphone:call",
-          "type": {
-            "number": "taxi"
-          }
-        }
-      ]
-    },
-    {
-      "display": "Bank",
-      "icon": "/html/static/img/icons_app/bank.png",
-      "subMenu": [
-        {
-          "title": "Мобильный банк",
-          "eventName": "esx_addons_gcphone:call",
-          "type": {
-            "number": "bank"
-          }
-        }
-      ]
+      }]
     }
   ],
 
-  "apps": [
+  "defaultContacts": [
     {
-      "name": "Telefon",
-      
-      "en_US__name": "Telefon",
-	  "ru_RU__name": "Телефон",
+      "number": "1111",
+      "display": "Администарция",
+      "backgroundColor": "red"
+    },
+    {
+      "number": "ambulance",
+      "display": "Ambulance",
+      "icon": "/html/static/img/icons_app/bank.png"
+    },
+    {
+      "number": "fbi",
+      "display": "FBI",
+      "icon": "data:image/png;base64,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"
+    },
+    {
+      "number": "police",
+      "display": "Полиция",
+      "icon": "/html/static/img/icons_app/police.png",
+      "backgroundColor": "blue",
+      "letter": "P"
+    },
+    {
+      "number": "cartel",
+      "display": "Картель",
+      "icon": "data:image/png;base64,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",
+      "letter": "C"
+    }
+  ],
+
+  "apps": [{
+      "name": "Twitter",
+      "ru_RU__name": "Твиттер",
+      "fr_FR__name": "Twitter",
+      "en_US__name": "Twitter",
+      "de_DE__name": "Twitter",
+      "pl_PL__name": "Twitter",
+      "es_ES__name": "Twitter",
+      "icons": "/html/static/img/icons_app/twitter.png",
+      "routeName": "twitter.splash",
+      "inHomePage": true
+    },
+    {
+      "name": "Mobilphone",
+      "ru_RU__name": "Звонки",
+      "fr_FR__name": "Téléphone",
+      "cs_CZ__name": "Telefon",
+      "en_US__name": "Phone",
+      "de_DE__name": "Telefon",
+      "pl_PL__name": "Telefon",
+      "es_ES__name": "llamar",
       "icons": "/html/static/img/icons_app/call.png",
       "routeName": "appels",
       "inHomePage": true
     },
     {
-      "name": "Сообщения",
-	  "ru_RU__name": "Сообщения",
+      "name": "Messages",
+      "ru_RU__name": "Сообщения",
+      "fr_FR__name": "Messages",
+      "en_US__name": "Messages",
+      "cs_CZ__name": "Zprávy",
+      "de_DE__name": "Nachrichten",
+      "pl_PL__name": "Wiadomości",
+      "es_ES__name": "Mensajes",
       "icons": "/html/static/img/icons_app/sms.png",
       "routeName": "messages",
       "inHomePage": true,
       "puceRef": "nbMessagesUnread"
     },
     {
-      "name": "Контакты",
-	  "ru_RU__name": "Контакты",
+      "name": "Contacts",
+      "ru_RU__name": "Контакты",
+      "fr_FR__name": "Contacts",
+      "en_US__name": "Contacts",
+      "cs_CZ__name": "Kontakty",
+      "de_DE__name": "Kontakte",
+      "pl_PL__name": "Kontakty",
+      "es_ES__name": "Contactos",
       "icons": "/html/static/img/icons_app/contacts.png",
       "routeName": "contacts",
       "inHomePage": true
     },
     {
-      "name": "Настройки",
-      
+      "name": "Settings",
+      "ru_RU__name": "Настройки",
+      "fr_FR__name": "Paramètres",
       "en_US__name": "System",
-	  "ru_RU__name": "Настройки",
+      "cs_CZ__name": "Nastavení",
+      "de_DE__name": "Einstellungen",
+      "pl_PL__name": "Ustawienia",
+      "es_ES__name": "Ajustes",
       "icons": "/html/static/img/icons_app/settings.png",
       "routeName": "parametre",
       "inHomePage": true
     },
     {
-      "name": "Банк",
-      
-      "en_US__name": "Bank",
-	  "ru_RU__name": "Мобильный банк",
+      "name": "Bank",
+      "ru_RU__name": "Мобильный банк",
+      "fr_FR__name": "Banque",
+      "en_US__name": "Bankmanager",
+      "cs_CZ__name": "Banka",
+      "de_DE__name": "Bank",
+      "pl_PL__name": "Lawka",
+      "es_ES__name": "Banquillo",
       "icons": "/html/static/img/icons_app/bank.png",
       "routeName": "bank",
-      "inHomePage": true
+      "inHomePage": false
     },
     {
-      "name": "Фондовый рынок",
-      "en_US__name": "Bourse",
-	  "ru_RU__name": "Фондовый рынок",
-      "icons": "/html/static/img/icons_app/bourse.png",
-      "routeName": "bourse",
-      "enabled": true
-    },
-    {
-      "name": "Камера",
-      
+      "name": "Camera",
+      "ru_RU__name": "Камера",
+      "fr_FR__name": "Photo",
+      "cs_CZ__name": "Fotoaparát",
       "en_US__name": "Camera",
-	  "ru_RU__name": "Камера",
+      "de_DE__name": "Kamera",
+      "pl_PL__name": "Kamera",
+      "es_ES__name": "Cámara",
       "icons": "/html/static/img/icons_app/photo.png",
       "routeName": "photo"
     },
     {
-      "name": "Whatsapp",
+      "name": "Dark Chat",
+      "ru_RU__name": "Dark чат",
+      "fr_FR__name": "Dark Chat",
+      "en_US__name": "Dark Chat",
+      "de_DE__name": "Dark Net",
+      "pl_PL__name": "Czat czarny",
+      "es_ES__name": "Chat Oscuro",
       "icons": "/html/static/img/icons_app/tchat.png",
       "routeName": "tchat"
     },
@@ -280,12 +271,11 @@
       "routeName": "9gag"
     }
   ],
-  
+
   "defaultLanguage": "ru_RU",
-  
   "language": {
 
-	"ru_RU": {
+     "ru_RU": {
       "NAME": "Русский",
       "PHONE_WARNING_MESSAGE": "Уведомление",
       "PHONE_WARNING_MESSAGE_MESS": "Новое сообщение",
@@ -310,6 +300,8 @@
       "APP_PHONE_MENU_RECENTS": "Последние",
       "APP_PHONE_MENU_CONTACTS": "Контакты",
       "APP_PHONE_ENTER_NUMBER": "Введите номер",
+       "APP_PHONE_NUMBER_HIDDEN": "Скрытый номер",
+       "APP_PHONE_NUMBER_UNKNOWN": "Неизвестный номер",
       "APP_BANK_TITLE": "Банк",
       "APP_BOURSE_TITLE": "Фондовая биржа",
       "APP_CONTACT_TITLE": "Детали контакта",
@@ -319,6 +311,7 @@
       "APP_CONTACT_CANCEL": "Отменить",
       "APP_CONTACT_DELETE": "Удалить",
       "APP_CONTACT_LABEL_NAME": "Имя Фамилия",
+      "APP_PHONE_CALL_ANONYMOUS": "Позвонить анонимно",
       "APP_CONTACT_LABEL_NUMBER": "Номер",
       "APP_MESSAGE_TITLE": "Новые сообщения",
       "APP_MESSAGE_NEW_MESSAGE": "Новое сообщение",
@@ -339,8 +332,8 @@
       "APP_DARKTCHAT_PLACEHOLDER_ENTER_MESSAGE": "Введите сообщение",
       "APP_TWITTER_NAME": "Twitter",
       "APP_TWITTER_VIEW_TWITTER": "Twitter",
-      "APP_TWITTER_VIEW_TOP_TWEETS": "top tweets",
-      "APP_TWITTER_VIEW_TWEETER": "tweets",
+      "APP_TWITTER_VIEW_TOP_TWEETS": "топ твиты",
+      "APP_TWITTER_VIEW_TWEETER": "твиты",
       "APP_TWITTER_VIEW_SETTING": "parameter",
       "APP_TWITTER_NEW_ACCOUNT_USERNAME": "Username (>= 4)",
       "APP_TWITTER_NEW_ACCOUNT_PASSWORD": "Password (>= 6)",
@@ -388,7 +381,119 @@
         ["%s year ago", "%s лет назад."]
       ]
     },
-	
+
+     "fr_FR": {
+      "NAME": "Français",
+      "PHONE_WARNING_MESSAGE": "Saturation mémoires !",
+      "PHONE_WARNING_MESSAGE_MESS": "messages",
+      "CONFIRM": "Accepter",
+      "CANCEL": "Annuler",
+      "APP_CONFIG_TITLE": "Paramètres",
+      "APP_CONFIG_MY_MUNBER": "Mon numéro",
+      "APP_CONFIG_WALLPAPER": "Fond d'écran",
+      "APP_CONFIG_CASE": "Coque téléhone",
+      "APP_CONFIG_ZOOM": "Zoom",
+      "APP_CONFIG_VOLUME": "Volume",
+      "APP_CONFIG_LANGUAGE": "Langue",
+      "APP_CONFIG_MOUSE_SUPPORT": "Controle souris",
+      "APP_CONFIG_RESET": "Formater",
+      "APP_CONFIG_RESET_CONFIRM": "TOUT SUPPRIMER",
+      "APP_PHONE_CALL": "Appeler",
+      "APP_PHONE_CALL_ANONYMOUS": "Appeler en anomyne",
+      "APP_PHONE_DELETE": "Effacer",
+      "APP_PHONE_DELETE_ALL": "Effacer TOUT.",
+      "APP_PHONE_TITLE": "Téléphone",
+      "APP_PHONE_MENU_FAVORITES": "Favoris",
+      "APP_PHONE_MENU_RECENTS": "Récents",
+      "APP_PHONE_MENU_CONTACTS": "Contacts",
+      "APP_PHONE_ENTER_NUMBER": "Entrer un numero",
+      "APP_PHONE_NUMBER_HIDDEN": "Munero masqué",
+      "APP_PHONE_NUMBER_UNKNOWN": "Inconnu",
+      "APP_PHONE_CALL_IGNORE": "Ignorée",
+      "APP_BANK_TITLE": "Banque",
+      "APP_BOURSE_TITLE": "Bourse",
+      "APP_CONTACT_TITLE": "Contact",
+      "APP_CONTACT_NEW": "Nouveau Contact",
+      "APP_CONTACT_EDIT": "Modifier le contact",
+      "APP_CONTACT_SAVE": "Enregistrer",
+      "APP_CONTACT_CANCEL": "Annuler",
+      "APP_CONTACT_DELETE": "Supprimer",
+      "APP_CONTACT_LABEL_NAME": "Prénom - Nom",
+      "APP_CONTACT_LABEL_NUMBER": "Numéro",
+      "APP_MESSAGE_TITLE": "Messages",
+      "APP_MESSAGE_NEW_MESSAGE": "Nouveau Message",
+      "APP_MESSAGE_ERASE_CONVERSATION": "Effacer la conversation",
+      "APP_MESSAGE_ERASE_ALL_CONVERSATIONS": "Effacer toutes les conv.",
+      "APP_MESSAGE_SEND_GPS": "Envoyer Coord GPS",
+      "APP_MESSAGE_SEND_PHOTO": "Envoyer une photo",
+      "APP_MESSAGE_SET_GPS": "Position GPS",
+      "APP_MESSAGE_ZOOM_IMG": "Zoom",
+      "APP_MESSAGE_DELETE": "Effacer",
+      "APP_MESSAGE_MESS_NUMBER": "Numero ",
+      "APP_MESSAGE_MESS_SMS": "SMS",
+      "APP_MESSAGE_MESS_CALL": "Appeler",
+      "APP_MESSAGE_MESS_COPY": "Copier",
+      "APP_MESSAGE_CONTACT_TITLE": "Contacts",
+      "APP_MESSAGE_CONTRACT_ENTER_NUMBER": "Enter un numero",
+      "APP_MESSAGE_PLACEHOLDER_ENTER_MESSAGE": "Envoyer un message",
+      "APP_DARKTCHAT_TITLE": "Dark Tchat",
+      "APP_DARKTCHAT_NEW_CHANNEL": "Ajouter un channel",
+      "APP_DARKTCHAT_DELETE_CHANNEL": "Effacer le channel",
+      "APP_DARKTCHAT_CANCEL": "Annuler",
+      "APP_DARKTCHAT_PLACEHOLDER_ENTER_MESSAGE": "Entrer un message",
+      "APP_TWITTER_NAME": "Twitter",
+      "APP_TWITTER_VIEW_TWITTER": "Twitter",
+      "APP_TWITTER_VIEW_TOP_TWEETS": "Top Tweets",
+      "APP_TWITTER_VIEW_TWEETER": "Tweeter",
+      "APP_TWITTER_VIEW_SETTING": "Paramètre",
+      "APP_TWITTER_NEW_ACCOUNT_USERNAME": "Nom utilisateur (>= 4)",
+      "APP_TWITTER_NEW_ACCOUNT_PASSWORD": "Mot de passe (>= 6)",
+      "APP_TWITTER_NEW_ACCOUNT_PASSWORD_CONFIRM": "Confirmer mot de passe",
+      "APP_TWITTER_NEW_ACCOUNT_AVATAR": "Url de votre avatar",
+      "APP_TWITTER_PLACEHOLDER_MESSAGE": "Quoi de neuf ?",
+      "APP_TWITTER_BUTTON_ACTION_TWEETER": "Tweeter",
+      "APP_TWITTER_ACCOUNT_LOGIN": "Se connecter",
+      "APP_TWITTER_ACCOUNT_LOGOUT": "Se déconnecter",
+      "APP_TWITTER_ACCOUNT_PARAM": "Mon compte",
+      "APP_TWITTER_ACCOUNT_AVATAR": "Changer l'avatar",
+      "APP_TWITTER_ACCOUNT_CHANGE_PASSWORD": "Changer Mot de passe",
+      "APP_TWITTER_ACCOUNT_NEW": "Nouveau compte",
+      "APP_TWIITER_ACCOUNT_SAVE": "Enregistrer",
+      "APP_TWIITER_ACCOUNT_CREATE": "Créer le compte",
+      "APP_TWIITER_ACCOUNT_CANCEL": "Annuler",
+      "APP_TWITTER_ACCOUNT_USERNAME": "Nom utilisateur",
+      "APP_TWITTER_ACCOUNT_PASSWORD": "Mot de passe",
+      "APP_TWITTER_NOTIFICATION": "Notification",
+      "APP_TWITTER_NOTIFICATION_WHEN": "Etre notification",
+      "APP_TWITTER_NOTIFICATION_ALL": "Tous les messages",
+      "APP_TWITTER_NOTIFICATION_MENTION": "Mentions seulement",
+      "APP_TWITTER_NOTIFICATION_NEVER": "Aucun",
+      "APP_TWITTER_NOTIFICATION_SOUND": "Jouer un son",
+      "APP_TWITTER_NOTIFICATION_SOUND_YES": "Oui",
+      "APP_TWITTER_NOTIFICATION_SOUND_NO": "Non",
+      "APP_TWITTER_NOTIF_ACCOUNT_CREATE_SUCCESS": "Votre compte Twitter à été crée",
+      "APP_TWITTER_NOTIF_ACCOUNT_CREATE_ERROR": "Votre compte Twitter n'à pas pu été crée (Pseudo déjà utilisé ?)",
+      "APP_TWITTER_NOTIF_LOGIN_SUCCESS": "Vous ête connectée à twitter",
+      "APP_TWITTER_NOTIF_LOGIN_ERROR": "Compte / Mots de passe non valide",
+      "APP_TWITTER_NOTIF_AVATAR_SUCCESS": "Votre avatar à été changer !",
+      "APP_TWITTER_NOTIF_NEW_PASSWORD_SUCCESS": "Votre mot de passe a été modifié",
+      "APP_TWITTER_NOTIF_NEW_PASSWORD_ERROR": "Oups ... votre mot de passe n'a pas pu être modifié",
+      "APP_TWITTER_NOTIF_NEW_PASSWORD_MISS_MATCH": "Les mots de passe ne corresponde pas",
+      "APP_TWITTER_NOTIF_NEW_PASSWORD_LENGTH_ERROR": "Mot de passe trop court",
+
+
+      "TIMEAGO": [
+        "à l'instant",
+        ["il y a %s seconde", "il y a %s secondes"],
+        ["il y a %s minute", "il y a %s minutes"],
+        ["il y a %s heure", "il y a %s heures"],
+        ["il y a %s jour", "il y a %s jours"],
+        ["il y a %s semaine", "il y a %s semaines"],
+        ["il y a %s mois", "il y a %s mois"],
+        ["il y a %s an", "il y a %s ans"]
+      ]
+
+    },
     "en_US": {
       "NAME": "English",
       "PHONE_WARNING_MESSAGE": "memento",
@@ -490,7 +595,418 @@
         ["%s month ago", "%s months ago"],
         ["%s year ago", "%s years ago"]
       ]
+    },
+    "de_DE": {
+      "NAME": "Deutsch",
+      "PHONE_WARNING_MESSAGE": "Achtung!",
+      "PHONE_WARNING_MESSAGE_MESS": "Nachrichten",
+      "CONFIRM": "Akzeptieren",
+      "CANCEL": "Abbrechen",
+      "APP_CONFIG_TITLE": "Einstellungen",
+      "APP_CONFIG_MY_MUNBER": "Meine Nummer",
+      "APP_CONFIG_WALLPAPER": "Hintergrundbild",
+      "APP_CONFIG_CASE": "Telefontyp",
+      "APP_CONFIG_ZOOM": "Grösse",
+      "APP_CONFIG_VOLUME": "Lautstärke",
+      "APP_CONFIG_LANGUAGE": "Sprache",
+      "APP_CONFIG_MOUSE_SUPPORT": "Maussteuerung",
+      "APP_CONFIG_RESET": "Werkseinstellungen",
+      "APP_CONFIG_RESET_CONFIRM": "Zurücksetzen",
+      "APP_PHONE_CALL": "Anrufen",
+      "APP_PHONE_DELETE": "Löschen",
+      "APP_PHONE_DELETE_ALL": "Alle löschen",
+      "APP_PHONE_TITLE": "Telefon",
+      "APP_PHONE_MENU_FAVORITES": "Favoriten",
+      "APP_PHONE_MENU_RECENTS": "Kürzlich",
+      "APP_PHONE_MENU_CONTACTS": "Kontakte",
+      "APP_PHONE_ENTER_NUMBER": "Nummer eingeben",
+      "APP_PHONE_NUMBER_HIDDEN": "Nummer unterdrückt",
+      "APP_PHONE_NUMBER_UNKNOWN": "Unbekannt",
+      "APP_PHONE_CALL_IGNORE": "Ignorieren",
+      "APP_BANK_TITLE": "Bank",
+      "APP_BOURSE_TITLE": "Börse",
+      "APP_CONTACT_TITLE": "Kontakt",
+      "APP_CONTACT_NEW": "Neuer Kontakt",
+      "APP_CONTACT_EDIT": "Kontakt bearbeiten",
+      "APP_CONTACT_SAVE": "Speichern",
+      "APP_CONTACT_CANCEL": "Abbrechen",
+      "APP_CONTACT_DELETE": "Löschen",
+      "APP_CONTACT_LABEL_NAME": "Vorname - Nachname",
+      "APP_CONTACT_LABEL_NUMBER": "Rufnummer",
+      "APP_MESSAGE_TITLE": "Nachrichten",
+      "APP_MESSAGE_NEW_MESSAGE": "Neue Nachricht",
+      "APP_MESSAGE_ERASE_CONVERSATION": "Konversation löschen",
+      "APP_MESSAGE_ERASE_ALL_CONVERSATIONS": "Alle Konversationen löschen",
+      "APP_MESSAGE_SEND_GPS": "GPS Position senden",
+      "APP_MESSAGE_SET_GPS": "Position als Ziel setzen",
+      "APP_MESSAGE_ZOOM_IMG": "Zoom",
+      "APP_MESSAGE_DELETE": "Löschen",
+      "APP_MESSAGE_MESS_NUMBER": "Nummer ",
+      "APP_MESSAGE_MESS_SMS": "SMS",
+      "APP_MESSAGE_MESS_CALL": "Anrufen",
+      "APP_MESSAGE_MESS_COPY": "Kopieren",
+      "APP_MESSAGE_CONTACT_TITLE": "Kontakte",
+      "APP_MESSAGE_CONTRACT_ENTER_NUMBER": "Eine Nummer eingeben",
+      "APP_MESSAGE_PLACEHOLDER_ENTER_MESSAGE": "Nachricht eingeben",
+      "APP_DARKTCHAT_TITLE": "Anonymer Chat",
+      "APP_DARKTCHAT_NEW_CHANNEL": "Neuen Channel erstellen",
+      "APP_DARKTCHAT_DELETE_CHANNEL": "Channel löschen",
+      "APP_DARKTCHAT_CANCEL": "Abbrechen",
+      "APP_DARKTCHAT_PLACEHOLDER_ENTER_MESSAGE": "Nachricht eingeben",
+      "APP_TWITTER_NAME": "Twitter",
+      "APP_TWITTER_VIEW_TWITTER": "Twitter",
+      "APP_TWITTER_VIEW_TOP_TWEETS": "Top Tweets",
+      "APP_TWITTER_VIEW_TWEETER": "Tweeter",
+      "APP_TWITTER_VIEW_SETTING": "Einstellungen",
+      "APP_TWITTER_NEW_ACCOUNT_USERNAME": "Benutzername (>= 4)",
+      "APP_TWITTER_NEW_ACCOUNT_PASSWORD": "Passwort (>= 6)",
+      "APP_TWITTER_NEW_ACCOUNT_PASSWORD_CONFIRM": "Passwort bestätigen",
+      "APP_TWITTER_NEW_ACCOUNT_AVATAR": "Avatar-URL",
+      "APP_TWITTER_PLACEHOLDER_MESSAGE": "Was gibts neues?",
+      "APP_TWITTER_BUTTON_ACTION_TWEETER": "Twittern",
+      "APP_TWITTER_ACCOUNT_LOGIN": "Einloggen",
+      "APP_TWITTER_ACCOUNT_LOGOUT": "Ausloggen",
+      "APP_TWITTER_ACCOUNT_PARAM": "Mein Account",
+      "APP_TWITTER_ACCOUNT_AVATAR": "Avatar ändern",
+      "APP_TWITTER_ACCOUNT_CHANGE_PASSWORD": "Passwort ändern",
+      "APP_TWITTER_ACCOUNT_NEW": "Neuer Account",
+      "APP_TWIITER_ACCOUNT_SAVE": "Registrieren",
+      "APP_TWIITER_ACCOUNT_CREATE": "Account erstellen",
+      "APP_TWIITER_ACCOUNT_CANCEL": "Abbrechen",
+      "APP_TWITTER_ACCOUNT_USERNAME": "Benutzername",
+      "APP_TWITTER_ACCOUNT_PASSWORD": "Passwort",
+      "APP_TWITTER_NOTIFICATION": "Notification",
+      "APP_TWITTER_NOTIFICATION_WHEN": "Benachrichtigungen",
+      "APP_TWITTER_NOTIFICATION_ALL": "Alle Nachrichten",
+      "APP_TWITTER_NOTIFICATION_MENTION": "Nachrichten mit Erwähnung",
+      "APP_TWITTER_NOTIFICATION_NEVER": "Niemals",
+      "APP_TWITTER_NOTIFICATION_SOUND": "Benachrichtigungston",
+      "APP_TWITTER_NOTIFICATION_SOUND_YES": "An",
+      "APP_TWITTER_NOTIFICATION_SOUND_NO": "Aus",
+      "APP_TWITTER_NOTIF_ACCOUNT_CREATE_SUCCESS": "Dein Twitter-Account wurde erstellt.",
+      "APP_TWITTER_NOTIF_ACCOUNT_CREATE_ERROR": "Dein Twitter-Account konnte nicht erstellt werden (Benutzername bereits verwendet?)",
+      "APP_TWITTER_NOTIF_LOGIN_SUCCESS": "Du hast dich erfolgreich eingeloggt.",
+      "APP_TWITTER_NOTIF_LOGIN_ERROR": "Ungültiges Konto / Passwort",
+      "APP_TWITTER_NOTIF_AVATAR_SUCCESS": "Dein Avatar wurde geändert.",
+      "APP_TWITTER_NOTIF_NEW_PASSWORD_SUCCESS": "Dein Passwort wurde geändert.",
+      "APP_TWITTER_NOTIF_NEW_PASSWORD_ERROR": "Ups.... dein Passwort konnte nicht geändert werden.",
+      "APP_TWITTER_NOTIF_NEW_PASSWORD_MISS_MATCH": "Passwörter stimmen nicht überein",
+      "APP_TWITTER_NOTIF_NEW_PASSWORD_LENGTH_ERROR": "Passwort zu kurz",
+
+      "TIMEAGO": [
+        "jetzt gerade",
+        ["vor %s Sekunde", "vor %s Sekunden"],
+        ["vor %s Minute", "vor %s Minuten"],
+        ["vor %s Stunde", "vor %s Stunden"],
+        ["vor %s Tag", "vor %s Tagen"],
+        ["vor %s Woche", "vor %s Wochen"],
+        ["vor %s Monat", "vor %s Monaten"],
+        ["vor %s Jahr", "vor %s Jahren"]
+      ]
+    },
+    "pl_PL": {
+      "NAME": "Polish",
+      "PHONE_WARNING_MESSAGE": "pamiątka",
+      "PHONE_WARNING_MESSAGE_MESS": "nowiny",
+      "CONFIRM": "Akceptacja",
+      "CANCEL": "przerwać",
+      "APP_CONFIG_TITLE": "parametr",
+      "APP_CONFIG_MY_MUNBER": "Mój numer",
+      "APP_CONFIG_WALLPAPER": "tapeta",
+      "APP_CONFIG_CASE": "Pokrywa telefoniczna",
+      "APP_CONFIG_ZOOM": "przybliżanie",
+      "APP_CONFIG_VOLUME": "objętość",
+      "APP_CONFIG_LANGUAGE": "Język",
+      "APP_CONFIG_RESET": "format",
+      "APP_CONFIG_RESET_CONFIRM": "DELETE ALL",
+      "APP_PHONE_CALL": "rozmowa telefoniczna",
+      "APP_PHONE_DELETE": "Usuń",
+      "APP_PHONE_DELETE_ALL": "Usuń wszystko.",
+      "APP_PHONE_TITLE": "Numer telefonu",
+      "APP_PHONE_MENU_FAVORITES": "ulubione",
+      "APP_PHONE_MENU_RECENTS": "Najnowszy",
+      "APP_PHONE_MENU_CONTACTS": "styki",
+      "APP_PHONE_ENTER_NUMBER": "Wprowadź numer",
+      "APP_BANK_TITLE": "ławka",
+      "APP_BOURSE_TITLE": "giełda",
+      "APP_CONTACT_TITLE": "dane kontaktowe",
+      "APP_CONTACT_NEW": "Nowy kontakt",
+      "APP_CONTACT_EDIT": "Zmień kontakt",
+      "APP_CONTACT_SAVE": "zameldowanie",
+      "APP_CONTACT_CANCEL": "przerwać",
+      "APP_CONTACT_DELETE": "Usuń",
+      "APP_CONTACT_LABEL_NAME": "Imię - Nazwisko - Nazwisko",
+      "APP_CONTACT_LABEL_NUMBER": "cyfra",
+      "APP_MESSAGE_TITLE": "nowiny",
+      "APP_MESSAGE_NEW_MESSAGE": "Nowa wiadomość",
+      "APP_MESSAGE_ERASE_CONVERSATION": "Usuń połączenie",
+      "APP_MESSAGE_ERASE_ALL_CONVERSATIONS": "Usuń cały konwulsja.",
+      "APP_MESSAGE_SEND_GPS": "Wyślij sprzęgło GPS",
+      "APP_MESSAGE_SET_GPS": "Pozycja GPS",
+      "APP_MESSAGE_ZOOM_IMG": "Powiększyć",
+      "APP_MESSAGE_DELETE": "Usuń",
+      "APP_MESSAGE_SMS": "wiadomość tekstowa",
+      "APP_MESSAGE_CONTACT_TITLE": "styki",
+      "APP_MESSAGE_CONTRACT_ENTER_NUMBER": "Wprowadź numer",
+      "APP_MESSAGE_PLACEHOLDER_ENTER_MESSAGE": "Wyślij wiadomość",
+      "APP_DARKTCHAT_TITLE": "Czat czarny",
+      "APP_DARKTCHAT_NEW_CHANNEL": "Dodaj kanał",
+      "APP_DARKTCHAT_DELETE_CHANNEL": "Usuń kanał",
+      "APP_DARKTCHAT_CANCEL": "przerwać",
+      "APP_DARKTCHAT_PLACEHOLDER_ENTER_MESSAGE": "Wprowadź wiadomość",
+      "APP_TWITTER_NAME": "Twitter",
+      "APP_TWITTER_VIEW_TWITTER": "Twitter",
+      "APP_TWITTER_VIEW_TOP_TWEETS": "górne tweety",
+      "APP_TWITTER_VIEW_TWEETER": "tweety",
+      "APP_TWITTER_VIEW_SETTING": "parametr",
+      "APP_TWITTER_NEW_ACCOUNT_USERNAME": "Nazwa użytkownika (>= 4)",
+      "APP_TWITTER_NEW_ACCOUNT_PASSWORD": "Hasło (>= 6)",
+      "APP_TWITTER_NEW_ACCOUNT_PASSWORD_CONFIRM": "Potwierdź hasło",
+      "APP_TWITTER_NEW_ACCOUNT_AVATAR": "URL twojego awatara",
+      "APP_TWITTER_PLACEHOLDER_MESSAGE": "Co się z tobš dzieje?",
+      "APP_TWITTER_BUTTON_ACTION_TWEETER": "Głośnik wysokotonowy",
+      "APP_TWITTER_ACCOUNT_LOGIN": "Zaloguj się na stronie internetowej",
+      "APP_TWITTER_ACCOUNT_LOGOUT": "Odłączenie od lokalizacji",
+      "APP_TWITTER_ACCOUNT_PARAM": "Moje konto",
+      "APP_TWITTER_ACCOUNT_AVATAR": "Zmiana Avatara.",
+      "APP_TWITTER_ACCOUNT_CHANGE_PASSWORD": "Zmiana hasła",
+      "APP_TWITTER_ACCOUNT_NEW": "Nowe konto",
+      "APP_TWIITER_ACCOUNT_SAVE": "zameldowanie",
+      "APP_TWIITER_ACCOUNT_CREATE": "Utwórz konto",
+      "APP_TWIITER_ACCOUNT_CANCEL": "przerwać",
+      "APP_TWITTER_ACCOUNT_USERNAME": "login",
+      "APP_TWITTER_ACCOUNT_PASSWORD": "hasło",
+      "APP_TWITTER_NOTIFICATION": "zawiadomienie",
+      "APP_TWITTER_NOTIFICATION_WHEN": "Do powiadomienia",
+      "APP_TWITTER_NOTIFICATION_ALL": "Wszystkie wiadomości",
+      "APP_TWITTER_NOTIFICATION_MENTION": "Wystarczy wspomnieć",
+      "APP_TWITTER_NOTIFICATION_NEVER": "Nikt",
+      "APP_TWITTER_NOTIFICATION_SOUND": "Odtwarzanie dźwięku",
+      "APP_TWITTER_NOTIFICATION_SOUND_YES": "Tak, tak.",
+      "APP_TWITTER_NOTIFICATION_SOUND_NO": "Nie, nie.",
+      "APP_TWITTER_NOTIF_ACCOUNT_CREATE_SUCCESS": "Twoje konto na Twitterze zostało utworzone.",
+      "APP_TWITTER_NOTIF_ACCOUNT_CREATE_ERROR": "Twoje konto na Twitterze nie mogło zostać utworzone (nazwa użytkownika już użyta?).",
+      "APP_TWITTER_NOTIF_LOGIN_SUCCESS": "Jesteś połączony z Twitterem.",
+      "APP_TWITTER_NOTIF_LOGIN_ERROR": "Nieprawidłowe konto / hasła",
+      "APP_TWITTER_NOTIF_AVATAR_SUCCESS": "Twój awatar został zmieniony!",
+      "APP_TWITTER_NOTIF_NEW_PASSWORD_SUCCESS": "Twoje hasło zostało zmienione.",
+      "APP_TWITTER_NOTIF_NEW_PASSWORD_ERROR": "Ups....... Twoje hasło nie mogło zostać zmienione.",
+      "APP_TWITTER_NOTIF_NEW_PASSWORD_MISS_MATCH": "Hasła nie pasują do siebie.",
+      "APP_TWITTER_NOTIF_NEW_PASSWORD_LENGTH_ERROR": "Hasło jest za krótkie",
+
+      "TIMEAGO": [
+        "tylko teraz",
+        ["mniej niż minuta"],
+        ["około minuty", "%s minut"],
+        ["około godziny", "około %s godzin"],
+        ["około tygodnia", "%s tydzień"],
+        ["%s week ago", "%s weeks ago"],
+        ["około miesiąca", "%s miesięcy"],
+        ["około roku", "%s lat"]
+      ]
+    },
+    "es_ES": {
+      "NAME": "Spanish",
+      "PHONE_WARNING_MESSAGE": "recuerdo",
+      "PHONE_WARNING_MESSAGE_MESS": "noticias",
+      "CONFIRM": "Aceptar",
+      "CANCEL": "interrumpir",
+      "APP_CONFIG_TITLE": "paramétrico",
+      "APP_CONFIG_MY_MUNBER": "Mi número",
+      "APP_CONFIG_WALLPAPER": "empapelado",
+      "APP_CONFIG_CASE": "cobertura telefónica",
+      "APP_CONFIG_ZOOM": "acercamiento",
+      "APP_CONFIG_VOLUME": "envergadura",
+      "APP_CONFIG_LANGUAGE": "Idioma",
+      "APP_CONFIG_RESET": "modelo",
+      "APP_CONFIG_RESET_CONFIRM": "BORRAR TODO",
+      "APP_PHONE_CALL": "gritar",
+      "APP_PHONE_DELETE": "Borrar",
+      "APP_PHONE_DELETE_ALL": "Borrar todo.",
+      "APP_PHONE_TITLE": "Número de teléfono",
+      "APP_PHONE_MENU_FAVORITES": "preferidos",
+      "APP_PHONE_MENU_RECENTS": "Lo más nuevo",
+      "APP_PHONE_MENU_CONTACTS": "contactos",
+      "APP_PHONE_ENTER_NUMBER": "Introduzca un número",
+      "APP_BANK_TITLE": "banquillo",
+      "APP_BOURSE_TITLE": "bolsa de valores",
+      "APP_CONTACT_TITLE": "datos de contacto",
+      "APP_CONTACT_NEW": "Nuevo contacto",
+      "APP_CONTACT_EDIT": "Cambiar el contacto",
+      "APP_CONTACT_SAVE": "matriculación",
+      "APP_CONTACT_CANCEL": "interrumpir",
+      "APP_CONTACT_DELETE": "Borrar",
+      "APP_CONTACT_LABEL_NAME": "Nombre - Apellido",
+      "APP_CONTACT_LABEL_NUMBER": "número",
+      "APP_MESSAGE_TITLE": "noticias",
+      "APP_MESSAGE_NEW_MESSAGE": "Nuevo Mensaje",
+      "APP_MESSAGE_ERASE_CONVERSATION": "Borrar la llamada",
+      "APP_MESSAGE_ERASE_ALL_CONVERSATIONS": "Borrar todos los conv.",
+      "APP_MESSAGE_SEND_GPS": "Enviar acoplamiento GPS",
+      "APP_MESSAGE_SET_GPS": "posición GPS",
+      "APP_MESSAGE_ZOOM_IMG": "Ampliar",
+      "APP_MESSAGE_DELETE": "Borrar",
+      "APP_MESSAGE_SMS": "mensaje de texto",
+      "APP_MESSAGE_CONTACT_TITLE": "contactos",
+      "APP_MESSAGE_CONTRACT_ENTER_NUMBER": "Introduzca un número",
+      "APP_MESSAGE_PLACEHOLDER_ENTER_MESSAGE": "Enviar un mensaje",
+      "APP_DARKTCHAT_TITLE": "Chat Oscuro",
+      "APP_DARKTCHAT_NEW_CHANNEL": "Añadir un canal",
+      "APP_DARKTCHAT_DELETE_CHANNEL": "Borrar el canal",
+      "APP_DARKTCHAT_CANCEL": "interrumpir",
+      "APP_DARKTCHAT_PLACEHOLDER_ENTER_MESSAGE": "Escriba un mensaje",
+      "APP_TWITTER_NAME": "Twitter",
+      "APP_TWITTER_VIEW_TWITTER": "Twitter",
+      "APP_TWITTER_VIEW_TOP_TWEETS": "mejores tweets",
+      "APP_TWITTER_VIEW_TWEETER": "tweets",
+      "APP_TWITTER_VIEW_SETTING": "paramétrico",
+      "APP_TWITTER_NEW_ACCOUNT_USERNAME": "Nombre de usuario (>= 4)",
+      "APP_TWITTER_NEW_ACCOUNT_PASSWORD": "Contraseña (>= 6)",
+      "APP_TWITTER_NEW_ACCOUNT_PASSWORD_CONFIRM": "Confirmar contraseña",
+      "APP_TWITTER_NEW_ACCOUNT_AVATAR": "URL de tu avatar",
+      "APP_TWITTER_PLACEHOLDER_MESSAGE": "¿Qué es lo que te pasa?",
+      "APP_TWITTER_BUTTON_ACTION_TWEETER": "Tweeter",
+      "APP_TWITTER_ACCOUNT_LOGIN": "Iniciar sesión en el sitio web",
+      "APP_TWITTER_ACCOUNT_LOGOUT": "Desconectar de la ubicación",
+      "APP_TWITTER_ACCOUNT_PARAM": "Mi cuenta",
+      "APP_TWITTER_ACCOUNT_AVATAR": "Cambiando el Avatar",
+      "APP_TWITTER_ACCOUNT_CHANGE_PASSWORD": "Cambiar contraseña",
+      "APP_TWITTER_ACCOUNT_NEW": "Nueva cuenta",
+      "APP_TWIITER_ACCOUNT_SAVE": "matriculación",
+      "APP_TWIITER_ACCOUNT_CREATE": "Crear la cuenta",
+      "APP_TWIITER_ACCOUNT_CANCEL": "interrumpir",
+      "APP_TWITTER_ACCOUNT_USERNAME": "nombre de usuario",
+      "APP_TWITTER_ACCOUNT_PASSWORD": "contraseña",
+      "APP_TWITTER_NOTIFICATION": "comunicación",
+      "APP_TWITTER_NOTIFICATION_WHEN": "Para ser notificado",
+      "APP_TWITTER_NOTIFICATION_ALL": "Todas las noticias",
+      "APP_TWITTER_NOTIFICATION_MENTION": "Sólo mencione",
+      "APP_TWITTER_NOTIFICATION_NEVER": "Nadie",
+      "APP_TWITTER_NOTIFICATION_SOUND": "Reproducir un sonido",
+      "APP_TWITTER_NOTIFICATION_SOUND_YES": "Sí",
+      "APP_TWITTER_NOTIFICATION_SOUND_NO": "No",
+      "APP_TWITTER_NOTIF_ACCOUNT_CREATE_SUCCESS": "Tu cuenta de Twitter ha sido creada.",
+      "APP_TWITTER_NOTIF_ACCOUNT_CREATE_ERROR": "Tu cuenta de Twitter no ha podido ser creada (nombre de usuario ya utilizado?)",
+      "APP_TWITTER_NOTIF_LOGIN_SUCCESS": "Estás conectado a Twitter.",
+      "APP_TWITTER_NOTIF_LOGIN_ERROR": "Cuenta no válida / contraseñas",
+      "APP_TWITTER_NOTIF_AVATAR_SUCCESS": "Tu avatar ha cambiado!",
+      "APP_TWITTER_NOTIF_NEW_PASSWORD_SUCCESS": "Su contraseña ha sido cambiada.",
+      "APP_TWITTER_NOTIF_NEW_PASSWORD_ERROR": "Oops...... Su contraseña no se ha podido cambiar.",
+      "APP_TWITTER_NOTIF_NEW_PASSWORD_MISS_MATCH": "Las contraseñas no coinciden",
+      "APP_TWITTER_NOTIF_NEW_PASSWORD_LENGTH_ERROR": "Contraseña demasiado corta",
+
+      "TIMEAGO": [
+        "ahora",
+        ["hace %s segundo", "hace %s segundos"],
+        ["hace %s minuto", "hace %s minutos"],
+        ["hace %s hora", "hace %s horas"],
+        ["hace %s día", "hace %s días"],
+        ["hace %s semana", "hace %s semanas"],
+        ["hace %s mes", "hace %s meses"],
+        ["hace %s año", "hace %s años"]
+      ]
+    },
+     "cs_CZ": {
+      "NAME": "Čeština",
+      "PHONE_WARNING_MESSAGE": "připomínka",
+      "PHONE_WARNING_MESSAGE_MESS": "zprávy",
+      "CONFIRM": "Přijmout",
+      "CANCEL": "Zrušit",
+      "APP_CONFIG_TITLE": "nastavení",
+      "APP_CONFIG_MY_MUNBER": "Mé číslo",
+      "APP_CONFIG_WALLPAPER": "tapeta",
+      "APP_CONFIG_CASE": "kryt telefonu",
+      "APP_CONFIG_ZOOM": "přiblížení",
+      "APP_CONFIG_VOLUME": "hlasitost",
+      "APP_CONFIG_LANGUAGE": "Jazyk",
+      "APP_CONFIG_MOUSE_SUPPORT": "Ovldání myší",
+      "APP_CONFIG_RESET": "resetovat",
+      "APP_CONFIG_RESET_CONFIRM": "SMAZAT VŠE",
+      "APP_PHONE_CALL": "volat",
+      "APP_PHONE_DELETE": "Smazat",
+      "APP_PHONE_DELETE_ALL": "Smazat vše.",
+      "APP_PHONE_TITLE": "Telefonní číslo",
+      "APP_PHONE_MENU_FAVORITES": "oblíbené",
+      "APP_PHONE_MENU_RECENTS": "Nejnovější",
+      "APP_PHONE_MENU_CONTACTS": "kontakty",
+      "APP_PHONE_ENTER_NUMBER": "Zadej číslo",
+      "APP_BANK_TITLE": "banka",
+      "APP_BOURSE_TITLE": "burza",
+      "APP_CONTACT_TITLE": "detaily kontaktu",
+      "APP_CONTACT_NEW": "Nový kontakt",
+      "APP_CONTACT_EDIT": "Změnit kontakt",
+      "APP_CONTACT_SAVE": "registrace",
+      "APP_CONTACT_CANCEL": "zrušit",
+      "APP_CONTACT_DELETE": "Smazat",
+      "APP_CONTACT_LABEL_NAME": "Křestní jméno - Příjmení",
+      "APP_CONTACT_LABEL_NUMBER": "číslo",
+      "APP_MESSAGE_TITLE": "zprávy",
+      "APP_MESSAGE_NEW_MESSAGE": "Nová zpráva",
+      "APP_MESSAGE_ERASE_CONVERSATION": "Smazat hovor",
+      "APP_MESSAGE_ERASE_ALL_CONVERSATIONS": "Smazat všechny konver.",
+      "APP_MESSAGE_SEND_GPS": "Poslat GPS polohu",
+      "APP_MESSAGE_SET_GPS": "GPS pozise",
+      "APP_MESSAGE_ZOOM_IMG": "Přiblížit",
+      "APP_MESSAGE_DELETE": "Smazat",
+      "APP_MESSAGE_SMS": "textová zpráva",
+      "APP_MESSAGE_CONTACT_TITLE": "kontakty",
+      "APP_MESSAGE_CONTRACT_ENTER_NUMBER": "Zadej číslo",
+      "APP_MESSAGE_PLACEHOLDER_ENTER_MESSAGE": "Odeslat zprávu",
+      "APP_DARKTCHAT_TITLE": "Dark Chat",
+      "APP_DARKTCHAT_NEW_CHANNEL": "Přidat kanál",
+      "APP_DARKTCHAT_DELETE_CHANNEL": "Delete the channel",
+      "APP_DARKTCHAT_CANCEL": "zrušit",
+      "APP_DARKTCHAT_PLACEHOLDER_ENTER_MESSAGE": "Zadej zprávu",
+      "APP_TWITTER_NAME": "Twitter",
+      "APP_TWITTER_VIEW_TWITTER": "Twitter",
+      "APP_TWITTER_VIEW_TOP_TWEETS": "nejlepší tweety",
+      "APP_TWITTER_VIEW_TWEETER": "tweety",
+      "APP_TWITTER_VIEW_SETTING": "nastavení",
+      "APP_TWITTER_NEW_ACCOUNT_USERNAME": "Přezdívka (>= 4)",
+      "APP_TWITTER_NEW_ACCOUNT_PASSWORD": "Heslo (>= 6)",
+      "APP_TWITTER_NEW_ACCOUNT_PASSWORD_CONFIRM": "Potvrdit heslo",
+      "APP_TWITTER_NEW_ACCOUNT_AVATAR": "URL avataru",
+      "APP_TWITTER_PLACEHOLDER_MESSAGE": "Co máš na mysli?",
+      "APP_TWITTER_BUTTON_ACTION_TWEETER": "Tweetnout",
+      "APP_TWITTER_ACCOUNT_LOGIN": "Přihlásit se na stránku",
+      "APP_TWITTER_ACCOUNT_LOGOUT": "Odhlásit se",
+      "APP_TWITTER_ACCOUNT_PARAM": "Můj účet",
+      "APP_TWITTER_ACCOUNT_AVATAR": "Měním avatar",
+      "APP_TWITTER_ACCOUNT_CHANGE_PASSWORD": "Změnit heslo",
+      "APP_TWITTER_ACCOUNT_NEW": "Nový účet",
+      "APP_TWIITER_ACCOUNT_SAVE": "registrace",
+      "APP_TWIITER_ACCOUNT_CREATE": "Vytvořit účet",
+      "APP_TWIITER_ACCOUNT_CANCEL": "zrušit",
+      "APP_TWITTER_ACCOUNT_USERNAME": "přezdívka",
+      "APP_TWITTER_ACCOUNT_PASSWORD": "heslo",
+      "APP_TWITTER_NOTIFICATION": "notifikace",
+      "APP_TWITTER_NOTIFICATION_WHEN": "Bude  oznámeno",
+      "APP_TWITTER_NOTIFICATION_ALL": "Všechny zprávy",
+      "APP_TWITTER_NOTIFICATION_MENTION": "Jen zmínit",
+      "APP_TWITTER_NOTIFICATION_NEVER": "Nikdo",
+      "APP_TWITTER_NOTIFICATION_SOUND": "Přehrát zvuk",
+      "APP_TWITTER_NOTIFICATION_SOUND_YES": "Ano",
+      "APP_TWITTER_NOTIFICATION_SOUND_NO": "Ne",
+      "APP_TWITTER_NOTIF_ACCOUNT_CREATE_SUCCESS": "Tvůj twitter byl vytvořen.",
+      "APP_TWITTER_NOTIF_ACCOUNT_CREATE_ERROR": "Tvůj twitter účet nemohl být vytvořen (přezdívka již existuje?)",
+      "APP_TWITTER_NOTIF_LOGIN_SUCCESS": "Jsi připojen na Twitter.",
+      "APP_TWITTER_NOTIF_LOGIN_ERROR": "Neplatný účet / heslo",
+      "APP_TWITTER_NOTIF_AVATAR_SUCCESS": "Tvůj avatar byl změněn!",
+      "APP_TWITTER_NOTIF_NEW_PASSWORD_SUCCESS": "Tvé heslo bylo změněno.",
+      "APP_TWITTER_NOTIF_NEW_PASSWORD_ERROR": "Oops.... Tvé heslo nemohlo být změněno.",
+      "APP_TWITTER_NOTIF_NEW_PASSWORD_MISS_MATCH": "Hesla se neshodují",
+      "APP_TWITTER_NOTIF_NEW_PASSWORD_LENGTH_ERROR": "Heslo je příliš krátké",
+
+      "TIMEAGO": [
+        "nyní",
+        ["před  %s sekundou", "před %s sekundami"],
+        ["před %s minutou", "před %s minutami"],
+        ["před %s hodinou", "před %s hodinami"],
+        ["před %s dnem", "před %s dny"],
+        ["před %s týdnem", "před %s týdny"],
+        ["před %s měsícem", "před %s měsíci"],
+        ["před %s rokem", "před %s lety"]
+      ]
     }
-  
   }
 }

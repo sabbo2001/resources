@@ -5,9 +5,6 @@ local isRobbing = false
 local canceltimer = GetGameTimer()
 ESX = nil
  
- 
- 
- 
 	Citizen.CreateThread(function()
 	if Config.policecontrol == true then 
 		while true do
@@ -21,9 +18,7 @@ ESX = nil
 			else
 if GetGameTimer() - canceltimer > Config.policereset*1000*60 then
 isRobbing = false
-end			
-
-			 
+end
 		end
 		end
 		end
@@ -192,7 +187,7 @@ cabinet20robbed = false
 end)
 
 
-Citizen.CreateThread(function()    
+Citizen.CreateThread(function()
 	while true do
 	Citizen.Wait(0)
 		local pos = GetEntityCoords(GetPlayerPed(-1), true)
@@ -201,154 +196,160 @@ isnear = false
 cabinetno = 0
 			if(Vdist(pos.x, pos.y, pos.z, -624.0, -232.47, 38.0) < 30.0)then
 isnear = true
---print(cabinet1robbed)		
-if cabinet1robbed == false then	
+--print(cabinet1robbed)
+if cabinet1robbed == false then
 					DrawMarker(1, -627.11, -234.95, 37.86, 0.0, 0.0, 0.0, 0, 0.0, 0.0, 0.2, 0.2, 0.2, 255, 0, 0, 100, false, true, 2, false, false, false, false)
-if(Vdist(pos.x, pos.y, pos.z, -627.11, -234.95, 38.06) < 1.0)then	
+if(Vdist(pos.x, pos.y, pos.z, -627.11, -234.95, 38.06) < 1.0)then
 cabinetno = 1
 locx,locy,locz = -627.11, -234.95, 37.86
-end			
 end
-if cabinet2robbed == false then	
+end
+if cabinet2robbed == false then
 					DrawMarker(1,-627.58, -234.36, 37.86,  0.0, 0.0, 0.0, 0, 0.0, 0.0,0.2, 0.2, 0.2, 255, 0, 0, 100, false, true, 2, false, false, false, false)
-if(Vdist(pos.x, pos.y, pos.z,-627.58, -234.36, 37.86) < 1.0)then	
+if(Vdist(pos.x, pos.y, pos.z,-627.58, -234.36, 37.86) < 1.0)then
 cabinetno = 2
 locx,locy,locz =  -627.58, -234.36, 37.86
-end						
 end
-if cabinet3robbed == false then	
+end
+if cabinet3robbed == false then
 					DrawMarker(1,-626.51, -233.65, 37.86, 0.0, 0.0, 0.0, 0, 0.0, 0.0, 0.2, 0.2, 0.2, 255, 0, 0, 100, false, true, 2, false, false, false, false)
-if(Vdist(pos.x, pos.y, pos.z,-626.51, -233.65, 37.86) < 1.0)then	
+if(Vdist(pos.x, pos.y, pos.z,-626.51, -233.65, 37.86) < 1.0)then
 cabinetno = 3
 locx,locy,locz =  -626.51, -233.65, 37.86
-end					
 end
-if cabinet4robbed == false then	
+end
+if cabinet4robbed == false then
 					DrawMarker(1,-626.13, -234.21, 37.86, 0.0, 0.0, 0.0, 0, 0.0, 0.0, 0.2, 0.2, 0.2, 255, 0, 0, 100, false, true, 2, false, false, false, false)
-if(Vdist(pos.x, pos.y, pos.z,-626.13, -234.21, 37.86) < 1.0)then	
+if(Vdist(pos.x, pos.y, pos.z,-626.13, -234.21, 37.86) < 1.0)then
 cabinetno = 4
 locx,locy,locz =  -626.13, -234.21, 37.86
-end					
 end
-if cabinet5robbed == false then	
+end
+if cabinet5robbed == false then
 					DrawMarker(1,-625.28, -238.27, 37.86, 0.0, 0.0, 0.0, 0, 0.0, 0.0, 0.2, 0.2, 0.2, 255, 0, 0, 100, false, true, 2, false, false, false, false)
-if(Vdist(pos.x, pos.y, pos.z,-625.28, -238.27, 37.86) < 1.0)then	
+if(Vdist(pos.x, pos.y, pos.z,-625.28, -238.27, 37.86) < 1.0)then
 cabinetno = 5
 locx,locy,locz =  -625.28, -238.27, 37.86
-end					
 end
-if cabinet6robbed == false then	
+end
+if cabinet6robbed == false then
 					DrawMarker(1,-626.32, -239.06, 37.86, 0.0, 0.0, 0.0, 0, 0.0, 0.0, 0.2, 0.2, 0.2, 255, 0, 0, 100, false, true, 2, false, false, false, false)
-if(Vdist(pos.x, pos.y, pos.z,-626.32, -239.06, 37.86) < 1.0)then	
+if(Vdist(pos.x, pos.y, pos.z,-626.32, -239.06, 37.86) < 1.0)then
 cabinetno = 6
 locx,locy,locz =  -626.32, -239.06, 37.86
-end					
 end
-if cabinet7robbed == false then	
+end
+if cabinet7robbed == false then
 					DrawMarker(1,-625.28, -227.43, 37.86, 0.0, 0.0, 0.0, 0, 0.0, 0.0, 0.2, 0.2, 0.2, 255, 0, 0, 100, false, true, 2, false, false, false, false)
-if(Vdist(pos.x, pos.y, pos.z,-625.28, -227.43, 37.86) < 1.0)then	
+if(Vdist(pos.x, pos.y, pos.z,-625.28, -227.43, 37.86) < 1.0)then
 cabinetno = 7
 locx,locy,locz = -625.28, -227.43, 37.86
-end					
 end
-if cabinet8robbed == false then	
+end
+if cabinet8robbed == false then
 					DrawMarker(1,-624.27, -226.62, 37.86, 0.0, 0.0, 0.0, 0, 0.0, 0.0, 0.2, 0.2, 0.2, 255, 0, 0, 100, false, true, 2, false, false, false, false)
-if(Vdist(pos.x, pos.y, pos.z,-624.27, -226.62, 37.86) < 1.0)then	
+if(Vdist(pos.x, pos.y, pos.z,-624.27, -226.62, 37.86) < 1.0)then
 cabinetno = 8
 locx,locy,locz =  -624.27, -226.62, 37.86
-end					
 end
-if cabinet9robbed == false then	
+end
+if cabinet9robbed == false then
 					DrawMarker(1,-619.96, -226.20, 37.86, 0.0, 0.0, 0.0, 0, 0.0, 0.0, 0.2, 0.2, 0.2, 255, 0, 0, 100, false, true, 2, false, false, false, false)
-if(Vdist(pos.x, pos.y, pos.z,-619.96, -226.20, 37.86) < 1.0)then	
+if(Vdist(pos.x, pos.y, pos.z,-619.96, -226.20, 37.86) < 1.0)then
 cabinetno = 9
 locx,locy,locz = -619.96, -226.20, 37.86
-end					
 end
-if cabinet10robbed == false then	
+end
+if cabinet10robbed == false then
 					DrawMarker(1,-619.24, -227.23, 37.86, 0.0, 0.0, 0.0, 0, 0.0, 0.0, 0.2, 0.2, 0.2, 255, 0, 0, 100, false, true, 2, false, false, false, false)
-if(Vdist(pos.x, pos.y, pos.z,-619.24, -227.23, 37.86) < 1.0)then	
+if(Vdist(pos.x, pos.y, pos.z,-619.24, -227.23, 37.86) < 1.0)then
 cabinetno = 10
 locx,locy,locz = -619.24, -227.23, 37.86
-end					
 end
-if cabinet11robbed == false then	
+end
+if cabinet11robbed == false then
 					DrawMarker(1,-617.88, -229.12, 37.86, 0.0, 0.0, 0.0, 0, 0.0, 0.0, 0.2, 0.2, 0.2, 255, 0, 0, 100, false, true, 2, false, false, false, false)
-if(Vdist(pos.x, pos.y, pos.z,-617.88, -229.12, 37.86) < 1.0)then	
+if(Vdist(pos.x, pos.y, pos.z,-617.88, -229.12, 37.86) < 1.0)then
 cabinetno = 11
 locx,locy,locz = -617.88, -229.12, 37.86
-end					
 end
-if cabinet12robbed == false then	
+end
+if cabinet12robbed == false then
 					DrawMarker(1,-617.1, -230.15, 37.86, 0.0, 0.0, 0.0, 0, 0.0, 0.0, 0.2, 0.2, 0.2, 255, 0, 0, 100, false, true, 2, false, false, false, false)
-if(Vdist(pos.x, pos.y, pos.z,-617.1, -230.15, 37.86) < 1.0)then	
+if(Vdist(pos.x, pos.y, pos.z,-617.1, -230.15, 37.86) < 1.0)then
 cabinetno = 12
 locx,locy,locz = -617.1, -230.15, 37.86
-end					
 end
-if cabinet13robbed == false then	
+end
+if cabinet13robbed == false then
 					DrawMarker(1,-618.84, -234.06, 37.86, 0.0, 0.0, 0.0, 0, 0.0, 0.0, 0.2, 0.2, 0.2, 255, 0, 0, 100, false, true, 2, false, false, false, false)
-if(Vdist(pos.x, pos.y, pos.z, -618.84, -234.06, 37.86) < 1.0)then	
+if(Vdist(pos.x, pos.y, pos.z, -618.84, -234.06, 37.86) < 1.0)then
 cabinetno = 13
 locx,locy,locz = -618.84, -234.06, 37.86
-end					
 end
-if cabinet14robbed == false then	
+end
+if cabinet14robbed == false then
 					DrawMarker(1,-619.87, -234.88, 37.86, 0.0, 0.0, 0.0, 0, 0.0, 0.0, 0.2, 0.2, 0.2, 255, 0, 0, 100, false, true, 2, false, false, false, false)
-if(Vdist(pos.x, pos.y, pos.z, -619.87, -234.88, 37.86) < 1.0)then	
+if(Vdist(pos.x, pos.y, pos.z, -619.87, -234.88, 37.86) < 1.0)then
 cabinetno = 14
 locx,locy,locz = -619.87, -234.88, 37.86
-end					
 end
-if cabinet15robbed == false then	
+end
+if cabinet15robbed == false then
 					DrawMarker(1,-620.54, -232.87, 37.86, 0.0, 0.0, 0.0, 0, 0.0, 0.0, 0.2, 0.2, 0.2, 255, 0, 0, 100, false, true, 2, false, false, false, false)
-if(Vdist(pos.x, pos.y, pos.z, -620.54, -232.87, 37.86) < 1.0)then	
+if(Vdist(pos.x, pos.y, pos.z, -620.54, -232.87, 37.86) < 1.0)then
 cabinetno = 15
 locx,locy,locz = -620.54, -232.87, 37.86
-end					
 end
-if cabinet16robbed == false then	
+end
+if cabinet16robbed == false then
 					DrawMarker(1,-620.05, -230.77, 37.86, 0.0, 0.0, 0.0, 0, 0.0, 0.0, 0.2, 0.2, 0.2, 255, 0, 0, 100, false, true, 2, false, false, false, false)
-if(Vdist(pos.x, pos.y, pos.z, -620.05, -230.77, 37.86) < 1.0)then	
+if(Vdist(pos.x, pos.y, pos.z, -620.05, -230.77, 37.86) < 1.0)then
 cabinetno = 16
 locx,locy,locz = -620.05, -230.77, 37.86
-end					
 end
-if cabinet17robbed == false then	
+end
+if cabinet17robbed == false then
 					DrawMarker(1,-621.53, -228.95, 37.86, 0.0, 0.0, 0.0, 0, 0.0, 0.0, 0.2, 0.2, 0.2, 255, 0, 0, 100, false, true, 2, false, false, false, false)
-if(Vdist(pos.x, pos.y, pos.z, -621.53, -228.95, 37.86) < 1.0)then	
+if(Vdist(pos.x, pos.y, pos.z, -621.53, -228.95, 37.86) < 1.0)then
 cabinetno = 17
 locx,locy,locz = -621.53, -228.95, 37.86
-end					
 end
-if cabinet18robbed == false then	
+end
+if cabinet18robbed == false then
 					DrawMarker(1,-623.68, -228.54, 37.86, 0.0, 0.0, 0.0, 0, 0.0, 0.0, 0.2, 0.2, 0.2, 255, 0, 0, 100, false, true, 2, false, false, false, false)
-if(Vdist(pos.x, pos.y, pos.z,-623.68, -228.54, 37.86) < 1.0)then	
+if(Vdist(pos.x, pos.y, pos.z,-623.68, -228.54, 37.86) < 1.0)then
 cabinetno = 18
 locx,locy,locz = -623.68, -228.54, 37.86
-end					
 end
-if cabinet19robbed == false then	
+end
+if cabinet19robbed == false then
 					DrawMarker(1,-624.09, -230.8, 37.86, 0.0, 0.0, 0.0, 0, 0.0, 0.0, 0.2, 0.2, 0.2, 255, 0, 0, 100, false, true, 2, false, false, false, false)
-if(Vdist(pos.x, pos.y, pos.z,-624.09, -230.8, 37.86) < 1.0)then	
+if(Vdist(pos.x, pos.y, pos.z,-624.09, -230.8, 37.86) < 1.0)then
 cabinetno = 19
 locx,locy,locz = -624.09, -230.8, 37.86
-end					
 end
-if cabinet20robbed == false then	
+end
+if cabinet20robbed == false then
 					DrawMarker(1,-622.64, -232.55, 37.86, 0.0, 0.0, 0.0, 0, 0.0, 0.0, 0.2, 0.2, 0.2, 255, 0, 0, 100, false, true, 2, false, false, false, false)
-if(Vdist(pos.x, pos.y, pos.z,-622.64, -232.55, 37.86) < 1.0)then	
-cabinetno = 20
-locx,locy,locz = -622.64, -232.55, 37.86
-end					
+if(Vdist(pos.x, pos.y, pos.z,-622.64, -232.55, 37.86) < 1.0)then
+			cabinetno = 20
+			locx,locy,locz = -622.64, -232.55, 37.86
 end
-
+end
 
 
 if cabinetno ~= 0 then
-							DisplayHelpText(_U('press_to_rob'))
-if IsControlJustPressed(0,38) then
-TriggerServerEvent('srvanrob:cabinet',cabinetno)
+
+		--if PlayerData.job ~= nil and (PlayerData.job.name == 'police' or PlayerData.job.name == 'fbi') then
+		--	ESX.ShowNotification("Вы коп")
+		--else
+		--	ESX.ShowNotification("Вы не коп")
+		--end
+
+		DisplayHelpText(_U('press_to_rob'))
+	if IsControlJustPressed(0,38) then
+								TriggerServerEvent('srvanrob:cabinet',cabinetno)
 								if not HasNamedPtfxAssetLoaded("scr_jewelheist") then
 	                            RequestNamedPtfxAsset("scr_jewelheist")
                                 end
@@ -356,81 +357,83 @@ TriggerServerEvent('srvanrob:cabinet',cabinetno)
 	                            Citizen.Wait(0)
                                 end
                                 SetPtfxAssetNextCall("scr_jewelheist")
-								
+
 								StartParticleFxLoopedAtCoord("scr_jewel_cab_smash", locx,locy,locz+0.2, 0.0, 0.0, 0.0, 1.0, false, false, false, false)
-								loadAnimDict( "missheist_jewel" ) 
-								TaskPlayAnim( GetPlayerPed(-1), "missheist_jewel", "smash_case", 8.0, 1.0, -1, 2, 0, 0, 0, 0 ) 
+								loadAnimDict( "missheist_jewel" )
+								TaskPlayAnim( GetPlayerPed(-1), "missheist_jewel", "smash_case", 8.0, 1.0, -1, 2, 0, 0, 0, 0 )
 								DisplayHelpText(_U('collectinprogress'))
 								DrawSubtitleTimed(4000, 1)
 								local waiter = GetGameTimer()
 								repeat
 								Wait(50)
 								until GetGameTimer() - waiter > Config.smashtimer
-								ClearPedTasks(GetPlayerPed(-1))									
-local chance = math.random(1,100)
-if chance < Config.alarmchance  then
+								ClearPedTasks(GetPlayerPed(-1))
+								local chance = math.random(1,100)
+	if chance < Config.alarmchance  then
+  				TriggerEvent('esx:showNotification',  _U('alarm_triggered'))--сработала тревога
+				local pos = {}
+				pos.x = locx
+				pos.y = locy
+				pos.z = locz
+				soundid = GetSoundId()
 
-                TriggerEvent('esx:showNotification',  _U('alarm_triggered'))
-				
-				if Config.AIpoliceon == true then
+					PlaySoundFromCoord(soundid, "VEHICLES_HORNS_AMBULANCE_WARNING", pos.x, pos.y, pos.z)
+					Citizen.Wait(15000)
+					StopSound(soundid)
+
+
+		if Config.AIpoliceon == true then
 			TriggerServerEvent('srvanrob:setwanted')
-isRobbing = true
-print("isRobbing",isRobbing)	
+				isRobbing = true
+			print("isRobbing",isRobbing)
 			end
-if Config.sendpolicealert == true then
-local Bpos = {}
-				 Bpos.x = locx
-				 Bpos.y = locy
-				 Bpos.z = locz
-				TriggerServerEvent('srvanrob:setblip',Bpos)
-end
-end
-local amount = math.random(5,10)
-local amount2 = math.random(0,3)
-TriggerServerEvent('srvanrob:givejewles',amount,amount2)				
-								
-end
-end
-elseif (Vdist(pos.x, pos.y, pos.z, 707.26, -965.63, 30.3) < 20.0) then
-DrawMarker(1,707.26, -965.63, 29.3, 0.0, 0.0, 0.0, 0, 0.0, 0.0, 1.2, 1.2, 0.2, 255, 0, 0, 100, false, true, 2, false, false, false, false)
-isnear = true
-if (Vdist(pos.x, pos.y, pos.z, 707.26, -965.63, 30.3) < 2.0) then
-							DisplayHelpText('Press ~INPUT_CONTEXT~ to Sell Jewles')
-if IsControlJustPressed(0,38) then
-Wait(300)
-TriggerServerEvent('srvanrob:selljewles')
-Wait(2000)
+			    if Config.sendpolicealert == true then
+					local Bpos = {}
+					Bpos.x = locx
+					Bpos.y = locy
+					Bpos.z = locz
+					TriggerServerEvent('srvanrob:setblip',Bpos)
+				end
+				end
+				local amount = math.random(5,10)
+				local amount2 = math.random(0,3)
+				TriggerServerEvent('srvanrob:givejewles',amount,amount2)
+		end
+	end
+	elseif (Vdist(pos.x, pos.y, pos.z, 707.26, -965.63, 30.3) < 20.0) then
+					DrawMarker(1,707.26, -965.63, 29.3, 0.0, 0.0, 0.0, 0, 0.0, 0.0, 1.2, 1.2, 0.2, 255, 0, 0, 100, false, true, 2, false, false, false, false)
+					isnear = true
 
+		if (Vdist(pos.x, pos.y, pos.z, 707.26, -965.63, 30.3) < 2.0) then
+			DisplayHelpText('Нажмите ~INPUT_CONTEXT~ чтобы продать драгоценности')
+		if IsControlJustPressed(0,38) then
+			Wait(300)
+			TriggerServerEvent('srvanrob:selljewles')
+			Wait(2000)
+			end
+			end
+		end
+				if isnear == false then
+							Wait(4500)
+				end
+		end
 
-end
-end
-
-
-
-end
-if isnear == false then
-Wait(4500)
-end
-end
 end)
 
 RegisterNetEvent('srvanrob:setblip')
 AddEventHandler('srvanrob:setblip', function(position)
 if Config.sendpolicealert == true then
-if PlayerData.job ~= nil and PlayerData.job.name == 'police' then
-
-Wait(1000)
-
-PlaySoundFrontend(-1, "CHALLENGE_UNLOCKED", "HUD_AWARDS", 1)
-
-	RemoveBlip(blipRobbery)
-    blipRobbery = AddBlipForCoord(position.x, position.y, position.z)
-    SetBlipSprite(blipRobbery , 161)
-    SetBlipScale(blipRobbery , 2.0)
-    SetBlipColour(blipRobbery, 3)
-    PulseBlip(blipRobbery)
-	Wait(60000)
-	RemoveBlip(blipRobbery)
+if PlayerData.job ~= nil and PlayerData.job.name == 'police' or PlayerData.job.name == 'fbi' then
+			Wait(1000)
+			PlaySoundFrontend(-1, "CHALLENGE_UNLOCKED", "HUD_AWARDS", 1)
+			RemoveBlip(blipRobbery)
+    		blipRobbery = AddBlipForCoord(position.x, position.y, position.z)
+    		SetBlipSprite(blipRobbery , 617)
+    		SetBlipScale(blipRobbery , 0.5)
+    		SetBlipColour(blipRobbery, 16742399)
+    		PulseBlip(blipRobbery)
+			Wait(60000)
+			RemoveBlip(blipRobbery)
 	
 		end
 	end

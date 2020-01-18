@@ -5,11 +5,7 @@ local playerdead = false -- Don't touch this !
 local maxCapacity = 64 -- Max capacity
 local OpenKey = 289 -- F2
 
-
-
 -- INVENTORY CONFIG --
-
-
 
 local WaterID = 1 -- Set this in your Data Base
 local FoodID = 2 -- Set this in your Data Base
@@ -17,9 +13,6 @@ local FoodID = 2 -- Set this in your Data Base
 
 
 -- CODE --
-
-
-
 RegisterNetEvent("item:reset")
 RegisterNetEvent("item:getuser_items")
 RegisterNetEvent("item:updateQuantity")
@@ -251,7 +244,7 @@ end
 
 
 
-function PlayerIsDead()
+function PlayerisDead()
     if playerdead then
         return
     end

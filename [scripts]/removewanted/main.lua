@@ -34,19 +34,6 @@ end)
 Citizen.CreateThread(function()
 		while true do
 			Citizen.Wait(0)
-				--local PlayerId = PlayerId()
-				--local playerPed = PlayerPedId()
-				--local GetPlayerWantedLevel = GetPlayerWantedLevel(PlayerId())
-			 
-				-- if GetPlayerWantedLevel(PlayerId()) == 0 then
-					-- SetPlayerWantedLevel(PlayerId(), 2, false)
-					-- Citizen.Wait(1)
-					-- SetPlayerWantedLevelNow(PlayerId(), false)
-					-- SetPoliceIgnorePlayer(PlayerId(), true)--включаем не стрелять в игрока полицеским NPC
-					-- SetDispatchCopsForPlayer(PlayerId(), true)--включаем не стрелять в игрока полицеским NPC
-					-- ESX.ShowNotification('Включаем розыск '..PlayerData.job.name)
-				-- end
-				--if PlayerData.job ~= nil and PlayerData.job.name == 'fbi' or PlayerData.job.name == 'police' then
 				if (PlayerData.job ~= nil and (PlayerData.job.name == 'police' or PlayerData.job.name == 'fbi')) then
 				--if (PlayerData.job ~= nil and PlayerData.job.name == 'police' or PlayerData.job.name == 'fbi' ) then
 					--SetRelationshipBetweenGroups(2, GetHashKey("COP"), GetHashKey('PLAYER'))

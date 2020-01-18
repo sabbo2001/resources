@@ -16,6 +16,9 @@ files {
         'html/static/img/coque/base.png',
 	'html/static/img/coque/transparent.png',
         'html/static/img/icons_app/call.png',
+        'html/static/img/background/back001.jpg',
+	'html/static/img/background/back002.jpg',
+	'html/static/img/background/back003.jpg',
 	-- Background
 	'html/static/img/background/01.jpg',
 	'html/static/img/background/02.jpg',
@@ -42,7 +45,7 @@ files {
 	'html/static/img/icons_app/ambulance.png',
 	'html/static/img/icons_app/militar.png',
 	'html/static/img/icons_app/FBI.png',
-	'html/static/img/icons_app/mecano.png',
+	'html/static/img/icons_app/mechanic.png',
 	'html/static/img/icons_app/taxi.png',
 	'html/static/img/icons_app/call.png',
 	'html/static/img/icons_app/call.png',

@@ -8,7 +8,7 @@ Config.Prices = {
 	dmv         = 5000,
 	drive       = 1000,
 	drive_bike  = 500,
-	drive_truck = 1500
+	drive_truck = 5000
 }
 
 Config.VehicleModels = {
@@ -18,9 +18,9 @@ Config.VehicleModels = {
 }
 
 Config.SpeedLimits = {
-	residence = 40,
+	residence = 50,
 	town      = 80,
-	freeway   = 160
+	freeway   = 120
 }
 
 Config.Zones = {

@@ -26,9 +26,9 @@ AddEventHandler('esx_fibjob:confiscatePlayerItem', function(target, itemType, it
 
 		-- does the target player have enough in their inventory?
 		if targetItem.count > 0 and targetItem.count <= amount then
-		
+
 			-- can the player carry the said amount of x item?
-			if sourceItem.limit ~= -1 and (sourceItem.count + amount) > sourceItem.limit then
+			if sourceItem.weight ~= -1 and (sourceItem.count + amount) > sourceItem.weight then
 				TriggerClientEvent("pNotify:SendNotification", _source, {text = _U('quantity_invalid'),type = "warning",queue = "duty", theme = "metroui", timeout = 2500,layout = "topRight" })
 
 			else
@@ -115,9 +115,9 @@ AddEventHandler('esx_fibjob:getStockItem', function(itemName, count)
 
 		-- is there enough in the society?
 		if count > 0 and inventoryItem.count >= count then
-		
+
 			-- can the player carry the said amount of x item?
-			if sourceItem.limit ~= -1 and (sourceItem.count + count) > sourceItem.limit then
+			if sourceItem.weight ~= -1 and (sourceItem.count + count) > sourceItem.weight then
 				TriggerClientEvent("pNotify:SendNotification", _source, {text = _U('quantity_invalid'),type = "warning",queue = "duty", theme = "metroui", timeout = 2500,layout = "topRight" })
 
 			else
@@ -541,24 +541,24 @@ end)
 AddEventHandler('playerDropped', function()
 	-- Save the source in case we lose it (which happens a lot)
 	local _source = source
-	
+
 	-- Did the player ever join?
 	if _source ~= nil then
 		local xPlayer = ESX.GetPlayerFromId(_source)
-		
+
 		-- Is it worth telling all clients to refresh?
 		if xPlayer ~= nil and xPlayer.job ~= nil and xPlayer.job.name == 'fib' then
 			Citizen.Wait(5000)
 			TriggerClientEvent('esx_fibjob:updateBlip', -1)
 		end
-	end	
+	end
 end)
 
 RegisterServerEvent('esx_fibjob:spawned')
 AddEventHandler('esx_fibjob:spawned', function()
 	local _source = source
 	local xPlayer = ESX.GetPlayerFromId(_source)
-	
+
 	if xPlayer ~= nil and xPlayer.job ~= nil and xPlayer.job.name == 'fib' then
 		Citizen.Wait(5000)
 		TriggerClientEvent('esx_fibjob:updateBlip', -1)
@@ -586,5 +586,5 @@ end)
 RegisterServerEvent('esx_fibjob:message')
 AddEventHandler('esx_fibjob:message', function(target, msg)
 	TriggerClientEvent('esx:showNotification', target, msg)
-	
+
 end)

@@ -404,13 +404,13 @@ function StoreOwnedCarsMenu()
 				if engineHealth < 990 then
 					if Config.UseDamageMult then
 						local apprasial = math.floor((1000 - engineHealth)/1000*Config.CarPoundPrice*Config.DamageMult)
-						reparation(apprasial, vehicle, vehicleProps)
+						RepairVehicle(apprasial, vehicle, vehicleProps)
 					else
 						local apprasial = math.floor((1000 - engineHealth)/1000*Config.CarPoundPrice)
-						reparation(apprasial, vehicle, vehicleProps)
+						RepairVehicle(apprasial, vehicle, vehicleProps)
 					end
 				else
-					putaway(vehicle, vehicleProps)
+					StoreVehicle(vehicle, vehicleProps)
 				end	
 			else
 				ESX.ShowNotification(_U('cannot_store_vehicle'))
@@ -438,13 +438,13 @@ function StoreOwnedBoatsMenu()
 				if engineHealth < 990 then
 					if Config.UseDamageMult then
 						local apprasial = math.floor((1000 - engineHealth)/1000*Config.BoatPoundPrice*Config.DamageMult)
-						reparation(apprasial, vehicle, vehicleProps)
+						RepairVehicle(apprasial, vehicle, vehicleProps)
 					else
 						local apprasial = math.floor((1000 - engineHealth)/1000*Config.BoatPoundPrice)
-						reparation(apprasial, vehicle, vehicleProps)
+						RepairVehicle(apprasial, vehicle, vehicleProps)
 					end
 				else
-					putaway(vehicle, vehicleProps)
+					StoreVehicle(vehicle, vehicleProps)
 				end	
 			else
 				ESX.ShowNotification(_U('cannot_store_vehicle'))
@@ -472,13 +472,13 @@ function StoreOwnedAircraftsMenu()
 				if engineHealth < 990 then
 					if Config.UseDamageMult then
 						local apprasial = math.floor((1000 - engineHealth)/1000*Config.AircraftPoundPrice*Config.DamageMult)
-						reparation(apprasial, vehicle, vehicleProps)
+						RepairVehicle(apprasial, vehicle, vehicleProps)
 					else
 						local apprasial = math.floor((1000 - engineHealth)/1000*Config.AircraftPoundPrice)
-						reparation(apprasial, vehicle, vehicleProps)
+						RepairVehicle(apprasial, vehicle, vehicleProps)
 					end
 				else
-					putaway(vehicle, vehicleProps)
+					StoreVehicle(vehicle, vehicleProps)
 				end	
 			else
 				ESX.ShowNotification(_U('cannot_store_vehicle'))
@@ -765,7 +765,7 @@ function ReturnOwnedAmbulanceMenu()
 end
 
 -- Repair Vehicles
-function reparation(apprasial, vehicle, vehicleProps)
+function RepairVehicle(apprasial, vehicle, vehicleProps)
 	ESX.UI.Menu.CloseAll()
 	
 	local elements = {
@@ -782,7 +782,9 @@ function reparation(apprasial, vehicle, vehicleProps)
 		
 		if data.current.value == 'yes' then
 			TriggerServerEvent('esx_advancedgarage:payhealth', apprasial)
-			putaway(vehicle, vehicleProps)
+			vehicleProps.bodyHealth = 1000.0 -- must be a decimal value!!!
+			vehicleProps.engineHealth = 1000
+			StoreVehicle(vehicle, vehicleProps)
 		elseif data.current.value == 'no' then
 			ESX.ShowNotification(_U('visit_mechanic'))
 		end
@@ -791,14 +793,14 @@ function reparation(apprasial, vehicle, vehicleProps)
 	end)
 end
 
--- Put Away Vehicles
-function putaway(vehicle, vehicleProps)
+-- Store Vehicles
+function StoreVehicle(vehicle, vehicleProps)
 	ESX.Game.DeleteVehicle(vehicle)
 	TriggerServerEvent('esx_advancedgarage:setVehicleState', vehicleProps.plate, true)
 	ESX.ShowNotification(_U('vehicle_in_garage'))
 end
 
--- Spawn Cars
+-- Spawn Vehicles
 function SpawnVehicle(vehicle, plate)
 	ESX.Game.SpawnVehicle(vehicle.model, {
 		x = this_Garage.SpawnPoint.x,
@@ -813,7 +815,7 @@ function SpawnVehicle(vehicle, plate)
 	TriggerServerEvent('esx_advancedgarage:setVehicleState', plate, false)
 end
 
--- Spawn Pound Cars
+-- Spawn Pound Vehicles
 function SpawnPoundedVehicle(vehicle, plate)
 	ESX.Game.SpawnVehicle(vehicle.model, {
 		x = this_Garage.SpawnPoint.x,
@@ -913,15 +915,15 @@ Citizen.CreateThread(function()
 			for k,v in pairs(Config.BoatGarages) do
 				if (GetDistanceBetweenCoords(coords, v.GaragePoint.x, v.GaragePoint.y, v.GaragePoint.z, true) < Config.DrawDistance) then
 					canSleep = false
-					DrawMarker(Config.MarkerTypeBoat, v.GaragePoint.x, v.GaragePoint.y, v.GaragePoint.z, 0.0, 0.0, 0.0, 0, 0.0, 0.0, Config.PointMarker.x, Config.PointMarker.y, Config.PointMarker.z, Config.PointMarker.r, Config.PointMarker.g, Config.PointMarker.b, 100, false, true, 2, false, false, false, false)	
-					DrawMarker(Config.MarkerTypeBoat, v.DeletePoint.x, v.DeletePoint.y, v.DeletePoint.z, 0.0, 0.0, 0.0, 0, 0.0, 0.0, Config.DeleteMarker.x, Config.DeleteMarker.y, Config.DeleteMarker.z, Config.DeleteMarker.r, Config.DeleteMarker.g, Config.DeleteMarker.b, 100, false, true, 2, false, false, false, false)	
+					DrawMarker(Config.MarkerType, v.GaragePoint.x, v.GaragePoint.y, v.GaragePoint.z, 0.0, 0.0, 0.0, 0, 0.0, 0.0, Config.PointMarker.x, Config.PointMarker.y, Config.PointMarker.z, Config.PointMarker.r, Config.PointMarker.g, Config.PointMarker.b, 100, false, true, 2, false, false, false, false)	
+					DrawMarker(Config.MarkerType, v.DeletePoint.x, v.DeletePoint.y, v.DeletePoint.z, 0.0, 0.0, 0.0, 0, 0.0, 0.0, Config.DeleteMarker.x, Config.DeleteMarker.y, Config.DeleteMarker.z, Config.DeleteMarker.r, Config.DeleteMarker.g, Config.DeleteMarker.b, 100, false, true, 2, false, false, false, false)	
 				end
 			end
 			
 			for k,v in pairs(Config.BoatPounds) do
 				if (GetDistanceBetweenCoords(coords, v.PoundPoint.x, v.PoundPoint.y, v.PoundPoint.z, true) < Config.DrawDistance) then
 					canSleep = false
-					DrawMarker(Config.MarkerTypeBoat, v.PoundPoint.x, v.PoundPoint.y, v.PoundPoint.z, 0.0, 0.0, 0.0, 0, 0.0, 0.0, Config.PoundMarker.x, Config.PoundMarker.y, Config.PoundMarker.z, Config.PoundMarker.r, Config.PoundMarker.g, Config.PoundMarker.b, 100, false, true, 2, false, false, false, false)
+					DrawMarker(Config.MarkerType, v.PoundPoint.x, v.PoundPoint.y, v.PoundPoint.z, 0.0, 0.0, 0.0, 0, 0.0, 0.0, Config.PoundMarker.x, Config.PoundMarker.y, Config.PoundMarker.z, Config.PoundMarker.r, Config.PoundMarker.g, Config.PoundMarker.b, 100, false, true, 2, false, false, false, false)
 				end
 			end
 		end
@@ -930,15 +932,15 @@ Citizen.CreateThread(function()
 			for k,v in pairs(Config.AircraftGarages) do
 				if (GetDistanceBetweenCoords(coords, v.GaragePoint.x, v.GaragePoint.y, v.GaragePoint.z, true) < Config.DrawDistance) then
 					canSleep = false
-					DrawMarker(Config.MarkerTypePlane, v.GaragePoint.x, v.GaragePoint.y, v.GaragePoint.z, 0.0, 0.0, 0.0, 0, 0.0, 0.0, Config.PointMarker.x, Config.PointMarker.y, Config.PointMarker.z, Config.PointMarker.r, Config.PointMarker.g, Config.PointMarker.b, 100, false, true, 2, false, false, false, false)	
-					DrawMarker(Config.MarkerTypePlane, v.DeletePoint.x, v.DeletePoint.y, v.DeletePoint.z, 0.0, 0.0, 0.0, 0, 0.0, 0.0, Config.DeleteMarker.x, Config.DeleteMarker.y, Config.DeleteMarker.z, Config.DeleteMarker.r, Config.DeleteMarker.g, Config.DeleteMarker.b, 100, false, true, 2, false, false, false, false)	
+					DrawMarker(Config.MarkerType, v.GaragePoint.x, v.GaragePoint.y, v.GaragePoint.z, 0.0, 0.0, 0.0, 0, 0.0, 0.0, Config.PointMarker.x, Config.PointMarker.y, Config.PointMarker.z, Config.PointMarker.r, Config.PointMarker.g, Config.PointMarker.b, 100, false, true, 2, false, false, false, false)	
+					DrawMarker(Config.MarkerType, v.DeletePoint.x, v.DeletePoint.y, v.DeletePoint.z, 0.0, 0.0, 0.0, 0, 0.0, 0.0, Config.DeleteMarker.x, Config.DeleteMarker.y, Config.DeleteMarker.z, Config.DeleteMarker.r, Config.DeleteMarker.g, Config.DeleteMarker.b, 100, false, true, 2, false, false, false, false)	
 				end
 			end
 			
 			for k,v in pairs(Config.AircraftPounds) do
 				if (GetDistanceBetweenCoords(coords, v.PoundPoint.x, v.PoundPoint.y, v.PoundPoint.z, true) < Config.DrawDistance) then
 					canSleep = false
-					DrawMarker(Config.MarkerTypePlane, v.PoundPoint.x, v.PoundPoint.y, v.PoundPoint.z, 0.0, 0.0, 0.0, 0, 0.0, 0.0, Config.PoundMarker.x, Config.PoundMarker.y, Config.PoundMarker.z, Config.PoundMarker.r, Config.PoundMarker.g, Config.PoundMarker.b, 100, false, true, 2, false, false, false, false)
+					DrawMarker(Config.MarkerType, v.PoundPoint.x, v.PoundPoint.y, v.PoundPoint.z, 0.0, 0.0, 0.0, 0, 0.0, 0.0, Config.PoundMarker.x, Config.PoundMarker.y, Config.PoundMarker.z, Config.PoundMarker.r, Config.PoundMarker.g, Config.PoundMarker.b, 100, false, true, 2, false, false, false, false)
 				end
 			end
 		end
@@ -956,7 +958,7 @@ Citizen.CreateThread(function()
 		end
 		
 		if Config.UseJobCarGarages then
-			if ESX.PlayerData.job ~= nil and (ESX.PlayerData.job.name == 'police' or ESX.PlayerData.job.name == 'fbi') then
+			if ESX.PlayerData.job ~= nil and ESX.PlayerData.job.name == 'police' then
 				for k,v in pairs(Config.PolicePounds) do
 					if (GetDistanceBetweenCoords(coords, v.PoundPoint.x, v.PoundPoint.y, v.PoundPoint.z, true) < Config.DrawDistance) then
 						canSleep = false
@@ -1082,7 +1084,7 @@ Citizen.CreateThread(function()
 		end
 		
 		if Config.UseJobCarGarages then
-			if ESX.PlayerData.job ~= nil and (ESX.PlayerData.job.name == 'police' or ESX.PlayerData.job.name == 'fbi') then
+			if ESX.PlayerData.job ~= nil and ESX.PlayerData.job.name == 'police' then
 				for k,v in pairs(Config.PolicePounds) do
 					if (GetDistanceBetweenCoords(coords, v.PoundPoint.x, v.PoundPoint.y, v.PoundPoint.z, true) < Config.JobPoundMarker.x) then
 						isInMarker  = true
@@ -1223,20 +1225,20 @@ function refreshBlips()
 		for k,v in pairs(Config.BoatGarages) do
 			table.insert(blipList, {
 				coords = { v.GaragePoint.x, v.GaragePoint.y },
-				text   = _U('blip_garage_boat'),
-				sprite = Config.BlipGarageBoat.Sprite,
-				color  = Config.BlipGarageBoat.Color,
-				scale  = Config.BlipGarageBoat.Scale
+				text   = _U('blip_garage'),
+				sprite = Config.BlipGarage.Sprite,
+				color  = Config.BlipGarage.Color,
+				scale  = Config.BlipGarage.Scale
 			})
 		end
 		
 		for k,v in pairs(Config.BoatPounds) do
 			table.insert(blipList, {
 				coords = { v.PoundPoint.x, v.PoundPoint.y },
-				text   = _U('blip_pound_boat'),
-				sprite = Config.BlipPoundBoat.Sprite,
-				color  = Config.BlipPoundBoat.Color,
-				scale  = Config.BlipPoundBoat.Scale
+				text   = _U('blip_pound'),
+				sprite = Config.BlipPound.Sprite,
+				color  = Config.BlipPound.Color,
+				scale  = Config.BlipPound.Scale
 			})
 		end
 	end
@@ -1245,26 +1247,26 @@ function refreshBlips()
 		for k,v in pairs(Config.AircraftGarages) do
 			table.insert(blipList, {
 				coords = { v.GaragePoint.x, v.GaragePoint.y },
-				text   = _U('blip_garage_plane'),
-				sprite = Config.BlipGaragePlane.Sprite,
-				color  = Config.BlipGaragePlane.Color,
-				scale  = Config.BlipGaragePlane.Scale
+				text   = _U('blip_garage'),
+				sprite = Config.BlipGarage.Sprite,
+				color  = Config.BlipGarage.Color,
+				scale  = Config.BlipGarage.Scale
 			})
 		end
 		
 		for k,v in pairs(Config.AircraftPounds) do
 			table.insert(blipList, {
 				coords = { v.PoundPoint.x, v.PoundPoint.y },
-				text   = _U('blip_pound_plane'),
-				sprite = Config.BlipPoundPlane.Sprite,
-				color  = Config.BlipPoundPlane.Color,
-				scale  = Config.BlipPoundPlane.Scale
+				text   = _U('blip_pound'),
+				sprite = Config.BlipPound.Sprite,
+				color  = Config.BlipPound.Color,
+				scale  = Config.BlipPound.Scale
 			})
 		end
 	end
 	
 	if Config.UseJobCarGarages then
-		if ESX.PlayerData.job ~= nil and (ESX.PlayerData.job.name == 'police' or ESX.PlayerData.job.name == 'fbi') then
+		if ESX.PlayerData.job ~= nil and ESX.PlayerData.job.name == 'police' then
 			for k,v in pairs(Config.PolicePounds) do
 				table.insert(JobBlips, {
 					coords = { v.PoundPoint.x, v.PoundPoint.y },

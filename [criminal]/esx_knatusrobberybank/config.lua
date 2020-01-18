@@ -1,7 +1,9 @@
 Config = {}
 Config.Locale = 'ru'
 --Количество полицейских на сервере
-Config.NumberOfCopsRequired = 1
+Config.NumberOfCopsRequired = 4
+Config.moneyType = 'black' 
+-- 'cash' or 'black'
 Banks = {
 	["fleeca"] = {
 		position = { ['x'] = 148.91908752441, ['y'] = -1050.7448242188, ['z'] = 29.36802482605 }, -- position of robbery, when you have tu use the item "blowtorch"
@@ -33,7 +35,7 @@ Banks = {
 		position = { ['x'] = 264.99899291992, ['y'] = 213.50576782227, ['z'] = 101.68346405029 },
 		hackposition = { ['x'] = 261.49499291992, ['y'] = 223.06776782227, ['z'] = 106.28346405029 },
         bombposition = { ['x'] = 254.12199291992, ['y'] = 225.50576782227, ['z'] = 101.87346405029 }, -- if this var is set will appear a site to plant a bomb which will open the door defined at var "bombdoortype"
-		reward = math.random(80000,100000),
+		reward = math.random(4000000,12000000),
 		nameofbank = "Principal bank",
 		lastrobbed = 0,
         bombdoortype = 'v_ilev_bk_vaultdoor', -- If this var is set you will need set the var "bombposition" to work properly , you can find the name or id here: https://objects.gt-mp.net/  if you dont find it, contact with your devs

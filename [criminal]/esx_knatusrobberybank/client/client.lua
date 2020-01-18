@@ -4,7 +4,7 @@ local bombholdingup = false
 local bank = ""
 local savedbank = {}
 local secondsRemaining = 0
-local dooropen = true
+local dooropen = false
 local platingbomb = false
 local platingbombtime = 20
 local blipRobbery = nil
@@ -85,14 +85,12 @@ function opendoors(success, timeremaining)
 		TriggerEvent('esx_holdupbank:hackcomplete')
 
 	else
+		hackholdingup = false
+		ESX.ShowNotification(_U('hack_failed'))
+		print('Failure')
 		TriggerEvent('mhacking:hide')
-		TriggerEvent('esx_holdupbank:hackcomplete')
-		-- hackholdingup = false
-		-- ESX.ShowNotification(_U('hack_failed'))
-		-- print('Failure')
-		-- TriggerEvent('mhacking:hide')
-		-- secondsRemaining = 0
-		-- incircle = false
+		secondsRemaining = 0
+		incircle = false
 	end
 end
 
@@ -172,7 +170,7 @@ end)
 
 RegisterNetEvent('esx_holdupbank:plantedbomb')
 AddEventHandler('esx_holdupbank:plantedbomb', function(x,y,z,doortype)
-	local coords = {x,y,z}
+	local coords = vector3(x,y,z) -- fix for vectors
 	local obs, distance = ESX.Game.GetClosestObject(doortype, coords)
 
     --AddExplosion( bank.bombposition.x,  bank.bombposition.y, bank.bombposition.z , 0, 0.5, 1, 0, 1065353216, 0)
@@ -199,9 +197,11 @@ end)
 RegisterNetEvent('esx_holdupbank:opendoors')
 AddEventHandler('esx_holdupbank:opendoors', function(x,y,z,doortype)
 	dooropen = true;
-
-	local coords = {x,y,z}
-	local obs, distance = ESX.Game.GetClosestObject('hei_v_ilev_bk_gate2_pris', coords)
+	
+	ESX.ShowNotification("X: "..x)
+		
+	local coords = vector3(x,y,z) -- fix for vectors
+	local obs, distance = ESX.Game.GetClosestObject(doortype, coords) -- instant open for people already in site
 
 	local pos = GetEntityCoords(obs);
 

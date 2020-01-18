@@ -3,6 +3,7 @@ Config.DrawDistance = 100.0
 Config.Locale       = 'ru'
 Config.Jobs         = {}
 
+Config.MaxCaution = 10000 -- the max caution allowed
 Config.PublicZones = {
 
 	EnterBuilding = {

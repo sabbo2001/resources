@@ -73,22 +73,6 @@ function getItemyWeight(item)
   return itemWeight
 end
 
-
-    
-
-
--- local ped = PlayerPedId()
-    -- local veh = GetVehiclePedIsIn(ped, false)
-    -- if veh ~= nil and veh ~= 0 and veh ~= 1 then
-        -- if GetVehicleDoorAngleRatio(veh, 5) > 0 then
-            -- SetVehicleDoorShut(veh, 5, false)
-        -- else
-            -- SetVehicleDoorOpen(veh, 5, false, false)
-        -- end
-    -- end
--- end
-
-
 function VehicleInFront()
   local pos = GetEntityCoords(GetPlayerPed(-1))
   local entityWorld = GetOffsetFromEntityInWorldCoords(GetPlayerPed(-1), 0.0, 4.0, 0.0)
@@ -133,9 +117,15 @@ function openmenuvehicle()
     if not Config.CheckOwnership or (Config.AllowPolice and PlayerData.job.name == "police") or (Config.CheckOwnership and myVeh) then
       if globalplate ~= nil or globalplate ~= "" or globalplate ~= " " then
         CloseToVehicle = true
+        local ped = GetPlayerPed(-1)
+        local vehLast = GetPlayersLastVehicle()
         local vehFront = VehicleInFront()
         local x, y, z = table.unpack(GetEntityCoords(GetPlayerPed(-1), true))
         local closecar = GetClosestVehicle(x, y, z, 4.0, 0, 71)
+
+        local distanceToVeh = GetDistanceBetweenCoords(GetEntityCoords(ped), GetEntityCoords(vehLast), 1)
+
+
 
         if vehFront > 0 and closecar ~= nil and GetPedInVehicleSeat(closecar, -1) ~= GetPlayerPed(-1) then
           lastVehicle = vehFront
@@ -143,11 +133,24 @@ function openmenuvehicle()
           local locked = GetVehicleDoorLockStatus(closecar)
           local class = GetVehicleClass(vehFront)
           ESX.UI.Menu.CloseAll()
-
+            ---Анимация багажника
           if ESX.UI.Menu.IsOpen("default", GetCurrentResourceName(), "inventory") then
             SetVehicleDoorShut(vehFront, 5, false)
+
+                --if distanceToVeh < 6 then
+                --    if GetVehicleDoorAngleRatio(vehLast, 5) > 0 then
+                --        SetVehicleDoorShut(vehLast, 5, false)
+                --        ESX.ShowNotification(_U('trunk_closed'))
+                --    else
+                --        SetVehicleDoorOpen(vehLast, 5, false, false)
+                --        ESX.ShowNotification('Багажник открыт')
+                --    end
+                --else
+                --    ESX.ShowNotification('Далеко от багажника')
+                --end
+
           else
-            if locked == 1 or locked == 2 or class == 15 or class == 16 or class == 14 then
+            if locked == 1 or class == 15 or class == 16 or class == 14 then
               SetVehicleDoorOpen(vehFront, 5, false, false)
               ESX.UI.Menu.CloseAll()
 
@@ -156,42 +159,20 @@ function openmenuvehicle()
                 OpenCoffreInventoryMenu(GetVehicleNumberPlateText(vehFront), Config.VehicleLimit[class], myVeh)
               end
             else
-              exports.pNotify:SendNotification(
-                {
-                  text = _U("trunk_closed"),
-                  type = "error",
-                  timeout = 5000,
-                  layout = "bottomCenter",
-                  queue = "trunk"
-                }
-              )
+                ESX.ShowNotification(_U('trunk_closed'))
             end
           end
         else
-          exports.pNotify:SendNotification(
-            {
-              text = _U("no_veh_nearby"),
-              type = "error",
-              timeout = 5000,
-              layout = "bottomCenter",
-              queue = "trunk"
-            }
-          )
+            ESX.ShowNotification(_U('no_veh_nearby'))
+
         end
         lastOpen = true
         GUI.Time = GetGameTimer()
       end
     else
       -- Not their vehicle
-      exports.pNotify:SendNotification(
-        {
-          text = _U("nacho_veh"),
-          type = "error",
-          timeout = 5000,
-          layout = "bottomCenter",
-          queue = "trunk"
-        }
-      )
+        ESX.ShowNotification(_U('nacho_veh'))
+
     end
   end
 end
@@ -224,12 +205,6 @@ Citizen.CreateThread(
           lastOpen = false
           ESX.UI.Menu.CloseAll()
           SetVehicleDoorShut(lastVehicle, 5, false)
-		  
-		  --local playerPed = PlayerPedId()
-		  --local Veh = GetVehiclePedIsUsing(GetPlayerPed(-1))
-		  --local vehicle = GetVehiclePedIsIn(playerPed, false)
-		  --SetVehicleDoorOpen(vehicle, 5, false)
-		  
         end
       end
     end
@@ -280,39 +255,3 @@ function dump(o)
     return tostring(o)
   end
 end
-
-
---- Code ---
-
-function ShowInfo(text)
-	SetNotificationTextEntry("STRING")
-	AddTextComponentString(text)
-	DrawNotification(false, false)
-end
-
-
-Citizen.CreateThread(function()
-        --while true do
-            Citizen.Wait(10)
-            local ped = GetPlayerPed(-1)
-            local veh = GetVehiclePedIsUsing(ped)
-            local vehLast = GetPlayersLastVehicle()
-            local distanceToVeh = GetDistanceBetweenCoords(GetEntityCoords(ped), GetEntityCoords(vehLast), 1)
-            local door = 5
-            if IsControlPressed(1, 38) then
-                if not IsPedInAnyVehicle(ped, false) then
-                    if distanceToVeh < 5 then
-                        if GetVehicleDoorAngleRatio(vehLast, door) > 0 then
-                            SetVehicleDoorShut(vehLast, door, false)
-                            ShowInfo("Вы ~g~закрыли ~w~багажник.")
-                        else	
-                            SetVehicleDoorOpen(vehLast, door, false, false)
-                            ShowInfo("Вы ~g~открыли ~w~багажник.")
-                        end
-                    else
-                        --ShowInfo("Вы слишком далеко от багажника.")
-                    end
-                end
-            end
-        --end
-    end)

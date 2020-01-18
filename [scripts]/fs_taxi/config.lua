@@ -3,6 +3,6 @@ i18n.setLang("en")
 
 -- Enable or disable a optional resource
 optional = {
-	use_essentialmode = false,
-	use_venomous = true
+	use_essentialmode = true,
+	use_venomous = false
 }

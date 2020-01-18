@@ -22,7 +22,7 @@ Config.Shops = {
 }
 
 for i=1, #Config.Shops, 1 do
-	Config.Zones['Shop_' .. i] = {
+	Config.Zones['Barber_' .. i] = {
 		Pos   = Config.Shops[i],
 		Size  = Config.MarkerSize,
 		Color = Config.MarkerColor,

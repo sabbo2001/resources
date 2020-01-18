@@ -1,4 +1,6 @@
-Config = {}
+Config,Locale = {},{} -- no touchey, thanks
+
+Config.locale = "ru"
 
 Config.draw_distance = 25.0
 
@@ -7,6 +9,7 @@ Config.default_tax_rate = 0.03 -- default tax rate if per-business one is not se
 Config.employee_payout_formula = function(earnings,employee_count) -- earnings = after tax | this is the amount that each employee will get, the remainder will go to the owner
     return (earnings*0.4)/employee_count -- employees get 40% split up (owner is guaranteed 60%)
 end
+
 -- List of possible variables
 -- {name} - name of the business
 -- {address} - address of the business
@@ -22,9 +25,9 @@ end
 -- {taxrate} - business tax rate (in %, default = 3)
 -- {id} - business ID
 Config.display = {
-    {offset = 0.23, text = "~y~ {name}",  scale = 1.5},
-    {offset = 0.0, text = "{address}: {description}", scale = 0.7},
-    {offset = -0.1, text = "~b~Владелец: ~r~{owner_rp_name} ~b~Цена: ~g~${price} ~s~(налог ~r~{taxrate}% ~s~)", scale = 1},
+    {offset = 0.23, text = "~y~ {name}", scale = 1.5},
+    {offset = 0.0, text = "{address}; {description}", scale = 0.7},
+    {offset = -0.1, text = "~b~Владелец: ~r~{owner_rp_name} ~b~Цена: ~g~${price} ~s~(налог~r~{taxrate}% ~s~)", scale = 1},
     {offset = -0.21, text = "~b~Доход бизнеса: ~g~${earnings}/час", scale = 1}
 }
 
@@ -32,6 +35,7 @@ Config.blip = {
     enabled = false,
     color = 29, -- https://wiki.gtanet.work/index.php?title=Blips
     sprite = 431, -- https://wiki.gtanet.work/index.php?title=Blips
+    scale = 0.5,
     name = "Бизнес"
 }
 

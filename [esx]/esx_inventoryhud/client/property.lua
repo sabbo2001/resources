@@ -45,7 +45,7 @@ function setPropertyInventoryData(data)
             item.type = "item_standard"
             item.usable = false
             item.rare = false
-            item.limit = -1
+            item.weight = -1
             item.canRemove = false
 
             table.insert(items, item)

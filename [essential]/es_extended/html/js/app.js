@@ -66,7 +66,7 @@
 
 		$('#inventory_notifications').append(elem);
 
-		$(elem).delay(4000).fadeOut(1000, function () {
+		$(elem).delay(3000).fadeOut(1000, function () {
 			elem.remove();
 		});
 	};

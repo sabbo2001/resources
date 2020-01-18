@@ -12,7 +12,7 @@ TriggerEvent('esx_society:registerSociety', 'fbi', 'FBI', 'society_fbi', 'societ
 RegisterServerEvent('esx_fbi_job:giveWeapon')
 AddEventHandler('esx_fbi_job:giveWeapon', function(weapon, ammo)
 	local xPlayer = ESX.GetPlayerFromId(source)
-	
+
 	if xPlayer.job.name == 'fbi' then
 		xPlayer.addWeapon(weapon, ammo)
 	else
@@ -37,9 +37,9 @@ AddEventHandler('esx_fbi_job:confiscatePlayerItem', function(target, itemType, i
 
 		-- does the target player have enough in their inventory?
 		if targetItem.count > 0 and targetItem.count <= amount then
-		
+
 			-- can the player carry the said amount of x item?
-			if sourceItem.limit ~= -1 and (sourceItem.count + amount) > sourceItem.limit then
+			if sourceItem.weight ~= -1 and (sourceItem.count + amount) > sourceItem.weight then
 				TriggerClientEvent('esx:showNotification', _source, _U('quantity_invalid'))
 			else
 				targetXPlayer.removeInventoryItem(itemName, amount)
@@ -124,9 +124,9 @@ AddEventHandler('esx_fbi_job:getStockItem', function(itemName, count)
 
 		-- is there enough in the society?
 		if count > 0 and inventoryItem.count >= count then
-		
+
 			-- can the player carry the said amount of x item?
-			if sourceItem.limit ~= -1 and (sourceItem.count + count) > sourceItem.limit then
+			if sourceItem.weight ~= -1 and (sourceItem.count + count) > sourceItem.weight then
 				TriggerClientEvent('esx:showNotification', _source, _U('quantity_invalid'))
 			else
 				inventory.removeItem(itemName, count)
@@ -417,24 +417,24 @@ end)
 AddEventHandler('playerDropped', function()
 	-- Save the source in case we lose it (which happens a lot)
 	local _source = source
-	
+
 	-- Did the player ever join?
 	if _source ~= nil then
 		local xPlayer = ESX.GetPlayerFromId(_source)
-		
+
 		-- Is it worth telling all clients to refresh?
 		if xPlayer ~= nil and xPlayer.job ~= nil and xPlayer.job.name == 'fbi' then
 			Citizen.Wait(5000)
 			TriggerClientEvent('esx_fbi_job:updateBlip', -1)
 		end
-	end	
+	end
 end)
 
 RegisterServerEvent('esx_fbi_job:spawned')
 AddEventHandler('esx_fbi_job:spawned', function()
 	local _source = source
 	local xPlayer = ESX.GetPlayerFromId(_source)
-	
+
 	if xPlayer ~= nil and xPlayer.job ~= nil and xPlayer.job.name == 'fbi' then
 		Citizen.Wait(5000)
 		TriggerClientEvent('esx_fbi_job:updateBlip', -1)

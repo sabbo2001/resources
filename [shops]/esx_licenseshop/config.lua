@@ -32,7 +32,7 @@ Config.Locations = {
 Config.Zones = {}
 
 for i=1, #Config.Locations, 1 do
-	Config.Zones['Shop_' .. i] = {
+	Config.Zones['Lisense_' .. i] = {
 		Pos   = Config.Locations[i],
 		Size  = Config.MarkerSize,
 		Color = Config.MarkerColor,

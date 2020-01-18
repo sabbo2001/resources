@@ -426,15 +426,25 @@ Config.DoorList = {
 	size = 1
 },
 --Дом френклина
-{
-	objName = 'v_ilev_fa_frontdoor',
-	objCoords  = vector3(-14.86892, -1441.182, 31.19323),
-	textCoords = vector3(-13.9, -1441, 31.19323),
-	authorizedJobs = { 'police', 'militar', 'fbi', 'ballas'  },
-	locked = true,
-	distance = 10,
-	size = 1
-}
+--{
+--	objName = 'v_ilev_fa_frontdoor',
+--	objCoords  = vector3(-14.86892, -1441.182, 31.19323),
+--	textCoords = vector3(-13.9, -1441, 31.19323),
+--	authorizedJobs = { 'police', 'militar', 'fbi', 'ballas'  },
+--	locked = true,
+--	distance = 10,
+--	size = 1
+--},
+
+	{
+		objName = 'hei_v_ilev_bk_gate2_pris',
+		objCoords  = vector3(261.99899291992, 221.50576782227, 106.68346405029),
+		textCoords = vector3( 261.99899291992,  221.50576782227, 107.68346405029),
+		authorizedJobs = {},
+		locked = true,
+		distance = 12,
+		size = 2
+	},
 
 	
 	--

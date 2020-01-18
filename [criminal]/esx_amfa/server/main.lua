@@ -35,7 +35,7 @@ local function HarvestAmfa(source)
 			local xPlayer = ESX.GetPlayerFromId(source)
 			local amfa = xPlayer.getInventoryItem('amfa')
 
-			if amfa.limit ~= -1 and amfa.count >= amfa.limit then
+			if amfa.weight ~= -1 and amfa.count >= amfa.weight then
 				TriggerClientEvent('esx:showNotification', source, _U('inv_full_amfa'))
 			else
 				xPlayer.addInventoryItem('amfa', 1)
@@ -78,7 +78,7 @@ local function TransformAmfa(source)
 			local amfaQuantity = xPlayer.getInventoryItem('amfa').count
 			local pooch = xPlayer.getInventoryItem('amfa_pooch')
 
-			if pooch.limit ~= -1 and pooch.count >= pooch.limit then
+			if pooch.weight ~= -1 and pooch.count >= pooch.weight then
 				TriggerClientEvent('esx:showNotification', source, _U('too_many_pouches'))
 			elseif amfaQuantity < 5 then
 				TriggerClientEvent('esx:showNotification', source, _U('not_enough_amfa'))

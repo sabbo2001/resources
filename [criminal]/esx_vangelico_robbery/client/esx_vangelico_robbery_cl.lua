@@ -115,7 +115,7 @@ Citizen.CreateThread(function()
 		local ve = v.position
 
 		local blip = AddBlipForCoord(ve.x, ve.y, ve.z)
-		SetBlipSprite(blip, 617)
+		SetBlipSprite(blip, 439)
 		SetBlipScale(blip, 0.8)
 		SetBlipAsShortRange(blip, true)
 		BeginTextCommandSetBlipName("STRING")
@@ -142,6 +142,18 @@ function drawTxt(x, y, scale, text, red, green, blue, alpha)
     DrawText(0.155, 0.935)
 end
 
+local borsa = nil
+
+Citizen.CreateThread(function()
+	while true do
+	  Citizen.Wait(1000)
+	  TriggerEvent('skinchanger:getSkin', function(skin)
+		borsa = skin['bags_1']
+	  end)
+	  Citizen.Wait(1000)
+	end
+end)
+
 Citizen.CreateThread(function()
       
 	while true do
@@ -160,174 +172,29 @@ Citizen.CreateThread(function()
 						end
 						incircle = true
 						if IsPedShooting(GetPlayerPed(-1)) then
-							ESX.TriggerServerCallback('esx_vangelico_robbery:conteggio', function(CopsConnected)
-								if CopsConnected >= Config.RequiredCopsRob then
-                                                                gioielli1 = AddBlipForCoord(-626.5326, -238.3758, 38.05)
-							SetBlipSprite(gioielli1,617)
-							SetBlipColour(gioielli1,16742399)
-							SetBlipScale(gioielli1,0.5)
-							BeginTextCommandSetBlipName("STRING")
-							AddTextComponentString(_U('jewelsblipmap'))
-							EndTextCommandSetBlipName(gioielli1)
-
-							gioielli2 = AddBlipForCoord(-625.6032, -237.5273, 38.05)
-							SetBlipSprite(gioielli2,617)
-							SetBlipColour(gioielli2,16742399)
-							SetBlipScale(gioielli2,0.5)
-							BeginTextCommandSetBlipName("STRING")
-							AddTextComponentString(_U('jewelsblipmap'))
-							EndTextCommandSetBlipName(gioielli2)
-
-							gioielli3 = AddBlipForCoord(-626.9178, -235.5166, 38.05)
-							SetBlipSprite(gioielli3,617)
-							SetBlipColour(gioielli3,16742399)
-							SetBlipScale(gioielli3,0.5)
-							BeginTextCommandSetBlipName("STRING")
-							AddTextComponentString(_U('jewelsblipmap'))
-							EndTextCommandSetBlipName(gioielli3)
-
-							gioielli4 = AddBlipForCoord(-625.6701, -234.6061, 38.05)
-							SetBlipSprite(gioielli4,617)
-							SetBlipColour(gioielli4,16742399)
-							SetBlipScale(gioielli4,0.5)
-							BeginTextCommandSetBlipName("STRING")
-							AddTextComponentString(_U('jewelsblipmap'))
-							EndTextCommandSetBlipName(gioielli4)
-
-
-							gioielli5 = AddBlipForCoord(-626.8935, -233.0814, 38.05)
-							SetBlipSprite(gioielli5,617)
-							SetBlipColour(gioielli5,16742399)
-							SetBlipScale(gioielli5,0.5)
-							BeginTextCommandSetBlipName("STRING")
-							AddTextComponentString(_U('jewelsblipmap'))
-							EndTextCommandSetBlipName(gioielli5)
-
-							gioielli6 = AddBlipForCoord(-627.9514, -233.8582, 38.05)
-							SetBlipSprite(gioielli6,617)
-							SetBlipColour(gioielli6,16742399)
-							SetBlipScale(gioielli6,0.5)
-							BeginTextCommandSetBlipName("STRING")
-							AddTextComponentString(_U('jewelsblipmap'))
-							EndTextCommandSetBlipName(gioielli6)
-
-							gioielli7 = AddBlipForCoord(-624.5250, -231.0555, 38.05)
-							SetBlipSprite(gioielli7,617)
-							SetBlipColour(gioielli7,16742399)
-							SetBlipScale(gioielli7,0.5)
-							BeginTextCommandSetBlipName("STRING")
-							AddTextComponentString(_U('jewelsblipmap'))
-							EndTextCommandSetBlipName(gioielli7)
-
-							gioielli8 = AddBlipForCoord(-623.0003, -233.0833, 38.05)
-							SetBlipSprite(gioielli8,617)
-							SetBlipColour(gioielli8,16742399)
-							SetBlipScale(gioielli8,0.5)
-							BeginTextCommandSetBlipName("STRING")
-							AddTextComponentString(_U('jewelsblipmap'))
-							EndTextCommandSetBlipName(gioielli8)
-
-							gioielli9 = AddBlipForCoord(-620.1098, -233.3672, 38.05)
-							SetBlipSprite(gioielli9,617)
-							SetBlipColour(gioielli9,16742399)
-							SetBlipScale(gioielli9,0.5)
-							BeginTextCommandSetBlipName("STRING")
-							AddTextComponentString(_U('jewelsblipmap'))
-							EndTextCommandSetBlipName(gioielli9)
-
-							gioielli10 = AddBlipForCoord(-620.2979, -234.4196, 38.05)
-							SetBlipSprite(gioielli10,617)
-							SetBlipColour(gioielli10,16742399)
-							SetBlipScale(gioielli10,0.5)
-							BeginTextCommandSetBlipName("STRING")
-							AddTextComponentString(_U('jewelsblipmap'))
-							EndTextCommandSetBlipName(gioielli10)
-
-							gioielli11 = AddBlipForCoord(-619.0646, -233.5629, 38.05)
-							SetBlipSprite(gioielli11,617)
-							SetBlipColour(gioielli11,16742399)
-							SetBlipScale(gioielli11,0.5)
-							BeginTextCommandSetBlipName("STRING")
-							AddTextComponentString(_U('jewelsblipmap'))
-							EndTextCommandSetBlipName(gioielli11)
-
-							gioielli12 = AddBlipForCoord(-617.4846, -230.6598, 38.05)
-							SetBlipSprite(gioielli12,617)
-							SetBlipColour(gioielli12,16742399)
-							SetBlipScale(gioielli12,0.5)
-							BeginTextCommandSetBlipName("STRING")
-							AddTextComponentString(_U('jewelsblipmap'))
-							EndTextCommandSetBlipName(gioielli12)
-
-							gioielli13 = AddBlipForCoord(-618.3619, -229.4285, 38.05)
-							SetBlipSprite(gioielli13,617)
-							SetBlipColour(gioielli13,16742399)
-							SetBlipScale(gioielli13,0.5)
-							BeginTextCommandSetBlipName("STRING")
-							AddTextComponentString(_U('jewelsblipmap'))
-							EndTextCommandSetBlipName(gioielli13)
-
-							gioielli14 = AddBlipForCoord(-619.6064, -230.5518, 38.05)
-							SetBlipSprite(gioielli14,617)
-							SetBlipColour(gioielli14,16742399)
-							SetBlipScale(gioielli14,0.5)
-							BeginTextCommandSetBlipName("STRING")
-							AddTextComponentString(_U('jewelsblipmap'))
-							EndTextCommandSetBlipName(gioielli14)
-
-							gioielli15 = AddBlipForCoord(-620.8951, -228.6519, 38.05)
-							SetBlipSprite(gioielli15,617)
-							SetBlipColour(gioielli15,16742399)
-							SetBlipScale(gioielli15,0.5)
-							BeginTextCommandSetBlipName("STRING")
-							AddTextComponentString(_U('jewelsblipmap'))
-							EndTextCommandSetBlipName(gioielli15)
-
-							gioielli16 = AddBlipForCoord(-619.7905, -227.5623, 38.05)
-							SetBlipSprite(gioielli16,617)
-							SetBlipColour(gioielli16,16742399)
-							SetBlipScale(gioielli16,0.5)
-							BeginTextCommandSetBlipName("STRING")
-							AddTextComponentString(_U('jewelsblipmap'))
-							EndTextCommandSetBlipName(gioielli16)
-
-							gioielli17 = AddBlipForCoord(-620.6110, -226.4467, 38.05)
-							SetBlipSprite(gioielli17,617)
-							SetBlipColour(gioielli17,16742399)
-							SetBlipScale(gioielli17,0.5)
-							BeginTextCommandSetBlipName("STRING")
-							AddTextComponentString(_U('jewelsblipmap'))
-							EndTextCommandSetBlipName(gioielli17)
-
-							gioielli18 = AddBlipForCoord(-623.9951, -228.1755, 38.05)
-							SetBlipSprite(gioielli18,617)
-							SetBlipColour(gioielli18,16742399)
-							SetBlipScale(gioielli18,0.5)
-							BeginTextCommandSetBlipName("STRING")
-							AddTextComponentString(_U('jewelsblipmap'))
-							EndTextCommandSetBlipName(gioielli18)
-
-							gioielli19 = AddBlipForCoord(-624.8832, -227.8645, 38.05)
-							SetBlipSprite(gioielli19,617)
-							SetBlipColour(gioielli19,16742399)
-							SetBlipScale(gioielli19,0.5)
-							BeginTextCommandSetBlipName("STRING")
-							AddTextComponentString(_U('jewelsblipmap'))
-							EndTextCommandSetBlipName(gioielli19)
-
-							gioielli20 = AddBlipForCoord(-623.6746, -227.0025, 38.05)
-							SetBlipSprite(gioielli20,617)
-							SetBlipColour(gioielli20,16742399)
-							SetBlipScale(gioielli20,0.5)
-							BeginTextCommandSetBlipName("STRING")
-							AddTextComponentString(_U('jewelsblipmap'))
-							EndTextCommandSetBlipName(gioielli20)	
-							        TriggerServerEvent('esx_vangelico_robbery:rob', k)
-									PlaySoundFromCoord(soundid, "VEHICLES_HORNS_AMBULANCE_WARNING", pos2.x, pos2.y, pos2.z)
-								else
-									TriggerEvent('esx:showNotification', _U('min_two_police') .. Config.RequiredCopsRob .. _U('min_two_police2'))
+							if Config.NeedBag then
+							    if borsa == 40 or borsa == 41 or borsa == 44 or borsa == 45 then
+							        ESX.TriggerServerCallback('esx_vangelico_robbery:conteggio', function(CopsConnected)
+								        if CopsConnected >= Config.RequiredCopsRob then
+							                TriggerServerEvent('esx_vangelico_robbery:rob', k)
+									        PlaySoundFromCoord(soundid, "VEHICLES_HORNS_AMBULANCE_WARNING", pos2.x, pos2.y, pos2.z)
+								        else
+									        TriggerEvent('esx:showNotification', _U('min_two_police') .. Config.RequiredCopsRob .. _U('min_two_police2'))
+								        end
+							        end)		
+						        else
+							        TriggerEvent('esx:showNotification', _U('need_bag'))
 								end
-							end)		
+							else
+								ESX.TriggerServerCallback('esx_vangelico_robbery:conteggio', function(CopsConnected)
+									if CopsConnected >= Config.RequiredCopsRob then
+										TriggerServerEvent('esx_vangelico_robbery:rob', k)
+										PlaySoundFromCoord(soundid, "VEHICLES_HORNS_AMBULANCE_WARNING", pos2.x, pos2.y, pos2.z)
+									else
+										TriggerEvent('esx:showNotification', _U('min_two_police') .. Config.RequiredCopsRob .. _U('min_two_police2'))
+									end
+								end)	
+							end	
                         end
 					elseif(Vdist(pos.x, pos.y, pos.z, pos2.x, pos2.y, pos2.z) > 1.0)then
 						incircle = false
@@ -340,6 +207,9 @@ Citizen.CreateThread(function()
 			drawTxt(0.3, 1.4, 0.45, _U('smash_case') .. ' :~r~ ' .. vetrineRotte .. '/' .. Config.MaxWindows, 185, 185, 185, 255)
 
 			for i,v in pairs(vetrine) do 
+				if(GetDistanceBetweenCoords(pos, v.x, v.y, v.z, true) < 10.0) and not v.isOpen and Config.EnableMarker then 
+					DrawMarker(20, v.x, v.y, v.z, 0, 0, 0, 0, 0, 0, 0.6, 0.6, 0.6, 0, 255, 0, 200, 1, 1, 0, 0)
+				end
 				if(GetDistanceBetweenCoords(pos, v.x, v.y, v.z, true) < 0.75) and not v.isOpen then 
 					DrawText3D(v.x, v.y, v.z, '~w~[~g~E~w~] ' .. _U('press_to_collect'), 0.6)
 					if IsControlJustPressed(0, 38) then
@@ -366,35 +236,20 @@ Citizen.CreateThread(function()
 					    TriggerServerEvent('esx_vangelico_robbery:gioielli')
 					    PlaySound(-1, "PICK_UP", "HUD_FRONTEND_DEFAULT_SOUNDSET", 0, 0, 1)
 					    vetrineRotte = vetrineRotte+1
-                        --RemoveBlip(gioielli+1)
 					    animazione = false
 
 						if vetrineRotte == Config.MaxWindows then 
-							for i,v in pairs(vetrine) do 
+						    for i,v in pairs(vetrine) do 
 								v.isOpen = false
 								vetrineRotte = 0
 							end
 							TriggerServerEvent('esx_vangelico_robbery:endrob', store)
 						    ESX.ShowNotification(_U('lester'))
-						    TriggerEvent('skinchanger:getSkin', function(skin)
-	
-		                        if skin.sex == 0 then
-		                            local clothesSkin = {
-		                            ['bags_1'] = 41, ['bags_2'] = 0
-		                            }
-		                            TriggerEvent('skinchanger:loadClothes', skin, clothesSkin)
-                                       else
-		                            local clothesSkin = {
-		                            ['bags_1'] = 41, ['bags_2'] = 0
-		                            }
-	                                TriggerEvent('skinchanger:loadClothes', skin, clothesSkin)
-	                               end
-						    end)
-						holdingup = false
-						StopSound(soundid)
+						    holdingup = false
+						    StopSound(soundid)
+						end
 					end
-					end	
-				end
+				end	
 			end
 
 			local pos2 = Stores[store].position
@@ -407,26 +262,6 @@ Citizen.CreateThread(function()
 					vetrineRotte = 0
 				end
 				StopSound(soundid)
-                RemoveBlip(gioielli1)
-				RemoveBlip(gioielli2)
-				RemoveBlip(gioielli3)
-				RemoveBlip(gioielli4)
-				RemoveBlip(gioielli5)
-				RemoveBlip(gioielli6)
-				RemoveBlip(gioielli7)
-				RemoveBlip(gioielli8)
-				RemoveBlip(gioielli9)
-				RemoveBlip(gioielli10)
-				RemoveBlip(gioielli11)
-				RemoveBlip(gioielli12)
-				RemoveBlip(gioielli13)
-				RemoveBlip(gioielli14)
-				RemoveBlip(gioielli15)
-				RemoveBlip(gioielli16)
-				RemoveBlip(gioielli17)
-				RemoveBlip(gioielli18)
-				RemoveBlip(gioielli19)
-				RemoveBlip(gioielli20)
 			end
 
 		end
@@ -462,31 +297,6 @@ AddEventHandler("lester:createBlip", function(type, x, y, z)
 end)
 
 blip = false
-
-
-RegisterNetEvent('esx_vangelico_robbery:togliblip')
-AddEventHandler('esx_vangelico_robbery:togliblip', function(robb)
-	RemoveBlip(gioielli1)
-	RemoveBlip(gioielli2)
-	RemoveBlip(gioielli3)
-	RemoveBlip(gioielli4)
-	RemoveBlip(gioielli5)
-	RemoveBlip(gioielli6)
-	RemoveBlip(gioielli7)
-	RemoveBlip(gioielli8)
-	RemoveBlip(gioielli9)
-	RemoveBlip(gioielli10)
-	RemoveBlip(gioielli11)
-	RemoveBlip(gioielli12)
-	RemoveBlip(gioielli13)
-	RemoveBlip(gioielli14)
-	RemoveBlip(gioielli15)
-	RemoveBlip(gioielli16)
-	RemoveBlip(gioielli17)
-	RemoveBlip(gioielli18)
-	RemoveBlip(gioielli19)
-	RemoveBlip(gioielli20)
-end)
 
 Citizen.CreateThread(function()
 	TriggerEvent('lester:createBlip', 77, 706.669, -966.898, 30.413)

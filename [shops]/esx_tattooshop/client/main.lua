@@ -34,6 +34,7 @@ function OpenShopMenu()
 	end
 
 	ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'tattoo_shop', {
+		css 	 = 'tatoo',
 		title    = _U('tattoos'),
 		align    = 'bottom-right',
 		elements = elements
@@ -52,6 +53,7 @@ function OpenShopMenu()
 			end
 
 			ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'tattoo_shop_categories', {
+				css 	 = 'tatoo',
 				title    = _U('tattoos') .. ' | '..currentLabel,
 				align    = 'bottom-right',
 				elements = elements
@@ -95,7 +97,7 @@ Citizen.CreateThread(function()
 		SetBlipSprite(blip, 75)
 		SetBlipColour(blip, 1)
 		SetBlipAsShortRange(blip, true)
-        SetBlipScale(blip, 0.7)
+
 		BeginTextCommandSetBlipName('STRING')
 		AddTextComponentString(_U('tattoo_shop'))
 		EndTextCommandSetBlipName(blip)
@@ -254,3 +256,8 @@ function cleanPlayer()
 		ApplyPedOverlay(PlayerPedId(), GetHashKey(v.collection), GetHashKey(Config.TattooList[v.collection][v.texture].nameHash))
 	end
 end
+
+RegisterNetEvent('esx:showTattooNotification')
+AddEventHandler('esx:showTattooNotification', function(msg,...)
+	ESX.ShowNotification(_U(msg,...))
+end)

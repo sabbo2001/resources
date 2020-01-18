@@ -37,8 +37,8 @@ function OpenShopMenu(zone)
 	for i=1, #Config.Zones[zone].Items, 1 do
 		local item = Config.Zones[zone].Items[i]
 
-		if item.limit == -1 then
-			item.limit = 100
+		if item.weight == -1 then
+			item.weight = 100
 		end
 
 		SendNUIMessage({
@@ -47,7 +47,7 @@ function OpenShopMenu(zone)
 			label      	= item.label,
 			item       	= item.item,
 			price      	= item.price,
-			max        	= item.limit,
+			max        	= item.weight,
 			loc			= zone
 		})
 

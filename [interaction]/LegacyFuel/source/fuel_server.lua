@@ -1,7 +1,6 @@
-
+ESX = nil
 
 if Config.UseESX then
-       local ESX = nil
 	TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
 
 	RegisterServerEvent('fuel:pay')

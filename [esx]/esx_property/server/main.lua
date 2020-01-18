@@ -23,9 +23,9 @@ function SetPropertyOwned(name, price, rented, owner)
 			TriggerClientEvent('esx_property:setPropertyOwned', xPlayer.source, name, true)
 
 			if rented then
-				TriggerClientEvent('esx:showNotification', xPlayer.source, _U('rented_for', ESX.Math.GroupDigits(price)))
+				xPlayer.showNotification(_U('rented_for', ESX.Math.GroupDigits(price)))
 			else
-				TriggerClientEvent('esx:showNotification', xPlayer.source, _U('purchased_for', ESX.Math.GroupDigits(price)))
+				xPlayer.showNotification(_U('purchased_for', ESX.Math.GroupDigits(price)))
 			end
 		end
 	end)
@@ -40,7 +40,7 @@ function RemoveOwnedProperty(name, owner)
 
 		if xPlayer then
 			TriggerClientEvent('esx_property:setPropertyOwned', xPlayer.source, name, false)
-			TriggerClientEvent('esx:showNotification', xPlayer.source, _U('made_property'))
+			xPlayer.showNotification(_U('made_property'))
 		end
 	end)
 end
@@ -129,7 +129,7 @@ AddEventHandler('esx_ownedproperty:getOwnedProperties', function(cb)
 			table.insert(properties, {
 				id     = result[i].id,
 				name   = result[i].name,
-				label  = GetProperty(result[i].name).label,
+				label  = result[i].price, --GetProperty(result[i].name).label,
 				price  = result[i].price,
 				rented = (result[i].rented == 1 and true or false),
 				owner  = result[i].owner
@@ -166,7 +166,7 @@ AddEventHandler('esx_property:buyProperty', function(propertyName)
 		xPlayer.removeMoney(property.price)
 		SetPropertyOwned(propertyName, property.price, false, xPlayer.identifier)
 	else
-		TriggerClientEvent('esx:showNotification', source, _U('not_enough'))
+		xPlayer.showNotification(_U('not_enough'))
 	end
 end)
 
@@ -194,7 +194,8 @@ RegisterServerEvent('esx_property:deleteLastProperty')
 AddEventHandler('esx_property:deleteLastProperty', function()
 	local xPlayer = ESX.GetPlayerFromId(source)
 
-	MySQL.Async.execute('UPDATE users SET last_property = NULL WHERE identifier = @identifier', {
+	MySQL.Async.execute('UPDATE users SET last_property = @last_property WHERE identifier = @identifier', {
+		['@last_property'] = '', -- задаем пустое значение для поля в базе
 		['@identifier'] = xPlayer.identifier
 	})
 end)
@@ -207,24 +208,23 @@ AddEventHandler('esx_property:getItem', function(owner, type, item, count)
 
 	if type == 'item_standard' then
 
-		local sourceItem = xPlayer.getInventoryItem(item)
 
 		TriggerEvent('esx_addoninventory:getInventory', 'property', xPlayerOwner.identifier, function(inventory)
 			local inventoryItem = inventory.getItem(item)
 
 			-- is there enough in the property?
 			if count > 0 and inventoryItem.count >= count then
-			
+
 				-- can the player carry the said amount of x item?
-				if sourceItem.limit ~= -1 and (sourceItem.count + count) > sourceItem.limit then
-					TriggerClientEvent('esx:showNotification', _source, _U('player_cannot_hold'))
-				else
+				if xPlayer.canCarryItem(item, count) then
 					inventory.removeItem(item, count)
 					xPlayer.addInventoryItem(item, count)
-					TriggerClientEvent('esx:showNotification', _source, _U('have_withdrawn', count, inventoryItem.label))
+					xPlayer.showNotification(_U('have_withdrawn', count, inventoryItem.label))
+				else
+					xPlayer.showNotification(_U('player_cannot_hold'))
 				end
 			else
-				TriggerClientEvent('esx:showNotification', _source, _U('not_enough_in_property'))
+				xPlayer.showNotification(_U('not_enough_in_property'))
 			end
 		end)
 
@@ -237,7 +237,7 @@ AddEventHandler('esx_property:getItem', function(owner, type, item, count)
 				account.removeMoney(count)
 				xPlayer.addAccountMoney(item, count)
 			else
-				TriggerClientEvent('esx:showNotification', _source, _U('amount_invalid'))
+				xPlayer.showNotification(_U('amount_invalid'))
 			end
 		end)
 
@@ -279,10 +279,10 @@ AddEventHandler('esx_property:putItem', function(owner, type, item, count)
 			TriggerEvent('esx_addoninventory:getInventory', 'property', xPlayerOwner.identifier, function(inventory)
 				xPlayer.removeInventoryItem(item, count)
 				inventory.addItem(item, count)
-				TriggerClientEvent('esx:showNotification', _source, _U('have_deposited', count, inventory.getItem(item).label))
+				xPlayer.showNotification(_U('have_deposited', count, inventory.getItem(item).label))
 			end)
 		else
-			TriggerClientEvent('esx:showNotification', _source, _U('invalid_quantity'))
+			xPlayer.showNotification(_U('invalid_quantity'))
 		end
 
 	elseif type == 'item_account' then
@@ -296,7 +296,7 @@ AddEventHandler('esx_property:putItem', function(owner, type, item, count)
 				account.addMoney(count)
 			end)
 		else
-			TriggerClientEvent('esx:showNotification', _source, _U('amount_invalid'))
+			xPlayer.showNotification(_U('amount_invalid'))
 		end
 
 	elseif type == 'item_weapon' then
@@ -424,7 +424,7 @@ function PayRent(d, h, m)
 			-- message player if connected
 			if xPlayer then
 				xPlayer.removeAccountMoney('bank', result[i].price)
-				TriggerClientEvent('esx:showNotification', xPlayer.source, _U('paid_rent', ESX.Math.GroupDigits(result[i].price)))
+				xPlayer.showNotification(_U('paid_rent', ESX.Math.GroupDigits(result[i].price)))
 			else -- pay rent either way
 				MySQL.Sync.execute('UPDATE users SET bank = bank - @bank WHERE identifier = @identifier', {
 					['@bank']       = result[i].price,

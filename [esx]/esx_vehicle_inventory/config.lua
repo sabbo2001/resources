@@ -2,7 +2,7 @@
 Config	=	{}
 
  -- Предел, единица может быть любым, что вы хотите. Первоначально граммы (в среднем люди могут держать 25 кг)
-Config.Limit = 25000
+Config.weight = 25000
 
 -- Default weight for an item:
 	-- weight == 0 : The item do not affect character inventory weight

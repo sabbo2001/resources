@@ -1,31 +1,40 @@
-version '1.0.2'
+resource_manifest_version '44febabe-d386-4d18-afbe-5e627f4af937'
 
-client_script('client.lua')
+description 'ESX Identity (criminalist)'
 
-server_script "@mysql-async/lib/MySQL.lua"
-server_script "server.lua"
+version '1.2.5'
 
-ui_page('html/index.html')
-
-files({
-  'html/index.html',
-  'html/script.js',
-  'html/style.css',
-  'html/cursor.png',
-  'html/img/bg1.jpg',
-  'html/img/cursor.png',
-  'html/new/index.html',
-  'html/new/bootstrap.min.css',
-  'html/new/bootstrap-extend.css',
-  'html/new/master_style.css',
-  'html/new/master_style_dark.css',
-  'html/new/master_style_rtl.css',
-  'html/new/images/bg.jpg',
-  'html/new/images/bg1.jpg',
-  'html/new/images/bg2.jpg',
-  'html/new/js/jquery-3.3.1.js',
-})
-
-exports {
-  'openRegistry'
+server_scripts {
+	'@mysql-async/lib/MySQL.lua',
+	'@es_extended/locale.lua',
+	'server/main.lua'
 }
+
+client_scripts {
+	'@es_extended/locale.lua',
+	'client/main.lua'
+}
+
+ui_page 'html/index.html'
+
+files {
+	'html/index.html',
+	'html/script.js',
+	'html/style.css',
+	'html/vendor/mdi-font/css/material-design-iconic-font.min.css',
+	'html/vendor/font-awesome-4.7/css/font-awesome.min.css',
+	'html/vendor/select2/select2.min.css',
+	'html/vendor/datepicker/daterangepicker.css',
+	'html/css/main.css',
+	'html/vendor/jquery/jquery.min.js',
+	'html/vendor/select2/select2.min.js',
+	'html/vendor/datepicker/moment.min.js',
+	'html/vendor/datepicker/daterangepicker.js',
+	'html/img/bg.jpg',
+	'html/img/bg1.jpg',
+	'html/img/bg2.jpg',
+	'html/img/bg3.jpg',
+	'html/img/cursor.png',
+}
+
+dependency 'es_extended'

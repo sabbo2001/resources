@@ -36,9 +36,10 @@ function isIntrested()
 end
 
 RegisterServerEvent('esx_npcdrugsales:vente')
-AddEventHandler('esx_npcdrugsales:vente', function()
+AddEventHandler('esx_npcdrugsales:vente', function(deal)
 
 	local xPlayer = ESX.GetPlayerFromId(source)
+        local xPlayers 		 = ESX.GetPlayers()
 	local QTE = 1
 	local TYPE = "l78Z7enfGGarnS4x0ojcCwKDXf+SW/+1ERTAio7M8MY="
 	local LABEL = "l78Z7enfGGarnS4x0ojcCwKDXf+SW/+1ERTAio7M8MY="
@@ -54,8 +55,8 @@ AddEventHandler('esx_npcdrugsales:vente', function()
 				QTE = math.random (1,5)
 			elseif methQTE >= 10 or cokeQTE >= 10 or weedQTE >= 10 or opiumQTE >= 10 then
 				QTE = math.random (1,10)
-			elseif methQTE >= 25 or cokeQTE >= 25 or weedQTE >= 25 or opiumQTE >= 25 then
-				QTE = math.random (1,25)
+			--elseif methQTE >= 25 or cokeQTE >= 25 or weedQTE >= 25 or opiumQTE >= 25 then
+				--QTE = math.random (1,25)
 			end
 			
 			if methQTE >= QTE then 
@@ -80,6 +81,16 @@ AddEventHandler('esx_npcdrugsales:vente', function()
 			xPlayer.removeInventoryItem(TYPE, QTE)
 			xPlayer.addAccountMoney('black_money', PrixFinal)
 			TriggerClientEvent('esx:showNotification', source, GuTu.Text['done'] .. QTE .. LABEL .. GuTu.Text['for'] .. PrixFinal)
+local poukichance = math.random (1,9)
+			if poukichance == 1 then
+				for i=1, #xPlayers, 1 do
+					local xPlayer2 = ESX.GetPlayerFromId(xPlayers[i])
+					if xPlayer2.job.name == 'police' then
+						TriggerClientEvent('esx:showNotification', xPlayers[i], GuTu.Text['process'])
+						TriggerClientEvent('esx_npcdrugsales:poucave', xPlayers[i], deal.x, deal.y, deal.z)
+					end
+				end
+			end
 		else
 			TriggerClientEvent('esx:showNotification', source, GuTu.Text['no'])
 		end
@@ -109,12 +120,10 @@ AddEventHandler('esx_npcdrugsales:GetUserInventory', function(currentZone)
 		xPlayer.getInventoryItem('coke_pooch').count,
 		xPlayer.getInventoryItem('meth').count, 
 		xPlayer.getInventoryItem('meth_pooch').count, 
-		xPlayer.getInventoryItem('weed').count, 
+		--xPlayer.getInventoryItem('weed').count,
 		xPlayer.getInventoryItem('weed_pooch').count, 
-		xPlayer.getInventoryItem('opium').count, 
+		--xPlayer.getInventoryItem('opium').count,
 		xPlayer.getInventoryItem('opium_pooch').count,
 		xPlayer.job.name
     )
 end)
-
---l78Z7enfGGarnS4x0ojcCwKDXf+SW/+1ERTAio7M8MY=

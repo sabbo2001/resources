@@ -173,7 +173,7 @@ TriggerClientEvent('srvanrob:setcabinate',-1,cabinetno,cabinet20robbed)
 canrob = true
 end
 end
-	print("can rob",canrob)
+print("Можно грабить",canrob)
 TriggerClientEvent('srvanrob:cabinet',_source,canrob)
 resettimer = GetGameTimer()
 end)
@@ -182,7 +182,7 @@ Citizen.CreateThread(function()
 	while true do
 	Citizen.Wait(60000)
 	if (GetGameTimer() - resettimer)/1000/ 60 > Config.resettimer then
-	print"can rob"
+	print"Можно грабить"
 cabinet1robbed = false
 cabinet2robbed = false
 cabinet3robbed = false
@@ -218,7 +218,7 @@ function CountCops()
 
 	for i=1, #xPlayers, 1 do
 		local xPlayer = ESX.GetPlayerFromId(xPlayers[i])
-		if xPlayer.job.name == 'police' then
+		if xPlayer.job.name == 'police' or xPlayer.job.name == 'fbi' then
 			CopsConnected = CopsConnected + 1
 		end
 	end
@@ -259,11 +259,14 @@ AddEventHandler('srvanrob:selljewles', function()
    xPlayer.removeInventoryItem('jewels',10)	
    	if Config.mopolicemomoney == true then 
 	local SellPrice = CopsConnected * Config.Copextra
-   		xPlayer.addMoney(Config.SellPrice)
-		TriggerClientEvent('esx:showNotification', _source, 'recived $'..Config.SellPrice..'')			
+   		--xPlayer.addMoney(Config.SellPrice)
+		xPlayer.addAccountMoney('black_money', Config.SellPrice)
+		TriggerClientEvent('esx:showNotification', _source, 'Вы получили ~r~$'..Config.SellPrice..'')
 				else
-			xPlayer.addMoney(Config.SellPrice)
-			TriggerClientEvent('esx:showNotification', _source, 'recived $'..Config.SellPrice..'')	
+
+		    xPlayer.addAccountMoney('black_money', Config.SellPrice)
+
+			TriggerClientEvent('esx:showNotification', _source, 'Вы получили ~r~$'..Config.SellPrice..'')
 	end			
 
 	else

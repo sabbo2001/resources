@@ -17,19 +17,18 @@ Citizen.CreateThread(function()
 	PlayerData = ESX.GetPlayerData()
 end)
 
-
 --Отключаем розыск если полицейские
 -- if Config.DisableWantedLevel then
 	-- Citizen.CreateThread(function()
-	    
+
 		-- while true do
 			-- Citizen.Wait(0)
 			-- local playerPed = PlayerPedId()
 			-- if PlayerData.job and PlayerData.job.name == 'police' or 'fbi' then
-				
+
 				-- SetPoliceIgnorePlayer(playerPed, true)
 				-- SetDispatchCopsForPlayer(playerPed, false)
-			
+
 				-- if GetPlayerWantedLevel(playerId) ~=0 then
 					-- SetPlayerWantedLevel(playerId, 0, false)
 					-- SetPlayerWantedLevelNow(playerId, false)
@@ -571,7 +570,7 @@ function OpenShopMenu(elements, restoreCoords, shopCoords)
 		table.insert(spawnedVehicles, vehicle)
 		TaskWarpPedIntoVehicle(playerPed, vehicle, -1)
 		FreezeEntityPosition(vehicle, true)
-		exports["LegacyFuel"]:SetFuel(vehicle, 100) 
+		exports["LegacyFuel"]:SetFuel(vehicle, 100)
 		SetModelAsNoLongerNeeded(elements[1].model)
 
 		if elements[1].livery then
@@ -633,11 +632,11 @@ function OpenPoliceActionsMenu()
 			{label = _U('object_spawner'), value = 'object_spawner'},
 			{label = "Тюрьма", value = 'jail_menu'}
 	}}, function(data, menu)
-	
+
 		if data.current.value == 'jail_menu' then
             TriggerEvent("esx-qalle-jail:openJailMenu")
         end
-	
+
 		if data.current.value == 'citizen_interaction' then
 			local elements = {
 				{label = _U('id_card'), value = 'identity_card'},
@@ -664,7 +663,7 @@ function OpenPoliceActionsMenu()
 				local closestPlayer, closestDistance = ESX.Game.GetClosestPlayer()
 				if closestPlayer ~= -1 and closestDistance <= 3.0 then
 					local action = data2.current.value
-					
+
 					if action == 'revive' then
 						IsBusy = true
 						ESX.TriggerServerCallback('esx_ambulancejob:getItemAmount', function(quantity)
@@ -676,7 +675,7 @@ function OpenPoliceActionsMenu()
 									local lib, anim = 'mini@cpr@char_a@cpr_str', 'cpr_pumpchest'
 									for i=1, 15, 1 do
 										Citizen.Wait(900)
-								
+
 										ESX.Streaming.RequestAnimDict(lib, function()
 											TaskPlayAnim(PlayerPedId(), lib, anim, 8.0, -8.0, -1, 0, 0, false, false, false)
 										end)
@@ -700,7 +699,7 @@ function OpenPoliceActionsMenu()
 							IsBusy = false
 						end, 'firstaidkit')
 					------------------вставка для мед помощи-----------------------------
-					
+
 					elseif action == 'identity_card' then
 						OpenIdentityCardMenu(closestPlayer)
 					elseif action == 'body_search' then
@@ -709,8 +708,8 @@ function OpenPoliceActionsMenu()
 					elseif action == 'handcuff' then
 						--TriggerServerEvent('esx_ruski_areszt:startAreszt', GetPlayerServerId(closestPlayer))
 						--Citizen.Wait(3000)
-						--TriggerServerEvent('InteractSound_SV:PlayWithinDistance', 2.0, 'unbuckle', 0.7)									
-						--Citizen.Wait(3100)		
+						--TriggerServerEvent('InteractSound_SV:PlayWithinDistance', 2.0, 'unbuckle', 0.7)
+						--Citizen.Wait(3100)
 						TriggerServerEvent('esx_policejob:handcuff', GetPlayerServerId(closestPlayer))
 					elseif action == 'drag' then
 						TriggerServerEvent('esx_policejob:drag', GetPlayerServerId(closestPlayer))
@@ -825,14 +824,10 @@ function OpenPoliceActionsMenu()
 			}}, function(data2, menu2)
 				local playerPed = PlayerPedId()
 				local coords    = GetEntityCoords(playerPed)
-				local forward   = GetEntityForwardVector(playerPed)
-				local x, y, z   = table.unpack(coords + forward * 1.0)
+				local coords, forward = GetEntityCoords(playerPed), GetEntityForwardVector(playerPed)
+				local objectCoords = (coords + forward * 1.0)
 
-				if data2.current.model == 'prop_mp_cone_01' then
-					z = z - 3.0
-				end
-
-				ESX.Game.SpawnObject(data2.current.model, {x = x, y = y, z = z}, function(obj)
+				ESX.Game.SpawnObject(data2.current.model, objectCoords, function(obj)
 					SetEntityHeading(obj, GetEntityHeading(playerPed))
 					PlaceObjectOnGroundProperly(obj)
 				end)
@@ -972,6 +967,7 @@ function OpenBodySearchMenu(player)
 			if data.current.value then
 				TriggerServerEvent('esx_policejob:confiscatePlayerItem', GetPlayerServerId(player), data.current.itemType, data.current.value, data.current.amount)
 				OpenBodySearchMenu(player)
+
 			end
 		end, function(data, menu)
 			menu.close()
@@ -1266,8 +1262,8 @@ function OpenBuyWeaponsMenu()
 				OpenWeaponComponentShop(data.current.components, data.current.name, menu)
 			end
 		else
-		
-			
+
+
 
 				ESX.TriggerServerCallback('esx_policejob:buyWeapon', function(bought)
 
@@ -1284,7 +1280,7 @@ function OpenBuyWeaponsMenu()
 
 				end, data.current.name, 1)
 			end
-		
+
 	end, function(data, menu)
 		menu.close()
 	end)

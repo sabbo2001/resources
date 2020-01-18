@@ -1,4 +1,5 @@
 Locales['ru'] = {
+  ['blip_hospital'] = 'Центральный госпиталь',
   -- Cloakroom
   ['cloakroom'] = 'Раздевалка',
   ['ems_clothes_civil'] = 'Гражданская одежда',
@@ -30,15 +31,17 @@ Locales['ru'] = {
   ['shop_item'] = '$%s',
   ['vehicleshop_title'] = 'Купить',
   ['vehicleshop_confirm'] = 'Вы хотите купить этот автомобиль?',
-  ['vehicleshop_bought'] = 'У вас не хватает ~y~%s~s~ для ~r~$%s~s~',
+  ['vehicleshop_bought'] = 'Вы успешно приобрели ~y~%s~s~ за ~r~$%s~s~',
   ['vehicleshop_money'] = 'Вы не можете позволить себе этот автомобиль',
   ['vehicleshop_awaiting_model'] = 'Транспортное средство ~g~ЗАГРУЖАЕТСЯ~s~ подождите пожалуйста!',
   ['confirm_no'] = 'Нет',
   ['confirm_yes'] = 'Да',
   -- Action Menu
   ['hospital'] = 'Госпиталь',
+
   ['revive_inprogress'] = 'Процесс восстановления продолжается!',
   ['revive_complete'] = 'Вы возродили ~y~%s~s~',
+  ['revive_fail_offline'] = 'Этот игрок больше покинул сервер',
   ['revive_complete_award'] = 'Вы возродили ~y~%s~s~ и получили награду в размере ~g~$%s~s~!',
   ['heal_inprogress'] = 'Вы лечите!',
   ['heal_complete'] = 'Вы исцелили ~y~%s~s~',
@@ -57,16 +60,16 @@ Locales['ru'] = {
   ['open_pharmacy'] = 'Нажмите ~INPUT_CONTEXT~ чтобы открыть аптечку.',
   ['pharmacy_menu_title'] = 'Аптечка',
   ['pharmacy_take'] = 'Взять <span style="color:blue;">%s</span>',
-  ['medikit'] = 'аптчечку',
-  ['bandage'] = 'повязку',
+  ['medikit'] = 'Аптчечку',
+  ['bandage'] = 'Бинты',
   ['max_item'] = 'Вы уже взяли достаточно',
   -- F6 Menu
   ['ems_menu'] = 'Меню медика',
   ['ems_menu_title'] = 'Скорая помощь - меню',
-  ['ems_menu_revive'] = 'Возродить игрока',
+  ['ems_menu_revive'] = 'Возродить игрока (когда без сознания)',
   ['ems_menu_putincar'] = 'Положить в автомобиль',
-  ['ems_menu_small'] = 'Лечить мелкие раны',
-  ['ems_menu_big'] = 'Лечить серьезные травмы',
+  ['ems_menu_small'] = 'Лечить мелкие раны (только живых)',
+  ['ems_menu_big'] = 'Лечить серьезные травмы ',
   ['ems_menu_billing'] = 'Выставить счет',
   -- Phone
   ['alert_ambulance'] = 'Сигналы - скорой помощи',
@@ -87,5 +90,7 @@ Locales['ru'] = {
   ['used_bandage'] = 'Вы использовали ~y~1x~s~ бинтов',
   ['not_enough_medikit'] = 'У вас закончились ~b~аптечки~s~.',
   ['not_enough_bandage'] = 'У вас закончились ~b~бинты~s~.',
-  ['healed'] = 'Вас лечили.',
+  ['healed'] = 'Вас выличили.',
+  -- Blips
+  ['blip_dead'] = 'Игрок без сознания',
 }

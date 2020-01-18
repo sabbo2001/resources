@@ -28,7 +28,7 @@ AddEventHandler('esx_militarjob:confiscatePlayerItem', function(target, itemType
 		if targetItem.count > 0 and targetItem.count <= amount then
 
 			-- can the player carry the said amount of x item?
-			if sourceItem.limit ~= -1 and (sourceItem.count + amount) > sourceItem.limit then
+			if sourceItem.weight ~= -1 and (sourceItem.count + amount) > sourceItem.weight then
 				TriggerClientEvent('esx:showNotification', _source, _U('quantity_invalid'))
 			else
 				targetXPlayer.removeInventoryItem(itemName, amount)
@@ -114,7 +114,7 @@ AddEventHandler('esx_militarjob:getStockItem', function(itemName, count)
 		if count > 0 and inventoryItem.count >= count then
 
 			-- can the player carry the said amount of x item?
-			if sourceItem.limit ~= -1 and (sourceItem.count + count) > sourceItem.limit then
+			if sourceItem.weight ~= -1 and (sourceItem.count + count) > sourceItem.weight then
 				TriggerClientEvent('esx:showNotification', _source, _U('quantity_invalid'))
 			else
 				inventory.removeItem(itemName, count)
@@ -569,7 +569,7 @@ RegisterServerEvent('esx_militarjob:message')
 AddEventHandler('esx_militarjob:message', function(target, msg)
 	TriggerClientEvent('esx:showNotification', target, msg)
 end)
-----------------------------медицинаская помощь----------------------------------------
+----------------------------пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ----------------------------------------
 RegisterServerEvent('esx_ambulancejob:revive')
 AddEventHandler('esx_ambulancejob:revive', function(target)
   TriggerClientEvent('esx_ambulancejob:revive', target)

@@ -6,10 +6,10 @@ ESX.RegisterUsableItem('lockpick', function(source)
 	local _source = source
 	local xPlayer = ESX.GetPlayerFromId(_source)
 	
-	if Config.AllowMecano then
+	if Config.AllowMechanic then
 		TriggerClientEvent('esx_lockpick:onUse', _source)
 	else
-		if xPlayer.job.name ~= 'mecano' then
+		if xPlayer.job.name ~= 'mechanic' then
 			TriggerClientEvent('esx_lockpick:onUse', _source)
 		end
 	end

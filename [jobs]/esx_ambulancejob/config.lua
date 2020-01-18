@@ -1,31 +1,32 @@
 Config                            = {}
+
 Config.DrawDistance               = 100.0
+
 Config.Marker                     = { type = 1, x = 1.5, y = 1.5, z = 0.5, r = 102, g = 0, b = 102, a = 100, rotate = false }
 
-Config.ReviveReward               = 0  -- revive reward, set to 0 if you don't want it enabled
-Config.AntiCombatLog              = false -- enable anti-combat logging?
-Config.LoadIpl                    = false -- disable if you're using fivem-ipl or other IPL loaders
+Config.ReviveReward               = 1000  -- revive reward, set to 0 if you don't want it enabled
+Config.AntiCombatLog              = true -- enable anti-combat logging?
+Config.LoadIpl                    = true -- disable if you're using fivem-ipl or other IPL loaders
 
 Config.Locale                     = 'ru'
 
 local second = 1000
 local minute = 60 * second
 
-Config.EarlyRespawnTimer          = 1.0 * minute  -- Время до возрождения доступно
-Config.BleedoutTimer              = 1.0 * minute -- Time til the player bleeds out
+Config.EarlyRespawnTimer          = 2 * minute  -- Time til respawn is available
+Config.BleedoutTimer              = 5 * minute -- Time til the player bleeds out
 
-Config.EnablePlayerManagement     = false
+Config.EnablePlayerManagement     = true
 
 Config.RemoveWeaponsAfterRPDeath  = true
 Config.RemoveCashAfterRPDeath     = true
 Config.RemoveItemsAfterRPDeath    = false
 
--- Пусть игрок заплатит за возрождение раньше, только если он может себе это позволить.
+-- Let the player pay for respawning early, only if he can afford it.
 Config.EarlyRespawnFine           = true
-Config.EarlyRespawnFineAmount     = 2000
+Config.EarlyRespawnFineAmount     = 5000
 
 Config.RespawnPoint = { coords = vector3(341.0, -1397.3, 32.5), heading = 48.5 }
-Config.RespawnPointJail = { coords = vector3(341.0, -1397.3, 52.5), heading = 48.5 }
 
 Config.Hospitals = {
 
@@ -131,34 +132,19 @@ Config.Hospitals = {
 Config.AuthorizedVehicles = {
 
 	ambulance = {
-		{ model = 'ambulance', label = 'Скорая помощь', price = 500}
+		{ model = 'ambulance', label = 'Ambulance Van', price = 5000}
 	},
 
 	doctor = {
-		{ model = 'ambulance', label = 'Скорая помощь', price = 500}
+		{ model = 'ambulance', label = 'Ambulance Van', price = 4500}
 	},
 
 	chief_doctor = {
-		{ model = 'ambulance', label = 'Скорая помощь', price = 500}
+		{ model = 'ambulance', label = 'Ambulance Van', price = 3000}
 	},
 
 	boss = {
-		{ model = 'ambulance', label = 'Скорая помощь', price = 500}
-	},
-	ambulance = {
-		{ model = 'ambulance', label = 'SUV', price = 500}
-	},
-
-	doctor = {
-		{ model = 'ambulance', label = 'SUV', price = 500}
-	},
-
-	chief_doctor = {
-		{ model = 'ambulance', label = 'SUV', price = 500}
-	},
-
-	boss = {
-		{ model = 'ambulance', label = 'SUV', price = 500}
+		{ model = 'ambulance', label = 'Ambulance Van', price = 2000}
 	}
 
 }
@@ -168,17 +154,17 @@ Config.AuthorizedHelicopters = {
 	ambulance = {},
 
 	doctor = {
-		{ model = 'buzzard2', label = 'Nagasaki Buzzard', price = 500 }
+		{ model = 'buzzard2', label = 'Nagasaki Buzzard', price = 150000 }
 	},
 
 	chief_doctor = {
-		{ model = 'buzzard2', label = 'Nagasaki Buzzard', price = 500 },
-		{ model = 'seasparrow', label = 'Sea Sparrow', price = 500 }
+		{ model = 'buzzard2', label = 'Nagasaki Buzzard', price = 150000 },
+		{ model = 'seasparrow', label = 'Sea Sparrow', price = 300000 }
 	},
 
 	boss = {
-		{ model = 'buzzard2', label = 'Nagasaki Buzzard', price = 500 },
-		{ model = 'seasparrow', label = 'Sea Sparrow', price = 500 }
+		{ model = 'buzzard2', label = 'Nagasaki Buzzard', price = 10000 },
+		{ model = 'seasparrow', label = 'Sea Sparrow', price = 250000 }
 	}
 
 }

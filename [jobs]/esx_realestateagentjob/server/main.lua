@@ -2,7 +2,7 @@ ESX = nil
 
 TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
 
-TriggerEvent('esx_phone:registerNumber', 'realestateagent', _U('client'), false, false)
+TriggerEvent('esx_phone:registerNumber', 'realestateagent', _U('clients'), false, false)
 TriggerEvent('esx_society:registerSociety', 'realestateagent', _U('realtors'), 'society_realestateagent', 'society_realestateagent', 'society_realestateagent', {type = 'private'})
 
 RegisterServerEvent('esx_realestateagentjob:revoke')
@@ -31,7 +31,7 @@ AddEventHandler('esx_realestateagentjob:sell', function(target, property, price)
 		TriggerEvent('esx_addonaccount:getSharedAccount', 'society_realestateagent', function(account)
 			account.addMoney(price)
 		end)
-	
+
 		TriggerEvent('esx_property:setPropertyOwned', property, price, false, xTarget.identifier)
 	else
 		TriggerClientEvent('esx:showNotification', xPlayer.source, _U('client_poor'))

@@ -10,8 +10,8 @@ local Keys = {
 	["NENTER"] = 201, ["N4"] = 108, ["N5"] = 60, ["N6"] = 107, ["N+"] = 96, ["N-"] = 97, ["N7"] = 117, ["N8"] = 61, ["N9"] = 118
 }
 
-ESX 			    			= nil
-local PlayerData 				= {}
+ESX = nil
+local PlayerData = {}
 
 Citizen.CreateThread(function()
 	while ESX == nil do
@@ -47,7 +47,6 @@ function drawLevel(r, g, b, a)
 	SetTextOutline()
 
 	BeginTextCommandDisplayText("STRING")
-	
 	--Проверка игрока на посадку в транспорте + полицейском транспорте
 	if IsPedInAnyPoliceVehicle(GetPlayerPed(-1)) and GetPedInVehicleSeat(GetVehiclePedIsIn(GetPlayerPed(-1)), -1) == GetPlayerPed(-1) then
 		AddTextComponentSubstringPlayerName('~y~Полицейский режим - Голос: ~s~' .. voicepolice.level)
@@ -77,7 +76,6 @@ Citizen.CreateThread(function()
 			local pos = GetEntityCoords(GetPlayerPed(-1), true)
 			if IsPedInAnyPoliceVehicle(GetPlayerPed(-1)) and GetPedInVehicleSeat(GetVehiclePedIsIn(GetPlayerPed(-1)), -1) == GetPlayerPed(-1) then
 				if voicepolice.current == 0 then
-					--DrawMarker(28,pos.x,pos.y,pos.z - 0.8, 0, 0, 0, 0, 0, 0, voicepolice.incar, voicepolice.incar, 0.5, 55, 160, 205, 105, 0, true, 2, 0, 0, 0, 0)
 					DrawMarker(25,pos.x,pos.y,pos.z - 0.5, 0, 0, 0, 0, 0, 0, voicepolice.incar, voicepolice.incar, 0.5, 55, 160, 205, 105, 0, true, 2, 0, 0, 0, 0)
 				elseif voicepolice.current == 1 then
 					DrawMarker(25,pos.x,pos.y,pos.z - 0.5, 0, 0, 0, 0, 0, 0, voicepolice.nexttocar, voicepolice.nexttocar, 0.5, 55, 160, 205, 105, 0, true, 2, 0, 0, 0, 0)

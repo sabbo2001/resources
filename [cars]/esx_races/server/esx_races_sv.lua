@@ -239,7 +239,7 @@ function collectSoloKey(source)
     if isCollectingSoloKey[_source] then
       local xPlayer  = ESX.GetPlayerFromId(_source)
       local solokey = xPlayer.getInventoryItem('solo_key')
-      if solokey.limit ~= -1 and solokey.count >= solokey.limit then
+      if solokey.weight ~= -1 and solokey.count >= solokey.weight then
         TriggerClientEvent('esx:showNotification', _source, _U('inv_full_solo_key'))
       else
         xPlayer.addInventoryItem('solo_key', 1)
@@ -254,7 +254,7 @@ AddEventHandler('esx_races:startCollectSoloKey', function()
   local xPlayer = ESX.GetPlayerFromId(_source)
   if not isCollectingSoloKey[_source] then
     local solokey = xPlayer.getInventoryItem('solo_key')
-    if solokey.limit ~= -1 and solokey.count >= solokey.limit then
+    if solokey.weight ~= -1 and solokey.count >= solokey.weight then
       TriggerClientEvent('esx:showNotification', _source, _U('inv_full_solo_key'))
       return
     end
@@ -473,7 +473,7 @@ function collectMultiKey(source)
     if isCollectingMultiKey[_source] then
       local xPlayer  = ESX.GetPlayerFromId(_source)
       local multikey = xPlayer.getInventoryItem('multi_key')
-      if multikey.limit ~= -1 and multikey.count >= multikey.limit then
+      if multikey.weight ~= -1 and multikey.count >= multikey.weight then
         TriggerClientEvent('esx:showNotification', _source, _U('inv_full_multi_key'))
       else
         xPlayer.addInventoryItem('multi_key', 1)
@@ -488,7 +488,7 @@ AddEventHandler('esx_races:startCollectMultiKey', function()
   local xPlayer = ESX.GetPlayerFromId(_source)
   if not isCollectingMultiKey[_source] then
     local multikey = xPlayer.getInventoryItem('multi_key')
-    if multikey.limit ~= -1 and multikey.count >= multikey.limit then
+    if multikey.weight ~= -1 and multikey.count >= multikey.weight then
       TriggerClientEvent('esx:showNotification', _source, _U('inv_full_multi_key'))
       return
     end

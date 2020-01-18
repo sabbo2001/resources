@@ -7,16 +7,16 @@ Config.EnableVaultManagement      = true
 Config.EnableHelicopters          = true
 Config.EnableMoneyWash            = true
 Config.MaxInService               = -1
-Config.Locale                     = 'en'
+Config.Locale                     = 'ru'
 
 Config.MissCraft                  = 10 -- %
 
 
 Config.AuthorizedVehicles = {
-    { name = 'rentalbus',  label = 'Vanilla Unicorn Bus' },
-	{ name = 'pbus2',  label = 'Festival Bus' },
-	{ name = 'jester3',  label = 'Jester Classic' },
-	{ name = 'patriot2',  label = 'Patriot Stretch-Limo' },
+    --{ name = 'rentalbus',  label = 'Vanilla Unicorn Bus' },
+	{ name = 'pbus2',  label = 'Фестивальный автобус' },
+	{ name = 'jester3',  label = 'Jester Классический' }
+	--{ name = 'patriot2',  label = 'Patriot Stretch-Limo' },
 }
 
 Config.Blips = {
@@ -147,8 +147,8 @@ Config.Zones = {
         Color = { r = 255, g = 255, b = 255 },
         Type  = 23,
         Items = {
-            { name = 'ice',     label = _U('ice'),      price = 1 },
-            { name = 'menthe',  label = _U('menthe'),   price = 2 }
+            { name = 'ice',     label = _U('ice'),      price = 10 },
+            { name = 'menthe',  label = _U('menthe'),   price = 20 }
         },
     },
 

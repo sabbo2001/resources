@@ -1,5 +1,3 @@
---[[ SEAT SHUFFLE ]]--
---[[ BY JAF ]]--
 local Keys = {
 	["ESC"] = 322, ["F1"] = 288, ["F2"] = 289, ["F3"] = 170, ["F5"] = 166, ["F6"] = 167, ["F7"] = 168, ["F8"] = 169, ["F9"] = 56, ["F10"] = 57,
 	["~"] = 243, ["1"] = 157, ["2"] = 158, ["3"] = 160, ["4"] = 164, ["5"] = 165, ["6"] = 159, ["7"] = 161, ["8"] = 162, ["9"] = 163, ["-"] = 84, ["="] = 83, ["BACKSPACE"] = 177,
@@ -11,38 +9,6 @@ local Keys = {
 	["LEFT"] = 174, ["RIGHT"] = 175, ["TOP"] = 27, ["DOWN"] = 173,
 	["NENTER"] = 201, ["N4"] = 108, ["N5"] = 60, ["N6"] = 107, ["N+"] = 96, ["N-"] = 97, ["N7"] = 117, ["N8"] = 61, ["N9"] = 118
 }
--- local disableShuffle = true
--- function disableSeatShuffle(flag)
-	-- disableShuffle = flag
--- end
-
--- Citizen.CreateThread(function()
-	-- while true do
-		-- Citizen.Wait(0)
-		-- if IsPedInAnyVehicle(GetPlayerPed(-1), false) and disableShuffle then
-			-- if GetPedInVehicleSeat(GetVehiclePedIsIn(GetPlayerPed(-1), false), 0) == GetPlayerPed(-1) then
-				-- if GetIsTaskActive(GetPlayerPed(-1), 165) then
-					-- SetPedIntoVehicle(GetPlayerPed(-1), GetVehiclePedIsIn(GetPlayerPed(-1), false), 0)
-				-- end
-			-- end
-		-- end
-	-- end
--- end)
-
--- RegisterNetEvent("SeatShuffle")
--- AddEventHandler("SeatShuffle", function()
-	-- if IsPedInAnyVehicle(GetPlayerPed(-1), false) then
-		-- disableSeatShuffle(false)
-		-- Citizen.Wait(5000)
-		-- disableSeatShuffle(true)
-	-- else
-		-- CancelEvent()
-	-- end
--- end)
-
--- RegisterCommand("shuff", function(source, args, raw) --change command here
-    -- TriggerEvent("SeatShuffle")
--- end, false) --False, allow everyone to run it
 
 ----------------------------------No Shuffle
 local disableShuffle = true
@@ -55,7 +21,7 @@ Citizen.CreateThread(function()
         Citizen.Wait(10)
         local ped = GetPlayerPed(-1)
 
-        if IsPedInAnyVehicle(ped, false) and IsControlJustReleased(0, Keys['BACKSPACE']) then
+        if IsPedInAnyVehicle(ped, false) and IsControlJustReleased(0, Keys['LEFTSHIFT']) then
           if disableShuffle == true then
             disableSeatShuffle(false)
           else
@@ -64,7 +30,7 @@ Citizen.CreateThread(function()
         end
         if IsPedInAnyVehicle(ped, false) and disableShuffle then
             if GetPedInVehicleSeat(GetVehiclePedIsIn(ped, false), 0) == ped then
-                if GetIsTaskActive(ped, 165) then
+                if GetIsTaskActive(ped, Keys["E"]) then
                     SetPedIntoVehicle(ped, GetVehiclePedIsIn(ped, false), 0)
                 end
             end

@@ -206,7 +206,7 @@ Citizen.CreateThread(function()
 		local elevator2Coords = GetEntityCoords(elevator2Prop, false)
 		
 		if elevator2Up then
-			-- TriggerServerEvent('InteractSound_CL:PlayOnOne', 'PontMecano_Monte', 1.0)
+			-- TriggerServerEvent('InteractSound_CL:PlayOnOne', 'PontMechanic_Monte', 1.0)
 			if elevator2Coords.z < Config.max then -- hauteur max de la nacelle
 				if (elevator2Coords.z > Config.beforemax) then -- juste avant la hauteur max de la nacelle
 					elevator2BaseZ = elevator2BaseZ + Config.speed_up_slow -- de combien de Z on monte à chaque fois (= vitesse de monte)
@@ -217,7 +217,7 @@ Citizen.CreateThread(function()
 				end
 			end
 		elseif elevator2Down then
-			-- TriggerServerEvent('InteractSound_CL:PlayOnOne', 'PontMecano_Descente', 1.0)
+			-- TriggerServerEvent('InteractSound_CL:PlayOnOne', 'PontMechanic_Descente', 1.0)
 			if elevator2Coords.z > Config.min then -- hauteur min de la nacelle
 				if (elevator2Coords.z < Config.beforemin) then -- juste avant la hauteur min de la nacelle
 					elevator2BaseZ = elevator2BaseZ - Config.speed_down_slow -- de combien de Z on descend à chaque fois (= vitesse de monte)

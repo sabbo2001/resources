@@ -1,5 +1,5 @@
 lockState = {}
---allowedtouse = {"cartel","police"}
+--allowedtouse = {"cartel"}
 
 --if PlayerData.job ~= nil and PlayerData.job.name ~= 'unemployed' and PlayerData.job.name == "police" then
 

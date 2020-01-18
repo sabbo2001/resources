@@ -105,7 +105,7 @@ AddEventHandler('esx_weashop:buyCaricatore', function(zone)
 
   if zone=="BlackWeashop" then
     if xPlayer.get('money') >= 500 then
-		if sourceItem.limit ~= -1 and (sourceItem.count + 1) > sourceItem.limit then
+		if sourceItem.weight ~= -1 and (sourceItem.count + 1) > sourceItem.weight then
 		TriggerClientEvent('esx:showNotification', _source, 'Hai gia il massimo trasportabile di caricatori!')
 		else
     xPlayer.removeMoney(500)
@@ -119,7 +119,7 @@ AddEventHandler('esx_weashop:buyCaricatore', function(zone)
   else 
   
 	if xPlayer.get('money') >= 3000 then
-	if sourceItem.limit ~= -1 and (sourceItem.count + 1) > sourceItem.limit then
+	if sourceItem.weight ~= -1 and (sourceItem.count + 1) > sourceItem.weight then
 		TriggerClientEvent('esx:showNotification', _source, 'Hai gia il massimo trasportabile di caricatori!')
 	else
     xPlayer.removeMoney(3000)

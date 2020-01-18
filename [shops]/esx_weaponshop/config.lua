@@ -7,7 +7,7 @@ Config.Type          = 29
 Config.Locale        = 'ru'
 
 Config.LicenseEnable = true -- only turn this on if you are using esx_license
-Config.LicensePrice  = 25000
+Config.LicensePrice  = 5000
 
 Config.Zones = {
 

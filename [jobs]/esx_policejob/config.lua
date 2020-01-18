@@ -3,7 +3,7 @@
 -- If you want armory management you have to set `Config.EnableArmoryManagement` to `true` in `config.lua`
 -- If you want license management you have to set `Config.EnableLicenses` to `true` in `config.lua`
 -- If you want service management you have to set `Config.MaxInService` to anything else than `-1` in `config.lua`
-   
+
 Config                            = {}
 
 Config.DrawDistance               = 100.0
@@ -152,29 +152,32 @@ Config.AuthorizedVehicles = {
 		-- { model = 'police', label = 'Полицейский Cruiser', price = 3500 },
 		-- { model = 'Police3', label = 'Полицейский седан', price = 3500 },
 		-- { model = 'PoliceT', label = 'Полицейский минивен', price = 400 },
-		{ model = 'Policeb', label = 'Полицейский мотоцикл', price = 500 },
+		{ model = 'Policeb', label = 'Полицейский мотоцикл', price = 5000 },
 		--{ model = 'pbus', label = 'Police Prison Bus', price = 5000 }
 	},
 
 	recruit = {
-		{ model = 'police', label = 'Полицейский Cruiser', price = 350 },
-		{ model = 'Police3', label = 'Полицейский седан', price = 350 },
-		{ model = 'PoliceT', label = 'Полицейский минивен', price = 400 },
-		{ model = 'Policeb', label = 'Полицейский мотоцикл', price = 100 },
+		{ model = 'police', label = 'Полицейский Cruiser', price = 35000 },
+		{ model = 'Police3', label = 'Полицейский седан', price = 35000 },
+		{ model = 'PoliceT', label = 'Полицейский минивен', price = 40000 },
+		{ model = 'Policeb', label = 'Полицейский мотоцикл', price = 10000 },
 	},
 
 	officer = {
-		{ model = 'police', label = 'Полицейский Cruiser', price = 350 },
-		{ model = 'Police3', label = 'Полицейский седан', price = 350 },
-		{ model = 'PoliceT', label = 'Полицейский минивен', price = 400 },
-		{ model = 'Policeb', label = 'Полицейский мотоцикл', price = 100 },
+		{ model = 'police', label = 'Полицейский Cruiser', price = 35000},
+		{ model = 'Police3', label = 'Полицейский седан', price = 35000 },
+		{ model = 'PoliceT', label = 'Полицейский минивен', price = 40000 },
+		{ model = 'Policeb', label = 'Полицейский мотоцикл', price = 10000 },
+		{ model = '2015polstang', label = 'Полицейский Mustang', price = 24000 },
+
 	},
 
 	sergeant = {
-		{ model = 'police', label = 'Полицейский Cruiser', price = 350 },
-		{ model = 'Police3', label = 'Полицейский седан', price = 350 },
-		{ model = 'PoliceT', label = 'Полицейский минивен', price = 400 },
-		{ model = 'Policeb', label = 'Полицейский мотоцикл', price = 100 },
+		{ model = 'police', label = 'Полицейский Cruiser', price = 35000 },
+		{ model = 'Police3', label = 'Полицейский седан', price = 35000 },
+		{ model = 'PoliceT', label = 'Полицейский минивен', price = 40000 },
+		{ model = 'Policeb', label = 'Полицейский мотоцикл', price = 10000 },
+		{ model = '2015polstang', label = 'Полицейский Mustang', price = 35000 },
 	},
 
 	intendent = {
@@ -182,30 +185,31 @@ Config.AuthorizedVehicles = {
 	},
 
 	lieutenant = {
-	    { model = 'police', label = 'Полицейский Cruiser', price = 3500 },
-		{ model = 'Police3', label = 'Полицейский седан', price = 3500 },
-		{ model = 'PoliceT', label = 'Полицейский минивен', price = 400 },
-		{ model = 'Policeb', label = 'Полицейский мотоцикл', price = 100 },
-		{ model = 'riot', label = 'Полицейский Riot', price = 500 },
+	    { model = 'police', label = 'Полицейский Cruiser', price = 35000 },
+		{ model = 'Police3', label = 'Полицейский седан', price = 35000 },
+		{ model = 'PoliceT', label = 'Полицейский минивен', price = 4000},
+		{ model = 'Policeb', label = 'Полицейский мотоцикл', price = 1000 },
+		{ model = 'riot', label = 'Полицейский Riot', price = 30000 },
+		{ model = '2015polstang', label = 'Полицейский Mustang', price = 50000 },
 		--{ model = 'fbi2', label = 'FIB SUV', price = 60000 }
 	},
 
 	chef = {
-		{ model = 'police', label = 'Полицейский Cruiser', price = 350},
-		{ model = 'Police3', label = 'Полицейский седан', price = 3500 },
-		{ model = 'PoliceT', label = 'Полицейский минивен', price = 400 },
-		{ model = 'Policeb', label = 'Полицейский мотоцикл', price = 100 },
+		{ model = 'police', label = 'Полицейский Cruiser', price = 35000},
+		{ model = 'Police3', label = 'Полицейский седан', price = 35000 },
+		{ model = 'PoliceT', label = 'Полицейский минивен', price = 4000 },
+		{ model = 'Policeb', label = 'Полицейский мотоцикл', price = 1000 },
 		{ model = 'riot', label = 'Полицейский Riot', price = 500 },
+		{ model = '2015polstang', label = 'Полицейский Mustang', price = 50000 },
 	},
 
 	boss = {
-		{ model = 'police', label = 'Полицейский Cruiser', price = 350 },
-		{ model = 'Police3', label = 'Полицейский седан', price = 350 },
-		-- { model = 'PoliceT', label = 'Полицейский минивен', price = 40000 },
-		-- { model = 'Policeb', label = 'Полицейский мотоцикл', price = 1000 },
-		{ model = 'riot', label = 'Полицейский Riot', price = 500 },
+		{ model = 'police', label = 'Полицейский Cruiser', price = 35000 },
+		{ model = 'Police3', label = 'Полицейский седан', price = 35000 },
+		{ model = 'riot', label = 'Полицейский Riot', price = 50000 },
+		{ model = '2015polstang', label = 'Полицейский Mustang', price = 50000 },
 		--{ model = 'polf430', label = 'Полицейский PORCHE', price = 50000 },
-		
+
 	}
 }
 

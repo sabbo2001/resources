@@ -1,3 +1,5 @@
+local PlayerData = {}
+
 ESX = nil
 
 Citizen.CreateThread(function()
@@ -5,11 +7,9 @@ Citizen.CreateThread(function()
 		TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
 		Citizen.Wait(0)
 	end
-
 	while ESX.GetPlayerData().job == nil do
 		Citizen.Wait(10)
 	end
-
 	PlayerData = ESX.GetPlayerData()
 end)
 
@@ -110,12 +110,11 @@ Citizen.CreateThread(function()
 		-- 5 = Ненависть
 		-- 255 = пешеходы
 			for _, group in ipairs(relationshipPolice) do
-			
 				SetRelationshipBetweenGroups(1, GetHashKey('PLAYER'), GetHashKey(group))
 				SetRelationshipBetweenGroups(1, GetHashKey(group), GetHashKey('PLAYER'))
 			end
 		end
-		if PlayerData.job ~= nil and PlayerData.job.name ~= 'cartel' then
+		if PlayerData.job ~= nil and PlayerData.job.name ~= 'cartel' then -- картель не дружим с копами, игроками, армией
 				SetRelationshipBetweenGroups(5, GetHashKey('PLAYER'), GetHashKey('COP'))
 				SetRelationshipBetweenGroups(5, GetHashKey('COP'), GetHashKey('PLAYER'))
 				SetRelationshipBetweenGroups(5, GetHashKey('PLAYER'), GetHashKey('ARMY'))
